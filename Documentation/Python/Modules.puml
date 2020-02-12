@@ -1,0 +1,30 @@
+@startuml
+
+
+package "Library overview" <<Rectangle>> {
+    object "Preprocessing" as preprocessing {
+      Preprocessing of raw data
+      }
+    object "Data Representation" as data_rep{
+      
+    }
+    object "Filtering" as filtering{
+
+    }
+    object "Deep_annot" as deep_annot{
+        Classes to create \n deep learning models
+    }
+    object "Classifyers Module" as classifiers{
+    }
+    object "Active Learning Module" as active_learning{
+    }
+    object "Performance Module" as performance{
+      Functions performance \n evaluation of model
+    }
+    object "Auxiliary Functions" as auxiliary{
+      Supporting functions
+    }
+}
+
+
+@enduml

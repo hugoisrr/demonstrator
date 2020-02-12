@@ -1,0 +1,35 @@
+@startuml
+
+partition "Input" {
+    :Dataset;
+    :Training parameters;
+}
+partition "Prepare data " {
+    :Import **labels** and **features**;
+    :One-hot-encode labels;
+    :Train-Test-Split data;
+}
+partition "Create model architecture" {
+    :Add layers;
+    :Define optimizer;
+    :Initialize Tensorboard;
+    :compile model;
+}
+partition "Classify" {
+    :Train model;
+    :Predict classes;
+    :save model;
+}
+partition "Check performance"{
+    :Calculate scores:
+        - accuracy
+        - precision
+        - recall
+        - f1 score;
+    :Plot scores;
+    :Calculate confusion matrix;
+    :Plot confusion matrix;
+    :Tensorboard;
+}
+
+@enduml
