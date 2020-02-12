@@ -1,0 +1,12 @@
+Edge(Port 1000):
+The Edge device gets the raw data from the Minitags and have to serve the data to the Model and Visualization. 
+Therefor the Edge needs a SocketIO-Server
+
+Model(Port 2000):
+The Model need the data from the Edge, so it needs a SocketIO-Client. 
+After computing the raw data it has to serve the states to the Visualization via a SocketIO-Server.
+
+Visualization(Port 3000):
+The Visualization need the raw data from Edge and the states from Model. 
+Therefor it needs two SocketIO-Clients. To send the data to the Browser it needs two SocketIO-Server. 
+The HTML displays the data which get received by two SocketIO-Clients.

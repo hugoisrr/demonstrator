@@ -1,0 +1,10 @@
+@startuml
+package "performance_annot\n(Functions to check model performance)"<<Rectangle>> {
+  object performance_metrics
+  object confusion_matrix
+  object plot_confusion_matrix
+  object plot_performance
+  object store_perf_xlsx
+  object eval_store_performance
+}
+@enduml

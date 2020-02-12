@@ -1,0 +1,22 @@
+@startwbs
+* Project setup
+** Owncloud
+*** Data Dictionary
+*** Raw data information
+**** Charts
+**** Text
+*** Datasets
+**** In process
+**** Final
+*** Models
+*** Results
+**** Table
+**** logs
+**** Charts
+
+** Gitlab
+*** Documentation
+*** SRC
+*** Notebooks
+*** Training plans
+@endwbs

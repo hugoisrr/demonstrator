@@ -1,0 +1,23 @@
+@startuml
+package "deep_annot\n(Classes to create \n deep learning modules)" <<Rectangle>> {
+    
+  class rnn_keras{
+    + build_m2o_model()
+    --
+    + build_m2m_model()
+    --
+    + return_model()
+    --
+    + fit_model()
+    --
+    + summary()
+    --
+    + predict()
+    --
+    + save_model()
+    --
+    + load_model()
+  }
+
+}
+@enduml
