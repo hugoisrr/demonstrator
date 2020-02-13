@@ -1,12 +1,7 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import { DataContextProvider } from "./components/context";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
 
-ReactDOM.render(
-  <DataContextProvider data={[]}>
-    <App />
-  </DataContextProvider>,
 
-  document.getElementById("root")
-);
+ReactDOM.render(<App />, document.getElementById('root'));
+
