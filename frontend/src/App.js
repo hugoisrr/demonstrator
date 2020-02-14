@@ -1,7 +1,54 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.scss';
+import $ from 'jquery'
 
 function App() {
+  useEffect(() => {
+    // Toggle the side navigation
+  $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
+    $("body").toggleClass("sidebar-toggled");
+    $(".sidebar").toggleClass("toggled");
+    if ($(".sidebar").hasClass("toggled")) {
+      $('.sidebar .collapse').collapse('hide');
+    };
+  });
+
+  // Close any open menu accordions when window is resized below 768px
+  $(window).resize(function() {
+    if ($(window).width() < 768) {
+      $('.sidebar .collapse').collapse('hide');
+    };
+  });
+
+  // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
+  $('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function(e) {
+    if ($(window).width() > 768) {
+      var e0 = e.originalEvent,
+        delta = e0.wheelDelta || -e0.detail;
+      this.scrollTop += (delta < 0 ? 1 : -1) * 30;
+      e.preventDefault();
+    }
+  });
+
+  // Scroll to top button appear
+  $(document).on('scroll', function() {
+    var scrollDistance = $(this).scrollTop();
+    if (scrollDistance > 100) {
+      $('.scroll-to-top').fadeIn();
+    } else {
+      $('.scroll-to-top').fadeOut();
+    }
+  });
+
+  // Smooth scrolling using jQuery easing
+  $(document).on('click', 'a.scroll-to-top', function(e) {
+    var $anchor = $(this);
+    $('html, body').stop().animate({
+      scrollTop: ($($anchor.attr('href')).offset().top)
+    }, 1000, 'easeInOutExpo');
+    e.preventDefault();
+  });
+  })
   return (
     <div className="App">
        
@@ -38,7 +85,7 @@ function App() {
 
        
       <li className="nav-item">
-        <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <a className="nav-link collapsed" href="/#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i className="fas fa-fw fa-cog"></i>
           <span>Components</span>
         </a>
@@ -53,7 +100,7 @@ function App() {
 
        
       <li className="nav-item">
-        <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <a className="nav-link collapsed" href="/#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i className="fas fa-fw fa-wrench"></i>
           <span>Utilities</span>
         </a>
@@ -78,7 +125,7 @@ function App() {
 
        
       <li className="nav-item active">
-        <a className="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+        <a className="nav-link" href="/#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
           <i className="fas fa-fw fa-folder"></i>
           <span>Pages</span>
         </a>
@@ -152,7 +199,7 @@ function App() {
 
      
             <li className="nav-item dropdown no-arrow d-sm-none">
-              <a className="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a className="nav-link dropdown-toggle" href="/#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i className="fas fa-search fa-fw"></i>
               </a>
      
@@ -172,7 +219,7 @@ function App() {
 
      
             <li className="nav-item dropdown no-arrow mx-1">
-              <a className="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a className="nav-link dropdown-toggle" href="/#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i className="fas fa-bell fa-fw"></i>
      
                 <span className="badge badge-danger badge-counter">3+</span>
@@ -182,7 +229,7 @@ function App() {
                 <h6 className="dropdown-header">
                   Alerts Center
                 </h6>
-                <a className="dropdown-item d-flex align-items-center" href="#">
+                <a className="dropdown-item d-flex align-items-center" href="/#">
                   <div className="mr-3">
                     <div className="icon-circle bg-primary">
                       <i className="fas fa-file-alt text-white"></i>
@@ -193,7 +240,7 @@ function App() {
                     <span className="font-weight-bold">A new monthly report is ready to download!</span>
                   </div>
                 </a>
-                <a className="dropdown-item d-flex align-items-center" href="#">
+                <a className="dropdown-item d-flex align-items-center" href="/#">
                   <div className="mr-3">
                     <div className="icon-circle bg-success">
                       <i className="fas fa-donate text-white"></i>
@@ -204,7 +251,7 @@ function App() {
                     $290.29 has been deposited into your account!
                   </div>
                 </a>
-                <a className="dropdown-item d-flex align-items-center" href="#">
+                <a className="dropdown-item d-flex align-items-center" href="/#">
                   <div className="mr-3">
                     <div className="icon-circle bg-warning">
                       <i className="fas fa-exclamation-triangle text-white"></i>
@@ -215,13 +262,13 @@ function App() {
                     Spending Alert: We've noticed unusually high spending for your account.
                   </div>
                 </a>
-                <a className="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                <a className="dropdown-item text-center small text-gray-500" href="/#">Show All Alerts</a>
               </div>
             </li>
 
      
             <li className="nav-item dropdown no-arrow mx-1">
-              <a className="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a className="nav-link dropdown-toggle" href="/#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i className="fas fa-envelope fa-fw"></i>
      
                 <span className="badge badge-danger badge-counter">7</span>
@@ -231,7 +278,7 @@ function App() {
                 <h6 className="dropdown-header">
                   Message Center
                 </h6>
-                <a className="dropdown-item d-flex align-items-center" href="#">
+                <a className="dropdown-item d-flex align-items-center" href="/#">
                   <div className="dropdown-list-image mr-3">
                     <img className="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt=""/>
                     <div className="status-indicator bg-success"></div>
@@ -241,7 +288,7 @@ function App() {
                     <div className="small text-gray-500">Emily Fowler · 58m</div>
                   </div>
                 </a>
-                <a className="dropdown-item d-flex align-items-center" href="#">
+                <a className="dropdown-item d-flex align-items-center" href="/#">
                   <div className="dropdown-list-image mr-3">
                     <img className="rounded-circle" src="https://source.unsplash.com/AU4VPcFN4LE/60x60" alt=""/>
                     <div className="status-indicator"></div>
@@ -251,7 +298,7 @@ function App() {
                     <div className="small text-gray-500">Jae Chun · 1d</div>
                   </div>
                 </a>
-                <a className="dropdown-item d-flex align-items-center" href="#">
+                <a className="dropdown-item d-flex align-items-center" href="/#">
                   <div className="dropdown-list-image mr-3">
                     <img className="rounded-circle" src="https://source.unsplash.com/CS2uCrpNzJY/60x60" alt=""/>
                     <div className="status-indicator bg-warning"></div>
@@ -261,7 +308,7 @@ function App() {
                     <div className="small text-gray-500">Morgan Alvarez · 2d</div>
                   </div>
                 </a>
-                <a className="dropdown-item d-flex align-items-center" href="#">
+                <a className="dropdown-item d-flex align-items-center" href="/#">
                   <div className="dropdown-list-image mr-3">
                     <img className="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt=""/>
                     <div className="status-indicator bg-success"></div>
@@ -271,7 +318,7 @@ function App() {
                     <div className="small text-gray-500">Chicken the Dog · 2w</div>
                   </div>
                 </a>
-                <a className="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                <a className="dropdown-item text-center small text-gray-500" href="/#">Read More Messages</a>
               </div>
             </li>
 
@@ -279,26 +326,26 @@ function App() {
 
      
             <li className="nav-item dropdown no-arrow">
-              <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a className="nav-link dropdown-toggle" href="/#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span className="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img className="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60"/>
+                <img className="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60" alt=""/>
               </a>
      
               <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a className="dropdown-item" href="#">
+                <a className="dropdown-item" href="/#">
                   <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
                 </a>
-                <a className="dropdown-item" href="#">
+                <a className="dropdown-item" href="/#">
                   <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                   Settings
                 </a>
-                <a className="dropdown-item" href="#">
+                <a className="dropdown-item" href="/#">
                   <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                   Activity Log
                 </a>
                 <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <a className="dropdown-item" href="/#" data-toggle="modal" data-target="#logoutModal">
                   <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
@@ -335,6 +382,27 @@ function App() {
     </div>
      
 
+  </div>
+  <a className="scroll-to-top rounded" href="#page-top">
+    <i className="fas fa-angle-up"></i>
+  </a>
+
+  <div className="modal fade" id="logoutModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div className="modal-dialog" role="document">
+      <div className="modal-content">
+        <div className="modal-header">
+          <h5 className="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button className="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div className="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div className="modal-footer">
+          <button className="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a className="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
   </div>
    
     </div>
