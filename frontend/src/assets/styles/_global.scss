@@ -19,11 +19,17 @@ a {
 #wrapper {
   display: flex;
   #content-wrapper {
-    background-color: $gray-100;
+    background-color: $customBody;
     width: 100%;
     overflow-x: hidden;
     #content {
       flex: 1 0 auto;
+      h1 {
+        color: $customPrimary2;
+      }
+      #title {
+        margin-bottom: 3vw;
+      }
     }
   }
 }
@@ -45,7 +51,7 @@ a {
   height: 2.75rem;
   text-align: center;
   color: $white;
-  background: fade-out($gray-800, .5);
+  background: fade-out($gray-800, 0.5);
   line-height: 46px;
   &:focus,
   &:hover {

@@ -7,14 +7,15 @@
 // Import Custom SB Admin 2 Mixins and Components
 @import "./assets/styles/mixins";
 @import "./assets/styles/global";
-@import "./assets/styles/utilities.scss";
+@import "./assets/styles/utilities";
 
 // Custom Components
-@import "./assets/styles/dropdowns.scss";
-@import "./assets/styles/navs.scss";
-@import "./assets/styles/buttons.scss";
-@import "./assets/styles/cards.scss";
-@import "./assets/styles/charts.scss";
-@import "./assets/styles/login.scss";
-@import "./assets/styles/error.scss";
-@import "./assets/styles/footer.scss";
+@import "./assets/styles/dropdowns";
+@import "./assets/styles/navs";
+@import "./assets/styles/buttons";
+@import "./assets/styles/cards";
+@import "./assets/styles/charts";
+@import "./assets/styles/login";
+@import "./assets/styles/error";
+@import "./assets/styles/footer";
+@import "./assets/styles/progress";

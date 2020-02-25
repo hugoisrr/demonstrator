@@ -1,7 +1,5 @@
 import React, { Fragment, useEffect } from 'react'
 import Sidebar from './components/layout/Sidebar'
-import Topbar from './components/layout/Topbar'
-import Footer from './components/layout/Footer'
 import './App.scss'
 import {
 	toogleSideNavigation,
@@ -25,13 +23,10 @@ const App = () => {
 				<Sidebar />
 				<div id='content-wrapper' className='d-flex flex-column'>
 					<div id='content'>
-						<Topbar />
 						<div className='container-fluid'>
 							<h1 className='h3 mb-4 text-gray-800'>Blank Page</h1>
 						</div>
 					</div>
-
-					<Footer />
 				</div>
 			</div>
 			<a className='scroll-to-top rounded' href='#page-top'>

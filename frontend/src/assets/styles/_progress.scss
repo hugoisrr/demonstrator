@@ -1,0 +1,14 @@
+.progress {
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    height: auto;
+    .progress-bar {
+        background: $customPrimary2;
+        .progress-num{
+            margin: 0.05rem;
+            font-weight: bold;
+        }
+    } 
+        
+}
