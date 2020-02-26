@@ -82,7 +82,8 @@ async def send_model(websocket, path):
             break
 
 async def server(title, server, keep_execution, port):
-    async with websockets.serve(server, "0.0.0.0", port):
+    # async with websockets.serve(server, "0.0.0.0", port):
+    async with websockets.serve(server, "172.21.30.241", port):
         print("Waiting for %s client on port %d" % (title,port))
         await keep_execution
         print("Stoping server on port %d" % port)

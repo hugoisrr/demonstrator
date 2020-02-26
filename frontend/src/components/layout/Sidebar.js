@@ -12,9 +12,14 @@ const Sidebar = () => {
 				to='/'
 			>
 				<div className='sidebar-brand-icon'>
-					<i className='fas fa-hdd'></i>
+					<img
+						id='test'
+						alt='test'
+						className='img-fluid '
+						src='img/torch.png'
+					></img>
 				</div>
-				<div className='sidebar-brand-text mx-1'>Edge Device</div>
+				<div className='sidebar-brand-text mx-3'>Edge Device</div>
 			</Link>
 
 			<hr className='sidebar-divider my-0' />
@@ -70,7 +75,7 @@ const Sidebar = () => {
 					data-parent='#accordionSidebar'
 				>
 					<div className='bg-white py-2 collapse-inner rounded'>
-						<h6 className='collapse-header'>Custom Utilities:</h6>
+						<h6 className='collapse-header'>Available IDs</h6>
 						<a className='collapse-item' href='utilities-color.html'>
 							Colors
 						</a>

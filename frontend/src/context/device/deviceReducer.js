@@ -1,8 +1,8 @@
-import { GET_LABEL_DATA, SET_LOADING, GET_LABELER_WKS } from '../types'
+import { GET_DEVICE_DATA, SET_LOADING, GET_DEVICE_WKS } from '../types'
 
 export default (state, action) => {
 	switch (action.type) {
-		case GET_LABEL_DATA:
+		case GET_DEVICE_DATA:
 			return {
 				...state,
 				data: action.payload,
@@ -15,7 +15,7 @@ export default (state, action) => {
 				loading: true,
 			}
 
-		case GET_LABELER_WKS:
+		case GET_DEVICE_WKS:
 			return {
 				...state,
 				wks: action.payload,

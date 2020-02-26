@@ -1,33 +1,33 @@
 import React, { useReducer } from 'react'
-import { w3cwebsocket as W3CWebSocket } from 'websocket'
 import LabelContext from './labelContext'
 import LabelReducer from './labelReducer'
-import { GET_LABEL_DATA, SET_LOADING } from '../types'
-
-const client = new W3CWebSocket('ws://localhost:2000')
+import { GET_LABEL_DATA, SET_LOADING, GET_LABELER_WKS } from '../types'
 
 const LabelState = props => {
 	const initialState = {
 		data: [],
+		wks: [],
 		loading: false,
 	}
 
 	const [state, dispatch] = useReducer(LabelReducer, initialState)
 
 	// Get Label Data
-	const getLabelData = () => {
+	const getLabelData = messageData => {
 		setLoading()
 
-		client.onopen = () => {
-			console.log('WebSocket Client Connected')
-		}
+		dispatch({
+			type: GET_LABEL_DATA,
+			payload: messageData,
+		})
+	}
 
-		client.onmessage = message => {
-			dispatch({
-				type: GET_LABEL_DATA,
-				payload: message.data,
-			})
-		}
+	const getLabelWks = wks => {
+		setLoading()
+		dispatch({
+			type: GET_LABELER_WKS,
+			payload: wks,
+		})
 	}
 
 	// Set Loading
@@ -37,8 +37,10 @@ const LabelState = props => {
 		<LabelContext.Provider
 			value={{
 				data: state.data,
+				wks: state.wks,
 				loading: state.loading,
 				getLabelData,
+				getLabelWks,
 			}}
 		>
 			{props.children}
