@@ -1,6 +1,9 @@
 import React, { Fragment, useEffect } from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { LabelContent } from './components/pages/LabelContent'
+import { ModelContent } from './components/pages/ModelContent'
+import { DebugContent } from './components/pages/DebugContent'
 import Sidebar from './components/layout/Sidebar'
-import './App.scss'
 import {
 	toogleSideNavigation,
 	menuAccordionsResized,
@@ -8,6 +11,9 @@ import {
 	topButtonAppear,
 	smoothScrollingTop,
 } from './assets/libs/customJquery'
+
+import './App.scss'
+import LabelState from './context/label/LabelState'
 
 const App = () => {
 	useEffect(() => {
@@ -18,21 +24,25 @@ const App = () => {
 		smoothScrollingTop()
 	})
 	return (
-		<Fragment>
-			<div id='wrapper'>
-				<Sidebar />
-				<div id='content-wrapper' className='d-flex flex-column'>
-					<div id='content'>
-						<div className='container-fluid'>
-							<h1 className='h3 mb-4 text-gray-800'>Blank Page</h1>
+		<LabelState>
+			<Router>
+				<Fragment>
+					<div id='wrapper'>
+						<Sidebar />
+						<div id='content-wrapper' className='d-flex flex-column'>
+							<Switch>
+								<Route exact path='/' component={LabelContent} />
+								<Route exact path='/model' component={ModelContent} />
+								<Route exact path='/debug' component={DebugContent} />
+							</Switch>
 						</div>
 					</div>
-				</div>
-			</div>
-			<a className='scroll-to-top rounded' href='#page-top'>
-				<i className='fas fa-angle-up'></i>
-			</a>
-		</Fragment>
+					<a className='scroll-to-top rounded' href='#page-top'>
+						<i className='fas fa-angle-up'></i>
+					</a>
+				</Fragment>
+			</Router>
+		</LabelState>
 	)
 }
 

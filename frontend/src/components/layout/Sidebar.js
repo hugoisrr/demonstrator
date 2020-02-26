@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Sidebar = () => {
 	return (
@@ -6,30 +7,17 @@ const Sidebar = () => {
 			className='navbar-nav bg-gradient-primary sidebar sidebar-dark accordion'
 			id='accordionSidebar'
 		>
-			<a
+			<Link
 				className='sidebar-brand d-flex align-items-center justify-content-center'
-				href='index.html'
+				to='/'
 			>
-				<div className='sidebar-brand-icon rotate-n-15'>
-					<i className='fas fa-laugh-wink'></i>
+				<div className='sidebar-brand-icon'>
+					<i className='fas fa-hdd'></i>
 				</div>
-				<div className='sidebar-brand-text mx-3'>
-					SB Admin <sup>2</sup>
-				</div>
-			</a>
+				<div className='sidebar-brand-text mx-1'>Edge Device</div>
+			</Link>
 
 			<hr className='sidebar-divider my-0' />
-
-			<li className='nav-item'>
-				<a className='nav-link' href='index.html'>
-					<i className='fas fa-fw fa-tachometer-alt'></i>
-					<span>Dashboard</span>
-				</a>
-			</li>
-
-			<hr className='sidebar-divider' />
-
-			<div className='sidebar-heading'>Interface</div>
 
 			<li className='nav-item'>
 				<a
@@ -40,8 +28,8 @@ const Sidebar = () => {
 					aria-expanded='true'
 					aria-controls='collapseTwo'
 				>
-					<i className='fas fa-fw fa-cog'></i>
-					<span>Components</span>
+					<i className='fas fa-fw fa-signal'></i>
+					<span>Data Sources</span>
 				</a>
 				<div
 					id='collapseTwo'
@@ -50,13 +38,15 @@ const Sidebar = () => {
 					data-parent='#accordionSidebar'
 				>
 					<div className='bg-white py-2 collapse-inner rounded'>
-						<h6 className='collapse-header'>Custom Components:</h6>
-						<a className='collapse-item' href='buttons.html'>
-							Buttons
-						</a>
-						<a className='collapse-item' href='cards.html'>
-							Cards
-						</a>
+						<Link className='collapse-item' to='/'>
+							Label Source
+						</Link>
+						<Link className='collapse-item' to='/model'>
+							Model Source
+						</Link>
+						<Link className='collapse-item' to='/debug'>
+							Debug Source
+						</Link>
 					</div>
 				</div>
 			</li>
@@ -70,8 +60,8 @@ const Sidebar = () => {
 					aria-expanded='true'
 					aria-controls='collapseUtilities'
 				>
-					<i className='fas fa-fw fa-wrench'></i>
-					<span>Utilities</span>
+					<i className='fas fa-fw fa-cogs'></i>
+					<span>List of Devices</span>
 				</a>
 				<div
 					id='collapseUtilities'
@@ -95,65 +85,6 @@ const Sidebar = () => {
 						</a>
 					</div>
 				</div>
-			</li>
-
-			<hr className='sidebar-divider' />
-
-			<div className='sidebar-heading'>Addons</div>
-
-			<li className='nav-item active'>
-				<a
-					className='nav-link'
-					href='/#'
-					data-toggle='collapse'
-					data-target='#collapsePages'
-					aria-expanded='true'
-					aria-controls='collapsePages'
-				>
-					<i className='fas fa-fw fa-folder'></i>
-					<span>Pages</span>
-				</a>
-				<div
-					id='collapsePages'
-					className='collapse show'
-					aria-labelledby='headingPages'
-					data-parent='#accordionSidebar'
-				>
-					<div className='bg-white py-2 collapse-inner rounded'>
-						<h6 className='collapse-header'>Login Screens:</h6>
-						<a className='collapse-item' href='login.html'>
-							Login
-						</a>
-						<a className='collapse-item' href='register.html'>
-							Register
-						</a>
-						<a className='collapse-item' href='forgot-password.html'>
-							Forgot Password
-						</a>
-						<div className='collapse-divider'></div>
-						<h6 className='collapse-header'>Other Pages:</h6>
-						<a className='collapse-item' href='404.html'>
-							404 Page
-						</a>
-						<a className='collapse-item active' href='blank.html'>
-							Blank Page
-						</a>
-					</div>
-				</div>
-			</li>
-
-			<li className='nav-item'>
-				<a className='nav-link' href='charts.html'>
-					<i className='fas fa-fw fa-chart-area'></i>
-					<span>Charts</span>
-				</a>
-			</li>
-
-			<li className='nav-item'>
-				<a className='nav-link' href='tables.html'>
-					<i className='fas fa-fw fa-table'></i>
-					<span>Tables</span>
-				</a>
 			</li>
 
 			<hr className='sidebar-divider d-none d-md-block' />
