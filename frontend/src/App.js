@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { LabelContent } from './components/pages/LabelContent'
 import { ModelContent } from './components/pages/ModelContent'
-import { DebugContent } from './components/pages/DebugContent'
+import { DeviceContent } from './components/pages/DeviceContent'
 import Sidebar from './components/layout/Sidebar'
 import {
 	toogleSideNavigation,
@@ -33,7 +33,7 @@ const App = () => {
 							<Switch>
 								<Route exact path='/' component={LabelContent} />
 								<Route exact path='/model' component={ModelContent} />
-								<Route exact path='/debug' component={DebugContent} />
+								<Route exact path='/debug' component={DeviceContent} />
 							</Switch>
 						</div>
 					</div>

@@ -5,7 +5,7 @@ export const DebugContent = () => {
 		<Fragment>
 			<div id='content'>
 				<div className='container-fluid'>
-					<h1 className='h3 mb-4 text-gray-800 my-4'>Debug Content</h1>
+					<h1 className='h3 mb-4 text-gray-800 my-4'>Device Content</h1>
 				</div>
 			</div>
 		</Fragment>

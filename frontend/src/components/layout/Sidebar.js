@@ -39,13 +39,13 @@ const Sidebar = () => {
 				>
 					<div className='bg-white py-2 collapse-inner rounded'>
 						<Link className='collapse-item' to='/'>
-							Label Source
+							Labeler Source
 						</Link>
 						<Link className='collapse-item' to='/model'>
 							Model Source
 						</Link>
 						<Link className='collapse-item' to='/debug'>
-							Debug Source
+							Device Source
 						</Link>
 					</div>
 				</div>
