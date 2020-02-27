@@ -15,15 +15,19 @@ const DeviceState = props => {
 	// Get Device Data
 	const getDeviceData = messageData => {
 		setLoading()
-
+		messageData = JSON.parse(messageData)
 		dispatch({
 			type: GET_DEVICE_DATA,
 			payload: messageData,
 		})
 	}
 
+	// Get List of Workstations
 	const getDeviceWks = wks => {
 		setLoading()
+		if (wks) {
+			wks = JSON.parse(wks)
+		}
 		dispatch({
 			type: GET_DEVICE_WKS,
 			payload: wks,

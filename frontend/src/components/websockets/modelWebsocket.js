@@ -1,14 +1,16 @@
-import { useContext, useRef, useState } from 'react'
+import { useContext } from 'react'
 import { w3cwebsocket as W3CWebSocket } from 'websocket'
 import ModelContext from '../../context/model/modelContext'
+import WebsocketContext from '../../context/websocket/websocketContext'
 
-const client = new W3CWebSocket('ws://172.21.30.241:4000')
+// export const client = new W3CWebSocket('ws://172.21.30.241:4000')
+export const client = new W3CWebSocket('ws://localhost:4000')
 
 const ModelWebsocket = () => {
 	const modelContext = useContext(ModelContext)
 	const { getModelData, getModelWks } = modelContext
-	const [wks, setWks] = useState()
-	const ref = useRef(true)
+	const websocketContext = useContext(WebsocketContext)
+	const { websocketModelOpen } = websocketContext
 
 	client.onerror = () => {
 		console.error('Connection Error with WebSocket Model')
@@ -16,16 +18,20 @@ const ModelWebsocket = () => {
 
 	client.onopen = () => {
 		console.log('WebSocket Model Client Connected')
+		websocketModelOpen()
 	}
 
 	client.onmessage = message => {
-		if (message.data.length > 0 && ref.current) {
-			setWks(message.data)
-			ref.current = false
-		} else if (!ref.current) {
-			getModelData(message.data)
+		message = JSON.parse(message.data)
+		if (Array.isArray(message) && message.length > 0) {
+			getModelWks(message)
+		} else if (typeof message === 'object') {
+			getModelData(message)
 		}
-		getModelWks(wks)
+	}
+
+	client.onclose = () => {
+		console.log('WebSocket Model Client Closed')
 	}
 
 	return null

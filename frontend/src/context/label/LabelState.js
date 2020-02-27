@@ -1,11 +1,12 @@
 import React, { useReducer } from 'react'
+
 import LabelContext from './labelContext'
 import LabelReducer from './labelReducer'
 import { GET_LABEL_DATA, SET_LOADING, GET_LABELER_WKS } from '../types'
 
 const LabelState = props => {
 	const initialState = {
-		data: [],
+		data: {},
 		wks: [],
 		loading: false,
 	}
@@ -22,6 +23,7 @@ const LabelState = props => {
 		})
 	}
 
+	// Get List of Workstations
 	const getLabelWks = wks => {
 		setLoading()
 		dispatch({

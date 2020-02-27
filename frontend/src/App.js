@@ -16,6 +16,7 @@ import './App.scss'
 import LabelState from './context/label/LabelState'
 import DeviceState from './context/device/DeviceState'
 import ModelState from './context/model/ModelState'
+import WebsocketState from './context/websocket/WebSocketState'
 import * as Websockets from './components/websockets'
 
 const App = () => {
@@ -30,26 +31,28 @@ const App = () => {
 		<LabelState>
 			<DeviceState>
 				<ModelState>
-					<Websockets.LablerWebsocket />
-					<Websockets.ModelWebsocket />
-					<Websockets.DeviceWebsocket />
-					<Router>
-						<Fragment>
-							<div id='wrapper'>
-								<Sidebar />
-								<div id='content-wrapper' className='d-flex flex-column'>
-									<Switch>
-										<Route exact path='/' component={LabelContent} />
-										<Route exact path='/model' component={ModelContent} />
-										<Route exact path='/debug' component={DeviceContent} />
-									</Switch>
+					<WebsocketState>
+						<Websockets.LablerWebsocket />
+						<Websockets.ModelWebsocket />
+						<Websockets.DeviceWebsocket />
+						<Router>
+							<Fragment>
+								<div id='wrapper'>
+									<Sidebar />
+									<div id='content-wrapper' className='d-flex flex-column'>
+										<Switch>
+											<Route exact path='/' component={LabelContent} />
+											<Route exact path='/model' component={ModelContent} />
+											<Route exact path='/debug' component={DeviceContent} />
+										</Switch>
+									</div>
 								</div>
-							</div>
-							<a className='scroll-to-top rounded' href='#page-top'>
-								<i className='fas fa-angle-up'></i>
-							</a>
-						</Fragment>
-					</Router>
+								<a className='scroll-to-top rounded' href='#page-top'>
+									<i className='fas fa-angle-up'></i>
+								</a>
+							</Fragment>
+						</Router>
+					</WebsocketState>
 				</ModelState>
 			</DeviceState>
 		</LabelState>

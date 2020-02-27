@@ -2,7 +2,8 @@ import { useContext, useRef, useState } from 'react'
 import { w3cwebsocket as W3CWebSocket } from 'websocket'
 import DeviceContext from '../../context/device/deviceContext'
 
-const client = new W3CWebSocket('ws://172.21.30.241:2000')
+// const client = new W3CWebSocket('ws://172.21.30.241:2000')
+const client = new W3CWebSocket('ws://localhost:2000')
 
 const DeviceWebsocket = () => {
 	const deviceContext = useContext(DeviceContext)
