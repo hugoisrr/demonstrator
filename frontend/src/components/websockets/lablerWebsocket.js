@@ -2,8 +2,8 @@ import { useContext } from 'react'
 import { w3cwebsocket as W3CWebSocket } from 'websocket'
 import LabelContext from '../../context/label/labelContext'
 
-// const client = new W3CWebSocket('ws://172.21.30.241:3000')
-const client = new W3CWebSocket('ws://localhost:3000')
+const client = new W3CWebSocket('ws://172.21.30.241:3000')
+// const client = new W3CWebSocket('ws://localhost:3000')
 
 const LablerWebsocket = () => {
 	const labelContext = useContext(LabelContext)

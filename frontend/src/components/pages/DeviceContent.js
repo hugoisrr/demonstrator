@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useRef, useState } from 'react'
 import DeviceContext from '../../context/device/deviceContext'
 import { Spinner } from '../layout/Spinner'
-import DeviceGraphs from '../DeviceGraphs'
+import DeviceGraphs from '../layout/DeviceGraphs'
 
 export const DeviceContent = () => {
 	const deviceContext = useContext(DeviceContext)
