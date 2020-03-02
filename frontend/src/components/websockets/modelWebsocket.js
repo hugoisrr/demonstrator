@@ -3,8 +3,8 @@ import { w3cwebsocket as W3CWebSocket } from 'websocket'
 import ModelContext from '../../context/model/modelContext'
 import WebsocketContext from '../../context/websocket/websocketContext'
 
-export const client = new W3CWebSocket('ws://172.21.30.241:4000')
-// export const client = new W3CWebSocket('ws://localhost:4000')
+//export const client = new W3CWebSocket('ws://172.21.30.241:4000')
+export const client = new W3CWebSocket('ws://localhost:4000')
 
 const ModelWebsocket = () => {
 	const modelContext = useContext(ModelContext)

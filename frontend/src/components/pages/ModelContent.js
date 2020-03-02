@@ -1,7 +1,6 @@
 import React, { Fragment, useContext } from 'react'
 import ModelContext from '../../context/model/modelContext'
 import WebsocketContext from '../../context/websocket/websocketContext'
-import { client } from '../websockets/modelWebsocket'
 import { Spinner } from '../layout/Spinner'
 
 export const ModelContent = () => {
@@ -9,8 +8,6 @@ export const ModelContent = () => {
 	const websocketContext = useContext(WebsocketContext)
 
 	const { data, wks } = modelContext
-
-	// client.close()
 
 	const { modelWebsocket } = websocketContext
 
