@@ -1,3 +1,4 @@
+//Graphic component for the sidebar on the left of each view
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -7,6 +8,7 @@ const Sidebar = () => {
 			className='navbar-nav bg-gradient-primary sidebar sidebar-dark accordion'
 			id='accordionSidebar'
 		>
+			{/* Link for logo that redirect to home page "/" */}
 			<Link
 				className='sidebar-brand d-flex align-items-center justify-content-center'
 				to='/'
@@ -24,6 +26,7 @@ const Sidebar = () => {
 
 			<hr className='sidebar-divider my-0' />
 
+			{/* Collapsed dropdown with links for the different data source views */}
 			<li className='nav-item'>
 				<a
 					className='nav-link collapsed'
