@@ -1,6 +1,7 @@
 import React, { Fragment, useContext } from 'react'
 import ModelContext from '../../context/model/modelContext'
 import WebsocketContext from '../../context/websocket/websocketContext'
+import WorkStationCard from '../layout/WorkStationCard'
 import { Spinner } from '../layout/Spinner'
 
 export const ModelContent = () => {
@@ -8,6 +9,7 @@ export const ModelContent = () => {
 	const websocketContext = useContext(WebsocketContext)
 
 	const { data, wks } = modelContext
+	// console.log('data:', data)
 
 	const { modelWebsocket } = websocketContext
 
@@ -29,8 +31,16 @@ export const ModelContent = () => {
 						</label>
 					</div>
 				</div>
-				<h3 className='h4 mb-4 text-gray-200 my-4'>{wks[0].ws_name}</h3>
-				<h3 className='h4 mb-4 text-gray-200 my-4'>{data.ws_id}</h3>
+				<div className='row'>
+					{wks.map(workstation => (
+						<div className='col-lg-4 col-md-4' key={workstation.ws_id}>
+							<WorkStationCard
+								workstation={workstation}
+								data={workstation.ws_id === data.ws_id && data}
+							/>
+						</div>
+					))}
+				</div>
 			</Content>
 		)
 	} else {
