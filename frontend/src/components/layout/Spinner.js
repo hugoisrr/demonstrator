@@ -1,3 +1,4 @@
+//Spinner that renders when undefined data comes in as a result of no connection in the websocket
 import React, { Fragment } from 'react'
 
 export const Spinner = () => {

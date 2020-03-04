@@ -4,6 +4,7 @@ import {
 	OPEN_WEBSOCKET_LABEL,
 } from '../types'
 
+//Change 'open' attribute of each websocket to true when each websocket triggers a 'onconnect' message
 export default (state, action) => {
 	switch (action.type) {
 		case OPEN_WEBSOCKET_MODEL:

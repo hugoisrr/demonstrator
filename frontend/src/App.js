@@ -20,6 +20,7 @@ import WebsocketState from './context/websocket/WebSocketState'
 import * as Websockets from './components/websockets'
 
 const App = () => {
+	//Use animation jquery methods
 	useEffect(() => {
 		toogleSideNavigation()
 		menuAccordionsResized()
