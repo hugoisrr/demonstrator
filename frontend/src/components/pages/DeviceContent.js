@@ -25,28 +25,22 @@ export const DeviceContent = () => {
 	//Do in the first render only: check if configuration file enters
 	if (wks && refInit.current && wks.length > 0) {
 		//Create array of wks ids to add to ids dropdown
+		refInit.current = false
 		refIds.current = wks
-		refWksArray.current = new Array(refIds.current.length).fill(
-			new Array(10).fill(0)
-		)
 		wks.forEach(element => {
 			dictionary.current[element.ws_id] = new Array(10).fill(0)
 		})
-		refInit.current = false
-		console.log(wks)
 	}
 
 	//Check if values in the data objects from the API are defined & websocket is open before rendering
 	if (open && wks.length > 0 && data.raw_values) {
 		dictionary.current[data.ws_id].shift()
-		console.log(wks[0].raw_data)
 		dictionary.current[data.ws_id].push(Object.values(data.raw_values))
 		return (
 			<Content>
-				<h1 className='h3 mb-4 text-gray-800 my-4'>Label Content</h1>
+				<h1 className='h3 mb-4 text-gray-800 my-4'>Device Content</h1>
 				<div className='row'>
 					<div className='col'>
-						<h3 className='h4 mb-4 text-gray-200 my-4'>Graph goes here</h3>
 						<div>
 							{refIds.current.map((item, i) => {
 								return (
@@ -55,6 +49,7 @@ export const DeviceContent = () => {
 										show={item.ws_id === refCurrentId.current}
 										data={dictionary.current[item.ws_id]}
 										keyNames={wks[0].raw_data}
+										key={i}
 									/>
 								)
 							})}
@@ -97,7 +92,7 @@ export const DeviceContent = () => {
 	else {
 		return (
 			<Content>
-				<h1 className='h3 mb-4 text-gray-800 my-4'>Label Content</h1>
+				<h1 className='h3 mb-4 text-gray-800 my-4'>Device Content</h1>
 				<Spinner />
 			</Content>
 		)
@@ -109,9 +104,7 @@ const Content = props => {
 	return (
 		<Fragment>
 			<div id='content'>
-				<div className='container-fluid'>
-					<h1 className='h3 mb-4 text-gray-800 my-4'>{props.children}</h1>
-				</div>
+				<div className='container-fluid'>{props.children}</div>
 			</div>
 		</Fragment>
 	)

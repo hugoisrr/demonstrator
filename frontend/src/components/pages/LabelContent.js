@@ -14,7 +14,6 @@ export const LabelContent = () => {
 	const { open } = labelerWebsocket
 
 	if (open && wks.length > 0) {
-		console.log(data)
 		return (
 			<Content>
 				<h1 className='h3 mb-4 text-gray-800 my-4'>Label Content</h1>

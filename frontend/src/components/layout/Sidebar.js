@@ -79,7 +79,7 @@ const Sidebar = () => {
 				>
 					<div className='bg-white py-2 collapse-inner rounded'>
 						<h6 className='collapse-header'>Available IDs</h6>
-						<a className='collapse-item' href='utilities-color.html'>
+						<a className='collapse-item' href='/test'>
 							Colors
 						</a>
 						<a className='collapse-item' href='utilities-border.html'>
