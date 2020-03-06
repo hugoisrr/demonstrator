@@ -10,7 +10,7 @@ export const ModelContent2 = () => {
 	let numState = client.readyState
 
 	useEffect(() => {
-		console.log('numState:', numState)
+		//console.log('numState:', numState)
 		switch (numState) {
 			case 0:
 				setWebsocketState('CONNECTING')
@@ -32,7 +32,7 @@ export const ModelContent2 = () => {
 
 	const handleChange = e => {
 		const target = e.target
-		console.log(target.checked)
+		//console.log(target.checked)
 		if (!target.checked && numState === 1) {
 			client.close()
 			setWebsocketState('CLOSED')

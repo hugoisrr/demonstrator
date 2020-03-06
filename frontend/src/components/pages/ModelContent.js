@@ -28,7 +28,7 @@ export const ModelContent = () => {
 	const modelContext = useContext(ModelContext)
 
 	const { data, wks } = modelContext
-	console.log(client.readyState)
+	//console.log(client.readyState)
 
 	if (client.readyState === 1 && wks.length > 0) {
 		return (
