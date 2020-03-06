@@ -7,12 +7,12 @@ from numpy.random import choice
 first_device = [
     {
         "ws_id": 0,
-        "ws_name": "sensor 1",
+        "ws_name": "Engraving machine",
         "raw_data": {"0": "acc_x", "1": "acc_y", "2": "acc_z", "3": "gyr_x", "4": "gyr_y", "5": "gyr_z", "6": "mag_x", "7": "mag_y", "8": "mag_z", "9": "kar_x", "10": "kar_y", "11": "kar_z"}
     },
     {
         "ws_id": 1,
-        "ws_name": "sensor 3",
+        "ws_name": "Power Tool",
         "raw_data": {"0": "acc_x", "1": "acc_y", "2": "acc_z", "3": "gyr_x", "4": "gyr_y", "5": "gyr_z", "6": "mag_x", "7": "mag_y", "8": "mag_z", "9": "kar_x", "10": "kar_y", "11": "kar_z"}
     }
 ]

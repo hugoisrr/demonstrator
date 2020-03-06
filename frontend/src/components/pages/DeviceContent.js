@@ -13,13 +13,19 @@ export const DeviceContent = () => {
 	const { open } = deviceWebsocket
 	const dictionary = useRef({})
 	const refInit = useRef(true)
+	const dropdownName = useRef('Select Workstation')
 	const refCurrentId = useRef(0)
 	const refIds = useRef(['test'])
 	const refWksArray = useRef([])
 	//const initialValue = { ids: [10, 11, 12] }
 
+	const style = {
+		padding: '3rem',
+	}
+
 	const handleClick = e => {
 		refCurrentId.current = parseInt(e.target.id)
+		dropdownName.current = e.target.name
 	}
 
 	//Do in the first render only: check if configuration file enters
@@ -28,7 +34,7 @@ export const DeviceContent = () => {
 		refInit.current = false
 		refIds.current = wks
 		wks.forEach(element => {
-			dictionary.current[element.ws_id] = new Array(10).fill(0)
+			dictionary.current[element.ws_id] = new Array(60).fill(0)
 		})
 	}
 
@@ -38,51 +44,53 @@ export const DeviceContent = () => {
 		dictionary.current[data.ws_id].push(Object.values(data.raw_values))
 		return (
 			<Content>
-				<h1 className='h3 mb-4 text-gray-800 my-4'>Device Content</h1>
-				<div className='row'>
-					<div className='col'>
-						<div>
+				{/* <h1 className='h3 mb-4 text-gray-800 my-4'>Device Content</h1> */}
+				<div className='row' style={style}>
+					<h2 className='col offset-1'>
+						Workstation ID: {refCurrentId.current}
+					</h2>
+					<div className='dropdown right col'>
+						<button
+							className='btn btn-secondary dropdown-toggle '
+							type='button'
+							id='dropdownMenu2'
+							data-toggle='dropdown'
+							aria-haspopup='true'
+							aria-expanded='false'
+						>
+							{dropdownName.current}
+						</button>
+						<div className='dropdown-menu' aria-labelledby='dropdownMenu2'>
 							{refIds.current.map((item, i) => {
 								return (
-									<DeviceGraphs
+									<button
+										name={item.ws_name}
+										className='dropdown-item'
 										id={item.ws_id}
-										show={item.ws_id === refCurrentId.current}
-										data={dictionary.current[item.ws_id]}
-										keyNames={wks[0].raw_data}
+										type='button'
 										key={i}
-									/>
+										onClick={handleClick}
+									>
+										{item.ws_name}
+									</button>
 								)
 							})}
 						</div>
 					</div>
-					<div className='col'>
-						<div className='dropdown'>
-							<button
-								className='btn btn-secondary dropdown-toggle'
-								type='button'
-								id='dropdownMenu2'
-								data-toggle='dropdown'
-								aria-haspopup='true'
-								aria-expanded='false'
-							>
-								Select Workstation ID
-							</button>
-							<div className='dropdown-menu' aria-labelledby='dropdownMenu2'>
-								{refIds.current.map((item, i) => {
-									return (
-										<button
-											className='dropdown-item'
-											id={item.ws_id}
-											type='button'
-											key={i}
-											onClick={handleClick}
-										>
-											{item.ws_name}
-										</button>
-									)
-								})}
-							</div>
-						</div>
+				</div>
+				<div className='row'>
+					<div>
+						{refIds.current.map((item, i) => {
+							return (
+								<DeviceGraphs
+									id={item.ws_id}
+									show={item.ws_id === refCurrentId.current}
+									data={dictionary.current[item.ws_id]}
+									keyNames={wks[0].raw_data}
+									key={i}
+								/>
+							)
+						})}
 					</div>
 				</div>
 			</Content>
@@ -92,7 +100,6 @@ export const DeviceContent = () => {
 	else {
 		return (
 			<Content>
-				<h1 className='h3 mb-4 text-gray-800 my-4'>Device Content</h1>
 				<Spinner />
 			</Content>
 		)

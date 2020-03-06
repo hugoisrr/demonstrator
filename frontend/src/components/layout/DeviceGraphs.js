@@ -10,13 +10,11 @@ export default function DeviceGraphs(props) {
 
 	if (props.data.length > 0) {
 		return (
-			<div>
-				<div id='chart'></div>
-				<h2>Graph here with id: {props.id}</h2>
-				<div>
+			<div className='container-fluid'>
+				<div className='row'>
 					{Object.values(props.keyNames).map((item, i) => {
 						return (
-							<div key={i}>
+							<div key={i} className='col-4'>
 								<DeviceGraphWks
 									legendName={item}
 									points={props.data.map((value, index) => {
