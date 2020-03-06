@@ -1,34 +1,54 @@
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment, useContext, useState, useEffect } from 'react'
 import ModelContext from '../../context/model/modelContext'
-import WebsocketContext from '../../context/websocket/websocketContext'
 import WorkStationCard from '../layout/WorkStationCard'
+import { client } from '../websockets/modelWebsocket'
 import { Spinner } from '../layout/Spinner'
 
 export const ModelContent = () => {
+	const [websocketState, setWebsocketState] = useState('')
+	// console.log(typeof client.readyState)
+
+	useEffect(() => {
+		if (client.CLOSING) {
+			setWebsocketState('CLOSING')
+		} else if (client.CLOSED) {
+			setWebsocketState('CLOSED')
+		} else if (client.CONNECTING) {
+			setWebsocketState('CONNECTING')
+		}
+		// eslint-disable-next-line
+	}, [])
+
+	const handleChange = e => {
+		const target = e.target
+		if (target.checked) {
+			client.close()
+		}
+	}
 	const modelContext = useContext(ModelContext)
-	const websocketContext = useContext(WebsocketContext)
 
 	const { data, wks } = modelContext
-	// console.log('data:', data)
+	console.log(client.readyState)
 
-	const { modelWebsocket } = websocketContext
-
-	const { open } = modelWebsocket
-
-	if (open && wks.length > 0) {
+	if (client.readyState === 1 && wks.length > 0) {
 		return (
 			<Content>
 				<div className='d-sm-flex align-items-center justify-content-between mb-4 my-4'>
 					<h1 className='h3 mb-0 text-gray-800'>Model Content</h1>
 					<div className='custom-control custom-switch'>
-						<input
-							type='checkbox'
-							className='custom-control-input'
-							id='customSwitch1'
-						/>
-						<label className='custom-control-label' htmlFor='customSwitch1'>
-							Toggle this switch element
-						</label>
+						<form>
+							<input
+								type='checkbox'
+								className='custom-control-input'
+								id='modelSwitch'
+								value='open'
+								onChange={handleChange}
+							/>
+							<label className='custom-control-label' htmlFor='modelSwitch'>
+								Websocket switch{' '}
+								<span className='badge badge-success'>OPEN</span>
+							</label>
+						</form>
 					</div>
 				</div>
 				<div className='row'>
@@ -43,6 +63,26 @@ export const ModelContent = () => {
 				</div>
 			</Content>
 		)
+	} else if (client.readyState === 3) {
+		return (
+			<Content>
+				<div className='d-sm-flex align-items-center justify-content-between mb-4 my-4'>
+					<h1 className='h3 mb-0 text-gray-800'>Model Content</h1>
+					<div className='custom-control custom-switch'>
+						<input
+							type='checkbox'
+							className='custom-control-input'
+							id='modelSwitch'
+						/>
+						<label className='custom-control-label' htmlFor='modelSwitch'>
+							Websocket switch{' '}
+							<span className='badge badge-success'>{websocketState}</span>
+						</label>
+					</div>
+				</div>
+				<Spinner />
+			</Content>
+		)
 	} else {
 		return (
 			<Content>
@@ -52,10 +92,11 @@ export const ModelContent = () => {
 						<input
 							type='checkbox'
 							className='custom-control-input'
-							id='customSwitch1'
+							id='modelSwitch'
 						/>
-						<label className='custom-control-label' htmlFor='customSwitch1'>
-							Toggle this switch element
+						<label className='custom-control-label' htmlFor='modelSwitch'>
+							Websocket switch{' '}
+							<span className='badge badge-success'>{websocketState}</span>
 						</label>
 					</div>
 				</div>

@@ -26,9 +26,6 @@ export const DeviceContent = () => {
 	if (wks && refInit.current && wks.length > 0) {
 		//Create array of wks ids to add to ids dropdown
 		refIds.current = wks
-		refWksArray.current = new Array(refIds.current.length).fill(
-			new Array(10).fill(0)
-		)
 		wks.forEach(element => {
 			dictionary.current[element.ws_id] = new Array(10).fill(0)
 		})

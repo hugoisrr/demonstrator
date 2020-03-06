@@ -7,9 +7,9 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 	const statesArray = Object.values(states)
 	let statesBuffer = new ArrayBuffer(16)
 	let stateView = new DataView(statesBuffer)
-	if (typeof data.state_key === 'number') {
-		console.log(data.state_key)
-	}
+	// if (typeof data.state_key === 'number') {
+	// 	console.log(data.state_key)
+	// }
 	return (
 		<div className='card shadow mb-4'>
 			<div className='card-header py-3'>
