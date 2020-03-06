@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { LabelContent } from './components/pages/LabelContent'
+import { LabelerContent } from './components/pages/LabelerContent'
 import { ModelContent2 } from './components/pages/ModelContent2'
 import { DeviceContent } from './components/pages/DeviceContent'
 import Sidebar from './components/layout/Sidebar'
@@ -13,7 +13,7 @@ import {
 } from './assets/libs/customJquery'
 
 import './App.scss'
-import LabelState from './context/label/LabelState'
+import LabelerState from './context/labeler/LabelerState'
 import DeviceState from './context/device/DeviceState'
 import ModelState from './context/model/ModelState'
 import WebsocketState from './context/websocket/WebSocketState'
@@ -29,11 +29,11 @@ const App = () => {
 		smoothScrollingTop()
 	})
 	return (
-		<LabelState>
+		<LabelerState>
 			<DeviceState>
 				<ModelState>
 					<WebsocketState>
-						<Websockets.LablerWebsocket />
+						<Websockets.LabelerWebsocket />
 						<Websockets.ModelWebsocket />
 						<Websockets.DeviceWebsocket />
 						<Router>
@@ -42,7 +42,7 @@ const App = () => {
 									<Sidebar />
 									<div id='content-wrapper' className='d-flex flex-column'>
 										<Switch>
-											<Route exact path='/' component={LabelContent} />
+											<Route exact path='/' component={LabelerContent} />
 											<Route exact path='/model' component={ModelContent2} />
 											<Route exact path='/debug' component={DeviceContent} />
 										</Switch>
@@ -56,7 +56,7 @@ const App = () => {
 					</WebsocketState>
 				</ModelState>
 			</DeviceState>
-		</LabelState>
+		</LabelerState>
 	)
 }
 

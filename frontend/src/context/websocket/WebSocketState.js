@@ -2,7 +2,7 @@
 import React, { useReducer } from 'react'
 import WebsocketContext from './websocketContext'
 import WebsocketReducer from './websocketReducer'
-import { OPEN_WEBSOCKET_LABEL, OPEN_WEBSOCKET_DEVICE } from '../types'
+import { OPEN_WEBSOCKET_LABELER, OPEN_WEBSOCKET_DEVICE } from '../types'
 
 const WebSocketState = props => {
 	//store in state if each websocket is either open or closed
@@ -19,7 +19,7 @@ const WebSocketState = props => {
 
 	//Change 'open' attribute of each websocket to true when each websocket triggers a 'onconnect' message
 
-	const websocketLabelOpen = () => dispatch({ type: OPEN_WEBSOCKET_LABEL })
+	const websocketLabelerOpen = () => dispatch({ type: OPEN_WEBSOCKET_LABELER })
 
 	const websocketDeviceOpen = () => dispatch({ type: OPEN_WEBSOCKET_DEVICE })
 
@@ -27,7 +27,7 @@ const WebSocketState = props => {
 		<WebsocketContext.Provider
 			value={{
 				labelerWebsocket: state.labelerWebsocket,
-				websocketLabelOpen,
+				websocketLabelerOpen,
 				deviceWebsocket: state.deviceWebsocket,
 				websocketDeviceOpen,
 			}}

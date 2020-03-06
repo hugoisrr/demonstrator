@@ -1,10 +1,10 @@
 import React, { Fragment, useContext } from 'react'
-import LabelContext from '../../context/label/labelContext'
+import LabelerContext from '../../context/labeler/labelerContext'
 import WebsocketContext from '../../context/websocket/websocketContext'
 import { Spinner } from '../layout/Spinner'
 
-export const LabelContent = () => {
-	const labelContext = useContext(LabelContext)
+export const LabelerContent = () => {
+	const labelContext = useContext(LabelerContext)
 	const websocketContext = useContext(WebsocketContext)
 
 	const { data, wks } = labelContext
@@ -16,14 +16,14 @@ export const LabelContent = () => {
 	if (open && wks.length > 0) {
 		return (
 			<Content>
-				<h1 className='h3 mb-4 text-gray-800 my-4'>Label Content</h1>
+				<h1 className='h3 mb-4 text-gray-800 my-4'>Labeler Content</h1>
 				<h2>{data.ws_id}</h2>
 			</Content>
 		)
 	} else {
 		return (
 			<Content>
-				<h1 className='h3 mb-4 text-gray-800 my-4'>Label Content</h1>
+				<h1 className='h3 mb-4 text-gray-800 my-4'>Labeler Content</h1>
 				<Spinner />
 			</Content>
 		)

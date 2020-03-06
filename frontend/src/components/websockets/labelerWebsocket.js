@@ -1,40 +1,40 @@
 import { useContext } from 'react'
 import { w3cwebsocket as W3CWebSocket } from 'websocket'
-import LabelContext from '../../context/label/labelContext'
+import LabelerContext from '../../context/labeler/labelerContext'
 import WebsocketContext from '../../context/websocket/websocketContext'
 
 //const client = new W3CWebSocket('ws://172.21.30.241:3000')
 export const client = new W3CWebSocket('ws://localhost:3000')
 
-const LablerWebsocket = () => {
-	const labelContext = useContext(LabelContext)
-	const { getLabelData, getLabelWks } = labelContext
+const LabelerWebsocket = () => {
+	const labelerContext = useContext(LabelerContext)
+	const { getLabelerData, getLabelerWks } = labelerContext
 	const websocketContext = useContext(WebsocketContext)
-	const { websocketLabelOpen } = websocketContext
+	const { websocketLabelerOpen } = websocketContext
 
 	client.onerror = () => {
-		console.error('Connection Error with WebSocket Labler')
+		console.error('Connection Error with WebSocket Labeler')
 	}
 
 	client.onopen = () => {
-		console.log('WebSocket Labler Client Connected')
-		websocketLabelOpen()
+		console.log('WebSocket Labeler Client Connected')
+		websocketLabelerOpen()
 	}
 
 	client.onmessage = message => {
 		message = JSON.parse(message.data)
 		if (Array.isArray(message) && message.length > 0) {
-			getLabelWks(message)
+			getLabelerWks(message)
 		} else if (typeof message === 'object') {
-			getLabelData(message)
+			getLabelerData(message)
 		}
 	}
 
 	client.onclose = () => {
-		console.log('WebSocket Model Client Closed')
+		console.log('WebSocket Labeler Client Closed')
 	}
 
 	return null
 }
 
-export default LablerWebsocket
+export default LabelerWebsocket
