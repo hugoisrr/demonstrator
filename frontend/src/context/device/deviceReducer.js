@@ -1,4 +1,4 @@
-import { GET_DEVICE_DATA, GET_DEVICE_WKS, GET_DICTIONARY_DATA } from '../types'
+import { GET_DEVICE_DATA, GET_DEVICE_WKS} from '../types'
 //Interface
 export default (state, action) => {
 	switch (action.type) {
@@ -11,11 +11,11 @@ export default (state, action) => {
 			return {
 				 
 			} */
-		case GET_DICTIONARY_DATA:
-			return {
-				...state,
-				dictionary2: action.payload,
-			}
+		// case GET_DICTIONARY_DATA:
+		// 	return {
+		// 		...state,
+		// 		dictionary2: action.payload,
+		// 	}
 
 		case GET_DEVICE_WKS:
 			return {

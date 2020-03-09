@@ -1,23 +1,27 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import drillImage from '../../assets/img/drill.png'
 import engravingImage from '../../assets/img/engravingMachine.png'
 
 const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
-	const statesArray = Object.values(states)
-	let statesBuffer = new ArrayBuffer(16)
-	let stateView = new DataView(statesBuffer)
-	// if (typeof data.state_key === 'number') {
-	// 	console.log(data.state_key)
-	// }
+	const [currentState, setState] = useState('null')
+	
+	// Set current state name of each workstation
+	useEffect(() => {
+		data.forEach(element => {
+			for (const [stateId, stateName] of Object.entries(states)) {
+				if (element === parseInt(stateId)) setState(stateName)
+			}
+		})
+	})
+
 	return (
-		<div className='card shadow mb-4'>
+		<div className='card shadow mb-4 workstationcard'>
 			<div className='card-header py-3'>
 				<div className='row'>
 					<h5
 						id='cardName'
 						className='m-0 font-weight bold col-6'
-						style={{ textTransform: 'uppercase' }}
 					>
 						{ws_name}
 					</h5>
@@ -34,8 +38,12 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 					/>
 				</div>
 				<h6 style={{ color: 'white' }}>State:</h6>
-				<h1 className='display-3 text-center bold'>Engraving</h1>
-				<h4>{data.ws_id}</h4>
+				<h1
+					className='display-3 text-center bold'
+				>
+					{currentState}
+				</h1>
+				<hr/>
 			</div>
 		</div>
 	)
