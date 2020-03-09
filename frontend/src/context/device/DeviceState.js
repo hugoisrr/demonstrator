@@ -11,6 +11,7 @@ const DeviceState = props => {
 		data: {},
 		wks: [],
 		dictionary: {},
+		currentWks: '',
 	}
 
 	const [state, dispatch] = useReducer(DeviceReducer, initialState)
@@ -18,7 +19,7 @@ const DeviceState = props => {
 	const startDictionary = () => {
 		if (refInit.current) {
 			state.wks.forEach(element => {
-				state.dictionary[element.ws_id] = new Array(10).fill(0)
+				state.dictionary[element.ws_id] = new Array(100).fill(0)
 				refInit.current = false
 			})
 		}
@@ -39,6 +40,7 @@ const DeviceState = props => {
 
 	// Get device workstations array and store it
 	const getDeviceWks = wks => {
+		state.currentWks = wks
 		dispatch({
 			type: GET_DEVICE_WKS,
 			payload: wks,

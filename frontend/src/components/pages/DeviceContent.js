@@ -2,9 +2,10 @@ import React, { Fragment, useContext, useRef } from 'react'
 import DeviceContext from '../../context/device/deviceContext'
 import WebsocketContext from '../../context/websocket/websocketContext'
 import { Spinner } from '../layout/Spinner'
+import pure from 'recompose/pure'
 import DeviceGraphs from '../layout/DeviceGraphs'
 
-export const DeviceContent = () => {
+const DeviceContent = () => {
 	const deviceContext = useContext(DeviceContext)
 	//const [ids, setIds] = useState()
 	const websocketContext = useContext(WebsocketContext)
@@ -63,7 +64,6 @@ export const DeviceContent = () => {
 											id={item.ws_id}
 											type='button'
 											key={i}
-											select
 											onClick={handleClick}
 										>
 											{item.ws_name}
@@ -125,3 +125,5 @@ const Content = props => {
 		</Fragment>
 	)
 }
+
+export default pure(DeviceContent)
