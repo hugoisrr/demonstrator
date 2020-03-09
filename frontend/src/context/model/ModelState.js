@@ -42,7 +42,6 @@ const ModelState = props => {
 
 	// Get WebsocketStatus
 	const getModelWebsocketStatus = status => {
-		console.log('status:', status)
 		dispatch({
 			type: GET_MODEL_WEBSOCKET_STATUS,
 			payload: status,
@@ -63,6 +62,7 @@ const ModelState = props => {
 				data: state.data,
 				wks: state.wks,
 				dictionary: state.dictionary,
+				websocketStatus: state.websocketStatus,
 				getModelWebsocketStatus,
 				startDictionary,
 				pushToDictionary,

@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { LabelerContent } from './components/pages/LabelerContent'
-import { ModelContent } from './components/pages/ModelContent'
+import ModelContent from './components/pages/ModelContent'
 import DeviceContent from './components/pages/DeviceContent'
 import Sidebar from './components/layout/Sidebar'
 import {

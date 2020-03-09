@@ -27,7 +27,6 @@ const ModelWebsocket = () => {
 	}
 
 	client.onmessage = message => {
-		getModelWebsocketStatus('OPEN')
 		message = JSON.parse(message.data)
 		if (Array.isArray(message) && message.length > 0) {
 			getModelWks(message)
@@ -35,6 +34,7 @@ const ModelWebsocket = () => {
 			startDictionary()
 			getModelData(message)
 			pushToDictionary(message)
+			getModelWebsocketStatus('OPEN')
 		}
 	}
 
