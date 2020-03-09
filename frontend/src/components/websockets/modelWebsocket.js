@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import { useContext } from 'react'
 import { w3cwebsocket as W3CWebSocket } from 'websocket'
 import ModelContext from '../../context/model/modelContext'
@@ -19,11 +20,25 @@ const ModelWebsocket = () => {
 
 	client.onmessage = message => {
 		message = JSON.parse(message.data)
+		let idWks = []
+		const workstationsMap = new Map()
+		// workstationsMap.set('ages', [2, 4, 5, 11, 65])
 		if (Array.isArray(message) && message.length > 0) {
+			idWks = message.map(workstation => Object.values(workstation)[0])
+			// console.log(idWks)
+			// console.table(message)
 			getModelWks(message)
-		} else if (typeof message === 'object') {
+		} else {
+			idWks.forEach(workstationID => {
+				workstationsMap.set(workstationID, Array(60).fill(-1))
+			})
+			console.log('workstationsMap:', workstationsMap)
 			getModelData(message)
 		}
+		// } else if (typeof message === 'object') {
+		// 	// console.log('message:', message)
+		// 	getModelData(message)
+		// }
 	}
 
 	client.onclose = () => {
