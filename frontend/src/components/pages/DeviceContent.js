@@ -2,21 +2,20 @@ import React, { Fragment, useContext, useRef } from 'react'
 import DeviceContext from '../../context/device/deviceContext'
 import WebsocketContext from '../../context/websocket/websocketContext'
 import { Spinner } from '../layout/Spinner'
+import pure from 'recompose/pure'
 import DeviceGraphs from '../layout/DeviceGraphs'
 
-export const DeviceContent = () => {
+const DeviceContent = () => {
 	const deviceContext = useContext(DeviceContext)
 	//const [ids, setIds] = useState()
 	const websocketContext = useContext(WebsocketContext)
-	const { data, wks } = deviceContext
+	const { data, wks, dictionary } = deviceContext
 	const { deviceWebsocket } = websocketContext
 	const { open } = deviceWebsocket
-	const dictionary = useRef({})
 	const refInit = useRef(true)
-	const dropdownName = useRef('Select Workstation')
+	const dropdownName = useRef('Select WorkStation')
 	const refCurrentId = useRef(0)
 	const refIds = useRef(['test'])
-	const refWksArray = useRef([])
 	//const initialValue = { ids: [10, 11, 12] }
 
 	const style = {
@@ -33,27 +32,22 @@ export const DeviceContent = () => {
 		//Create array of wks ids to add to ids dropdown
 		refInit.current = false
 		refIds.current = wks
-		wks.forEach(element => {
-			dictionary.current[element.ws_id] = new Array(60).fill(0)
-		})
 	}
 
 	//Check if values in the data objects from the API are defined & websocket is open before rendering
 	if (open && wks.length > 0 && data.raw_values) {
-		dictionary.current[data.ws_id].shift()
-		dictionary.current[data.ws_id].push(Object.values(data.raw_values))
 		return (
 			<Content>
 				{/* <h1 className='h3 mb-4 text-gray-800 my-4'>Device Content</h1> */}
 				<div className='row' style={style}>
 					<h2 className='col offset-1'>
-						Workstation ID: {refCurrentId.current}
+						Workstation Name: {dropdownName.current}
 					</h2>
 					<div className='dropdown right col'>
 						<button
 							className='btn btn-secondary dropdown-toggle '
 							type='button'
-							id='dropdownMenu2'
+							id=''
 							data-toggle='dropdown'
 							aria-haspopup='true'
 							aria-expanded='false'
@@ -62,18 +56,33 @@ export const DeviceContent = () => {
 						</button>
 						<div className='dropdown-menu' aria-labelledby='dropdownMenu2'>
 							{refIds.current.map((item, i) => {
-								return (
-									<button
-										name={item.ws_name}
-										className='dropdown-item'
-										id={item.ws_id}
-										type='button'
-										key={i}
-										onClick={handleClick}
-									>
-										{item.ws_name}
-									</button>
-								)
+								if (i === 0) {
+									return (
+										<button
+											name={item.ws_name}
+											className='dropdown-item'
+											id={item.ws_id}
+											type='button'
+											key={i}
+											onClick={handleClick}
+										>
+											{item.ws_name}
+										</button>
+									)
+								} else {
+									return (
+										<button
+											name={item.ws_name}
+											className='dropdown-item'
+											id={item.ws_id}
+											type='button'
+											key={i}
+											onClick={handleClick}
+										>
+											{item.ws_name}
+										</button>
+									)
+								}
 							})}
 						</div>
 					</div>
@@ -85,7 +94,7 @@ export const DeviceContent = () => {
 								<DeviceGraphs
 									id={item.ws_id}
 									show={item.ws_id === refCurrentId.current}
-									data={dictionary.current[item.ws_id]}
+									data={dictionary[item.ws_id]}
 									keyNames={wks[0].raw_data}
 									key={i}
 								/>
@@ -116,3 +125,5 @@ const Content = props => {
 		</Fragment>
 	)
 }
+
+export default pure(DeviceContent)

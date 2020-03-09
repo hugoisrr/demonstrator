@@ -11,7 +11,12 @@ const DeviceWebsocket = () => {
 	//Define the context to use
 	const deviceContext = useContext(DeviceContext)
 	//Declare context functions
-	const { getDeviceData, getDeviceWks } = deviceContext
+	const {
+		getDeviceData,
+		getDeviceWks,
+		pushToDictionary,
+		startDictionary,
+	} = deviceContext
 	//Websocket context call
 	const websocketContext = useContext(WebsocketContext)
 	//Websocket open function declaration
@@ -34,8 +39,10 @@ const DeviceWebsocket = () => {
 			//Passing initial data array into the context
 			getDeviceWks(message)
 		} else if (typeof message === 'object') {
-			//Passing frequent data objects into the context
+			startDictionary()
 			getDeviceData(message)
+			pushToDictionary(message)
+			//Passing frequent data objects into the context
 		}
 	}
 
