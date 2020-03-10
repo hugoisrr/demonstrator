@@ -2,23 +2,10 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import drillImage from '../../assets/img/drill.png'
 import engravingImage from '../../assets/img/engravingMachine.png'
+import ProgressBar from './ProgressBar'
 
 const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 	const [currentState, setState] = useState('null')
-	const counterStates = new Map()
-	for (const [stateId] of Object.keys(states)) {
-		counterStates.set(stateId, [])
-	}
-	data.forEach(element => {
-		for (const [state_id, statesArray] of counterStates.entries()) {
-			if (element === parseInt(state_id)) {
-				statesArray.push(element)
-			}
-		}
-	})
-	for (const [state_id, statesArray] of counterStates.entries()) {
-		console.log(state_id, '->', statesArray.length)
-	}
 
 	// Set current state name of each workstation
 	useEffect(() => {
@@ -51,6 +38,7 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 				<h6 style={{ color: 'white' }}>State:</h6>
 				<h1 className='display-3 text-center bold'>{currentState}</h1>
 				<hr />
+				<ProgressBar states={states} data={data} />
 			</div>
 		</div>
 	)
