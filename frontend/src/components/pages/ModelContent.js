@@ -2,15 +2,27 @@ import React, { useContext } from 'react'
 import ModelContext from '../../context/model/modelContext'
 import ContentAPI from '../layout/ContentAPI'
 import WorkStationCard from '../layout/WorkStationCard'
+import { client } from '../websockets/modelWebsocket'
 import { Spinner } from '../layout/Spinner'
 
 const ModelContent = ({ title }) => {
 	const modelContext = useContext(ModelContext)
 
-	const { wks, dictionary, websocketStatus } = modelContext
+	const {
+		wks,
+		dictionary,
+		websocketStatus,
+		getModelWebsocketStatus,
+	} = modelContext
 
 	const handleSwitch = ({ target }) => {
-		console.log(target.checked)
+		if (!target.checked && websocketStatus === 'OPEN') {
+			client.close()
+			getModelWebsocketStatus('CLOSED')
+		} else if (target.checked && websocketStatus !== 'OPEN') {
+			window.location.reload()
+			getModelWebsocketStatus('OPEN')
+		}
 	}
 
 	// Verifies if there are Workstations and Data is been received
@@ -38,7 +50,11 @@ const ModelContent = ({ title }) => {
 		)
 	} else {
 		return (
-			<ContentAPI>
+			<ContentAPI
+				title={title}
+				websocketStatus={websocketStatus}
+				change={handleSwitch}
+			>
 				<Spinner />
 			</ContentAPI>
 		)

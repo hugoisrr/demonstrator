@@ -13,7 +13,15 @@ const SwitchAPI = ({ websocketStatus, change }) => {
 				/>
 				<label className='custom-control-label' htmlFor='apiSwitch'>
 					Websocket switch{' '}
-					<span className='badge badge-success'>{websocketStatus}</span>
+					<span
+						className={
+							websocketStatus === 'OPEN'
+								? `badge badge-success`
+								: `badge badge-info`
+						}
+					>
+						{websocketStatus}
+					</span>
 				</label>
 			</form>
 		</div>
