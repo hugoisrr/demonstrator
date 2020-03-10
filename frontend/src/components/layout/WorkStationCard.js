@@ -5,7 +5,21 @@ import engravingImage from '../../assets/img/engravingMachine.png'
 
 const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 	const [currentState, setState] = useState('null')
-	
+	const counterStates = new Map()
+	for (const [stateId] of Object.keys(states)) {
+		counterStates.set(stateId, [])
+	}
+	data.forEach(element => {
+		for (const [state_id, statesArray] of counterStates.entries()) {
+			if (element === parseInt(state_id)) {
+				statesArray.push(element)
+			}
+		}
+	})
+	for (const [state_id, statesArray] of counterStates.entries()) {
+		console.log(state_id, '->', statesArray.length)
+	}
+
 	// Set current state name of each workstation
 	useEffect(() => {
 		data.forEach(element => {
@@ -19,10 +33,7 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 		<div className='card shadow mb-4 workstationcard'>
 			<div className='card-header py-3'>
 				<div className='row'>
-					<h5
-						id='cardName'
-						className='m-0 font-weight bold col-6'
-					>
+					<h5 id='cardName' className='m-0 font-weight bold col-6'>
 						{ws_name}
 					</h5>
 					<small className='text-right text-muted col-6'>ID: {ws_id}</small>
@@ -38,12 +49,8 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 					/>
 				</div>
 				<h6 style={{ color: 'white' }}>State:</h6>
-				<h1
-					className='display-3 text-center bold'
-				>
-					{currentState}
-				</h1>
-				<hr/>
+				<h1 className='display-3 text-center bold'>{currentState}</h1>
+				<hr />
 			</div>
 		</div>
 	)
