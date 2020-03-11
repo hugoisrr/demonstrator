@@ -3,12 +3,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Sidebar = () => {
+	console.log('render')
 	return (
 		<ul
 			className='navbar-nav bg-gradient-primary sidebar sidebar-dark accordion'
 			id='accordionSidebar'
 		>
-			{/* Link for logo that redirect to home page "/" */}
+			{/* Link for logo that redirects to home page "/" */}
 			<Link
 				className='sidebar-brand d-flex align-items-center justify-content-center'
 				to='/'

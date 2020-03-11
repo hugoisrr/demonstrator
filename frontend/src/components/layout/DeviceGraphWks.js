@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import pure from 'recompose/pure'
 import {
 	LineChart,
 	Line,
@@ -9,17 +10,15 @@ import {
 	ResponsiveContainer,
 } from 'recharts'
 
-export default function DeviceGraphWks(props) {
+const DeviceGraphWks = props => {
 	const [data, setData] = useState([{ key: 0 }])
 
-	const transform = () => {
-		const arr = props.points.map(item => {
-			return { key: item }
-		})
-		return arr
-	}
 	useEffect(() => {
-		setData(transform())
+		setData(
+			props.points.map(item => {
+				return { key: item }
+			})
+		)
 	}, [props.points])
 	return (
 		<div>
@@ -33,12 +32,14 @@ export default function DeviceGraphWks(props) {
 						dot={false}
 						isAnimationActive={false}
 					/>
-					<CartesianGrid strokeDasharray='3 3' />
-					<Legend />
-					<YAxis />
-					<XAxis />
+					{/* <CartesianGrid strokeDasharray='3 3' />
+					<Legend />*/}
+					{/* <XAxis type='number' domain={[0, 'auto']} />
+					<YAxis /> */}
 				</LineChart>
 			</ResponsiveContainer>
 		</div>
 	)
 }
+
+export default pure(DeviceGraphWks)
