@@ -1,41 +1,68 @@
-import React, { Fragment, useContext } from 'react'
+import React, { useContext } from 'react'
 import LabelerContext from '../../context/labeler/labelerContext'
-import WebsocketContext from '../../context/websocket/websocketContext'
+import ContentAPI from '../layout/ContentAPI'
+import WorkStationCard from '../layout/WorkStationCard'
+import { client } from '../websockets/labelerWebsocket'
 import { Spinner } from '../layout/Spinner'
 
-export const LabelerContent = () => {
-	const labelContext = useContext(LabelerContext)
-	const websocketContext = useContext(WebsocketContext)
+const LabelerContent = ({ title }) => {
+	const labelerContext = useContext(LabelerContext)
+	
+	const {
+		wks,
+		dictionary,
+		websocketStatus,
+		getLabelerWebsocketStatus,
+	} = labelerContext
 
-	const { data, wks } = labelContext
+	const handleSwitch = ({ target }) => {
+		if (!target.checked && websocketStatus === 'OPEN') {
+			client.close()
+			getLabelerWebsocketStatus('CLOSED')
+		} else if (target.checked && websocketStatus !== 'OPEN') {
+			window.location.reload()
+			getLabelerWebsocketStatus('OPEN')
+		}
+	}
 
-	const { labelerWebsocket } = websocketContext
-
-	const { open } = labelerWebsocket
-
-	if (open && wks.length > 0) {
+	// Verifies if there are Workstations and Data is been received
+	if (wks.length > 0 && Object.keys(dictionary).length > 0) {
 		return (
-			<Content>
-				<h1 className='h3 mb-4 text-gray-800 my-4'>Labeler Content</h1>
-				<h2>{data.ws_id}</h2>
-			</Content>
+			<ContentAPI
+				title={title}
+				websocketStatus={websocketStatus}
+				change={handleSwitch}
+			>
+				<div className='row'>
+					{wks.map(workstation => {
+						console.table()
+						return (
+							<div className='col-lg-4 col-md-4' key={workstation.ws_id}>
+								<WorkStationCard
+									workstation={workstation}
+									data={dictionary[workstation.ws_id]}
+								/>
+							</div>
+						)
+					})}
+				</div>
+			</ContentAPI>
 		)
 	} else {
 		return (
-			<Content>
-				<h1 className='h3 mb-4 text-gray-800 my-4'>Labeler Content</h1>
+			<ContentAPI
+				title={title}
+				websocketStatus={websocketStatus}
+				change={handleSwitch}
+			>
 				<Spinner />
-			</Content>
+			</ContentAPI>
 		)
 	}
 }
 
-const Content = props => {
-	return (
-		<Fragment>
-			<div id='content'>
-				<div className='container-fluid'>{props.children}</div>
-			</div>
-		</Fragment>
-	)
+LabelerContent.defaultProps = {
+	title: 'Labeler Content',
 }
+
+export default LabelerContent

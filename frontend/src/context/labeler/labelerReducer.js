@@ -1,4 +1,4 @@
-import { GET_LABELER_DATA, GET_LABELER_WKS } from '../types'
+import { GET_LABELER_DATA, GET_LABELER_WKS, GET_LABELER_WEBSOCKET_STATUS } from '../types'
 
 export default (state, action) => {
 	switch (action.type) {
@@ -15,6 +15,12 @@ export default (state, action) => {
 				wks: action.payload,
 				loading: false,
 			}
+		
+			case GET_LABELER_WEBSOCKET_STATUS:
+				return {
+					...state,
+					websocketStatus: action.payload,
+				}
 
 		default:
 			return state
