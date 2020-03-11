@@ -11,13 +11,17 @@
     "datatables-bootstrap": "0.0.1",
     "jquery": "^3.4.1",
     "lodash": "^4.17.15",
+    "plotly.js": "^1.52.3",
     "popper.js": "^1.16.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-plotly.js": "^2.4.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.1",
+    "react-virtualized": "^9.21.2",
     "recharts": "^2.0.0-beta.1",
     "recompose": "^0.30.0",
+    "victory": "^34.1.3",
     "websocket": "^1.0.31"
   },
   "scripts": {

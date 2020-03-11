@@ -16,6 +16,7 @@ const DeviceWebsocket = () => {
 		getDeviceWks,
 		pushToDictionary,
 		startDictionary,
+		pushToDictionaryTemp,
 	} = deviceContext
 	//Websocket context call
 	const websocketContext = useContext(WebsocketContext)
@@ -40,6 +41,7 @@ const DeviceWebsocket = () => {
 			getDeviceWks(message)
 		} else if (typeof message === 'object') {
 			startDictionary()
+			//pushToDictionaryTemp(message)
 			getDeviceData(message)
 			pushToDictionary(message)
 			//Passing frequent data objects into the context

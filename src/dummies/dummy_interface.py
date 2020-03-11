@@ -55,19 +55,19 @@ async def send_device(websocket, path):
         data = msg_device()
         try:
             await websocket.send( json.dumps( data ) )
-            await asyncio.sleep(1/6)
+            await asyncio.sleep(1/30)
         except websockets.exceptions.ConnectionClosedError:
             print("Device gui disconected")
             break
 
-async def send_label(websocket, path):
+""" async def send_label(websocket, path):
     print("client connected to label")
     await websocket.send( json.dumps( first_label ) )
     while True:
         data =  choice(msg_label, p=[0.14, 0.14, 0.14, 0.14, 0.14, 0.15, 0.15])
         try:
             await websocket.send( json.dumps( data ) )
-            await asyncio.sleep(1/6)
+            await asyncio.sleep(1/1)
         except websockets.exceptions.ConnectionClosedError:
             print("Label gui disconected")
             break
@@ -79,11 +79,11 @@ async def send_model(websocket, path):
         data =  choice(msg_label, p=[0.14, 0.14, 0.14, 0.14, 0.14, 0.15, 0.15])
         try:
             await websocket.send( json.dumps( data ) )
-            await asyncio.sleep(1/6)
+            await asyncio.sleep(1/1)
         except websockets.exceptions.ConnectionClosedError:
             print("Model gui disconected")
             break
-
+ """
 async def server(title, server, keep_execution, port):
     async with websockets.serve(server, "0.0.0.0", port):
         print("Waiting for %s client on port %d" % (title,port))
@@ -96,8 +96,8 @@ def main():
     loop.add_signal_handler(signal.SIGINT, keep_execution.set_result, None)
 
     loop.create_task(server("device", send_device, keep_execution, 2000))
-    loop.create_task(server("labler", send_label, keep_execution, 3000))
-    loop.create_task(server("model", send_model, keep_execution, 4000))
+    """ loop.create_task(server("labler", send_label, keep_execution, 3000)) """
+    """ loop.create_task(server("model", send_model, keep_execution, 4000)) """
 
     loop.run_until_complete(keep_execution)
 
