@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { percentage } from '../../assets/libs/helperFunctions'
 
 const ProgressBar = ({ states, data }) => {
 	const counterStates = new Map()
@@ -7,6 +8,7 @@ const ProgressBar = ({ states, data }) => {
 	for (const [stateId] of Object.keys(states)) {
 		counterStates.set(stateId, [])
 	}
+
 	// For each state id an element of the data in been pushed into an empty array
 	data.forEach(element => {
 		for (const [state_id, statesArray] of counterStates.entries()) {
@@ -15,19 +17,37 @@ const ProgressBar = ({ states, data }) => {
 			}
 		}
 	})
-	// According to the length of the array is the number of elements pushed and counts the total
+	// According to the length of the array ,is the number of elements pushed and counts the total
 	let total = 0
-	for (const [state_id, statesArray] of counterStates.entries()) {
-		console.log(state_id, '->', statesArray.length)
+	for (const statesArray of counterStates.values()) {
 		total += statesArray.length
 	}
+	// Calculates the percentage of state
+	let percentageValue = 0
+	let flexValue = 0
+	for (const [state_id, statesArray] of counterStates.entries()) {
+		percentageValue = percentage(statesArray.length, total).toFixed(2)
+		if (percentageValue === 'NaN' || percentageValue === 'Infinity')
+			percentageValue = 0
+		flexValue = (percentageValue / 100).toFixed(1)
+		console.log(
+			state_id,
+			'->',
+			statesArray.length,
+			'->',
+			percentageValue,
+			'% ->',
+			flexValue
+		)
+	}
 	console.log('total:', total)
+
 	return (
 		<div className='progress'>
 			<div
 				className='progress-bar progress-bar-success'
 				role='progressbar'
-				style={{ flex: 0.4 }}
+				style={{ flex: 0.4, backgroundColor: 'blue' }}
 			>
 				Free Space
 			</div>
