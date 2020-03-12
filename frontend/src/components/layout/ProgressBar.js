@@ -18,10 +18,10 @@ const ProgressBar = ({ states, data }) => {
 	// According to the length of the array is the number of elements pushed and counts the total
 	let total = 0
 	for (const [state_id, statesArray] of counterStates.entries()) {
-		console.log(state_id, '->', statesArray.length)
+		//console.log(state_id, '->', statesArray.length)
 		total += statesArray.length
 	}
-	console.log('total:', total)
+	//console.log('total:', total)
 	return (
 		<div className='progress'>
 			<div

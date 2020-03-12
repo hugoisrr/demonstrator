@@ -2,15 +2,20 @@
 import React, { useReducer, useRef } from 'react'
 import DeviceContext from './deviceContext'
 import DeviceReducer from './deviceReducer'
-import { GET_DEVICE_DATA, GET_DEVICE_WKS } from '../types'
+import {
+	GET_DEVICE_DATA,
+	GET_DEVICE_WKS,
+	GET_DEVICE_WEBSOCKET_STATUS,
+} from '../types'
 
-const DeviceState = React.memo(props => {
+const DeviceState = props => {
 	const refInit = useRef(true)
 
 	const initialState = {
 		data: {},
 		wks: [],
 		dictionary: {},
+		websocketStatus: '',
 		dictionaryTest: {},
 		currentWks: '',
 		avg: {},
@@ -85,6 +90,14 @@ const DeviceState = React.memo(props => {
 		})
 	}
 
+		// Get WebsocketStatus
+	const getDeviceWebsocketStatus = status => {
+			dispatch({
+				type: GET_DEVICE_WEBSOCKET_STATUS,
+				payload: status,
+			})
+		}
+
 	//Not rendered component that provides data to component tree
 	return (
 		<DeviceContext.Provider
@@ -97,12 +110,13 @@ const DeviceState = React.memo(props => {
 				pushToDictionary,
 				getDeviceData,
 				getDeviceWks,
+				getDeviceWebsocketStatus,
 				pushToDictionaryTemp,
 			}}
 		>
 			{props.children}
 		</DeviceContext.Provider>
 	)
-})
+}
 
 export default DeviceState

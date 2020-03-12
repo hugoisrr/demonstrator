@@ -1,17 +1,19 @@
-import React, { Fragment, useContext, useRef } from 'react'
+import React, {useContext, useRef } from 'react'
 import DeviceContext from '../../context/device/deviceContext'
-import WebsocketContext from '../../context/websocket/websocketContext'
+//import WebsocketContext from '../../context/websocket/websocketContext'
+import { client } from '../websockets/deviceWebsocket'
 import { Spinner } from '../layout/Spinner'
+import ContentAPI from '../layout/ContentAPI'
 import pure from 'recompose/pure'
 import DeviceGraphs from '../layout/DeviceGraphs'
 
-const DeviceContent = () => {
+const DeviceContent = ({ title }) => {
 	const deviceContext = useContext(DeviceContext)
 	//const [ids, setIds] = useState()
-	const websocketContext = useContext(WebsocketContext)
-	const { data, wks, dictionary } = deviceContext
-	const { deviceWebsocket } = websocketContext
-	const { open } = deviceWebsocket
+	//const websocketContext = useContext(WebsocketContext)
+	const {wks, dictionary, websocketStatus, getDeviceWebsocketStatus } = deviceContext
+	//const { deviceWebsocket } = websocketContext
+	//const { open } = deviceWebsocket
 	const refInit = useRef(true)
 	const dropdownName = useRef('Select WorkStation')
 	const refCurrentId = useRef(0)
@@ -27,6 +29,19 @@ const DeviceContent = () => {
 		dropdownName.current = e.target.name
 	}
 
+	
+	const handleSwitch = ({ target }) => {
+		if (!target.checked && websocketStatus === 'OPEN') {
+			client.close()
+			getDeviceWebsocketStatus('CLOSED')
+			console.log("Close");
+		} else if (target.checked && websocketStatus !== 'OPEN') {
+			window.location.reload()
+			getDeviceWebsocketStatus('OPEN')
+			console.log("Open");
+		}
+	}
+
 	//Do in the first render only: check if configuration file enters
 	if (wks && refInit.current && wks.length > 0) {
 		//Create array of wks ids to add to ids dropdown
@@ -35,9 +50,13 @@ const DeviceContent = () => {
 	}
 
 	//Check if values in the data objects from the API are defined & websocket is open before rendering
-	if (open && wks.length > 0 && data.raw_values) {
+	if (wks.length > 0 && Object.keys(dictionary).length > 0){//data.raw_values) {
 		return (
-			<Content>
+			<ContentAPI
+				title={title}
+				websocketStatus={websocketStatus}
+				change={handleSwitch}
+			>
 				{/* <h1 className='h3 mb-4 text-gray-800 my-4'>Device Content</h1> */}
 				<div className='row' style={style}>
 					<h2 className='col offset-1'>
@@ -87,6 +106,7 @@ const DeviceContent = () => {
 						</div>
 					</div>
 				</div>
+				
 				<div className='row'>
 					<div>
 						{refIds.current.map((item, i) => {
@@ -102,21 +122,25 @@ const DeviceContent = () => {
 						})}
 					</div>
 				</div>
-			</Content>
+				</ContentAPI>
 		)
 	}
 	// If data coming from API is still undefined, render Spinner until actual data comes in
 	else {
 		return (
-			<Content>
+			<ContentAPI
+				title={title}
+				websocketStatus={websocketStatus}
+				change={handleSwitch}
+			>
 				<Spinner />
-			</Content>
+			</ContentAPI>
 		)
 	}
 }
 
 //Render container with common tags for the 2 conditional cases
-const Content = props => {
+/**const Content = props => {
 	return (
 		<Fragment>
 			<div id='content'>
@@ -125,5 +149,10 @@ const Content = props => {
 		</Fragment>
 	)
 }
+*/
 
-export default pure(DeviceContent)
+DeviceContent.defaultProps = {
+	title: 'Device Content',
+}
+
+export default DeviceContent

@@ -1,4 +1,4 @@
-import { GET_DEVICE_DATA, GET_DEVICE_WKS} from '../types'
+import { GET_DEVICE_DATA, GET_DEVICE_WKS, GET_DEVICE_WEBSOCKET_STATUS} from '../types'
 //Interface
 export default (state, action) => {
 	switch (action.type) {
@@ -6,6 +6,7 @@ export default (state, action) => {
 			return {
 				...state,
 				data: action.payload,
+				loading: false,
 			}
 		/* case PUSH_DEVICE_DATA:
 			return {
@@ -21,6 +22,13 @@ export default (state, action) => {
 			return {
 				...state,
 				wks: action.payload,
+				loading: false,
+			}
+		
+		case GET_DEVICE_WEBSOCKET_STATUS:
+			return {
+				...state,
+				websocketStatus: action.payload,
 			}
 
 		default:
