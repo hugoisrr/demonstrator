@@ -1,17 +1,39 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import drillImage from '../../assets/img/drill.png'
 import engravingImage from '../../assets/img/engravingMachine.png'
 import ProgressBar from './ProgressBar'
+import { hexColorGenerator } from '../../assets/libs/helperFunctions'
 
 const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 	const [currentState, setState] = useState('null')
+	const [statesColors, setStatesColors] = useState([])
+	// const [statesColors2, setStatesColors2] = useState({})
+	const [color, setColor] = useState()
 
-	// Set current state name of each workstation
+	// Get a random color for each state
+	useEffect(() => {
+		// const colorStates2 = {}
+		const colorStates = []
+		let hexColor = ''
+		Object.values(states).forEach(() => {
+			hexColor = hexColorGenerator()
+			// colorStates2[idState] = hexColor
+			colorStates.push(hexColor)
+		})
+		// setStatesColors2(colorStates2)
+		setStatesColors(colorStates)
+	}, [])
+
+	// Set current state name and state's color of each workstation
 	useEffect(() => {
 		data.forEach(element => {
 			for (const [stateId, stateName] of Object.entries(states)) {
-				if (element === parseInt(stateId)) setState(stateName)
+				if (element === parseInt(stateId)) {
+					setState(stateName)
+					setColor(statesColors[stateId])
+				}
 			}
 		})
 	})
@@ -36,9 +58,11 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 					/>
 				</div>
 				<h6 style={{ color: 'white' }}>State:</h6>
-				<h1 className='display-3 text-center bold'>{currentState}</h1>
+				<h1 className='display-3 text-center bold' style={{ color: color }}>
+					{currentState}
+				</h1>
 				<hr />
-				<ProgressBar states={states} data={data} />
+				<ProgressBar states={states} data={data} statesColors={statesColors} />
 			</div>
 		</div>
 	)

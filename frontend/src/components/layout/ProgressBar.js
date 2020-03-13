@@ -2,8 +2,9 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { percentage } from '../../assets/libs/helperFunctions'
 import PropTypes from 'prop-types'
 
-const ProgressBar = ({ states, data }) => {
-	const [percentageValues, setPercentageValues] = useState([])
+const ProgressBar = ({ states, data, statesColors }) => {
+	console.log('statesColors:', statesColors)
+	const [flexValues, setFlexValues] = useState([])
 
 	useEffect(() => {
 		const counterStates = new Map()
@@ -27,29 +28,35 @@ const ProgressBar = ({ states, data }) => {
 		}
 		// Calculates the percentage of each state
 		let percentageValue = 0
+		let flexValue = 0
 		const values = []
 		for (const statesArray of counterStates.values()) {
 			percentageValue = percentage(statesArray.length, total).toFixed(2)
 			if (percentageValue === 'NaN' || percentageValue === 'Infinity')
 				percentageValue = 0
-			values.push(percentageValue)
+			flexValue = (percentageValue / 100).toFixed(1)
+			values.push(flexValue)
 		}
-		setPercentageValues(values)
-	}, [data, percentageValues, states])
+		setFlexValues(values)
+	}, [data, flexValues, states])
 
 	return (
 		<Fragment>
 			<h6 style={{ color: 'white' }}>Percentage:</h6>
 			<div className='progress'>
-				{percentageValues.map(value => {
-					let flexValue = (value / 100).toFixed(1)
+				{flexValues.map((value, index) => {
+					const percentage = value * 100
 					return (
 						<div
 							className='progress-bar progress-bar-success'
 							role='progressbar'
-							style={{ flex: flexValue }}
+							style={{
+								flex: value,
+								color: 'gray',
+								backgroundColor: statesColors[index],
+							}}
 						>
-							{value}
+							{percentage}%
 						</div>
 					)
 				})}
@@ -61,6 +68,7 @@ const ProgressBar = ({ states, data }) => {
 ProgressBar.propTypres = {
 	states: PropTypes.object.isRequired,
 	data: PropTypes.object.isRequired,
+	statesColors: PropTypes.array.isRequired,
 }
 
 export default ProgressBar
