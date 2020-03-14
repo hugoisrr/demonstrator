@@ -14,10 +14,8 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 	// Get a random color for each state
 	useEffect(() => {
 		const colorStates = {}
-		let hexColor = ''
 		Object.values(states).forEach(state => {
-			hexColor = getRandColor(5)
-			colorStates[state] = hexColor
+			colorStates[state] = getRandColor(5)
 		})
 		setStatesColors(colorStates)
 	}, [])
