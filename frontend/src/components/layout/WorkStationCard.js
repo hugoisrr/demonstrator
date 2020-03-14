@@ -4,26 +4,21 @@ import PropTypes from 'prop-types'
 import drillImage from '../../assets/img/drill.png'
 import engravingImage from '../../assets/img/engravingMachine.png'
 import ProgressBar from './ProgressBar'
-// import { hexColorGenerator } from '../../assets/libs/helperFunctions'
 import { getRandColor } from '../../assets/libs/helperFunctions'
 
 const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 	const [currentState, setState] = useState('null')
-	const [statesColors, setStatesColors] = useState([])
-	// const [statesColors2, setStatesColors2] = useState({})
+	const [statesColors, setStatesColors] = useState({})
 	const [color, setColor] = useState()
 
 	// Get a random color for each state
 	useEffect(() => {
-		// const colorStates2 = {}
-		const colorStates = []
+		const colorStates = {}
 		let hexColor = ''
-		Object.values(states).forEach(() => {
+		Object.values(states).forEach(state => {
 			hexColor = getRandColor(5)
-			// colorStates2[idState] = hexColor
-			colorStates.push(hexColor)
+			colorStates[state] = hexColor
 		})
-		// setStatesColors2(colorStates2)
 		setStatesColors(colorStates)
 	}, [])
 
@@ -33,7 +28,7 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 			for (const [stateId, stateName] of Object.entries(states)) {
 				if (element === parseInt(stateId)) {
 					setState(stateName)
-					setColor(statesColors[stateId])
+					setColor(Object.values(statesColors)[stateId])
 				}
 			}
 		})
@@ -63,7 +58,11 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 					{currentState}
 				</h1>
 				<hr />
-				<ProgressBar states={states} data={data} statesColors={statesColors} />
+				<ProgressBar
+					states={states}
+					data={data}
+					statesColors={Object.values(statesColors)}
+				/>
 			</div>
 		</div>
 	)

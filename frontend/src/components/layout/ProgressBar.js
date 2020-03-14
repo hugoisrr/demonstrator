@@ -20,7 +20,7 @@ const ProgressBar = ({ states, data, statesColors }) => {
 				}
 			}
 		})
-		// According to the length of the array ,is the number of elements pushed and counts the total
+		// According to the length of the array, is the number of elements pushed and counts the total
 		let total = 0
 		for (const statesArray of counterStates.values()) {
 			total += statesArray.length
@@ -29,14 +29,26 @@ const ProgressBar = ({ states, data, statesColors }) => {
 		let percentageValue = 0
 		let flexValue = 0
 		const values = []
+		// NOTE to verify the percentage and the states uncomment the next lines
+		// for (const [state_id, statesArray] of counterStates.entries()) {
 		for (const statesArray of counterStates.values()) {
 			percentageValue = percentage(statesArray.length, total).toFixed(2)
 			if (percentageValue === 'NaN' || percentageValue === 'Infinity')
 				percentageValue = 0
 			flexValue = (percentageValue / 100).toFixed(1)
 			values.push(flexValue)
+			// console.log(
+			// 	state_id,
+			// 	'->',
+			// 	statesArray.length,
+			// 	'->',
+			// 	percentageValue,
+			// 	'% ->',
+			// 	flexValue
+			// )
 		}
 		setFlexValues(values)
+		// console.log('total:', total)
 	}, [data, flexValues, states])
 
 	return (
