@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import drillImage from '../../assets/img/drill.png'
 import engravingImage from '../../assets/img/engravingMachine.png'
 import ProgressBar from './ProgressBar'
-import { hexColorGenerator } from '../../assets/libs/helperFunctions'
+// import { hexColorGenerator } from '../../assets/libs/helperFunctions'
+import { getRandColor } from '../../assets/libs/helperFunctions'
 
 const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 	const [currentState, setState] = useState('null')
@@ -18,7 +19,7 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 		const colorStates = []
 		let hexColor = ''
 		Object.values(states).forEach(() => {
-			hexColor = hexColorGenerator()
+			hexColor = getRandColor(5)
 			// colorStates2[idState] = hexColor
 			colorStates.push(hexColor)
 		})

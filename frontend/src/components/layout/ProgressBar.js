@@ -3,7 +3,6 @@ import { percentage } from '../../assets/libs/helperFunctions'
 import PropTypes from 'prop-types'
 
 const ProgressBar = ({ states, data, statesColors }) => {
-	console.log('statesColors:', statesColors)
 	const [flexValues, setFlexValues] = useState([])
 
 	useEffect(() => {
@@ -52,7 +51,7 @@ const ProgressBar = ({ states, data, statesColors }) => {
 							role='progressbar'
 							style={{
 								flex: value,
-								color: 'gray',
+								color: 'darkslategray',
 								backgroundColor: statesColors[index],
 							}}
 						>
