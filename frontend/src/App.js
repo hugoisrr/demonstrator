@@ -4,14 +4,7 @@ import ModelContent from './components/pages/ModelContent'
 import DeviceContent from './components/pages/DeviceContent'
 import LabelerContent from './components/pages/LabelerContent'
 import Sidebar from './components/layout/Sidebar'
-import {
-	toogleSideNavigation,
-	menuAccordionsResized,
-	preventContentWrapper,
-	topButtonAppear,
-	smoothScrollingTop,
-} from './assets/libs/customJquery'
-
+import * as JqueryFunctions from './assets/libs/customJquery'
 import './App.scss'
 import LabelerState from './context/labeler/LabelerState'
 import DeviceState from './context/device/DeviceState'
@@ -22,11 +15,11 @@ import * as Websockets from './components/websockets'
 const App = () => {
 	//Use animation jquery methods
 	useEffect(() => {
-		toogleSideNavigation()
-		menuAccordionsResized()
-		preventContentWrapper()
-		topButtonAppear()
-		smoothScrollingTop()
+		JqueryFunctions.toogleSideNavigation()
+		JqueryFunctions.menuAccordionsResized()
+		JqueryFunctions.preventContentWrapper()
+		JqueryFunctions.topButtonAppear()
+		JqueryFunctions.smoothScrollingTop()
 	})
 	return (
 		<LabelerState>

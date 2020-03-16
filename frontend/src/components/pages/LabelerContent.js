@@ -7,7 +7,7 @@ import { Spinner } from '../layout/Spinner'
 
 const LabelerContent = ({ title }) => {
 	const labelerContext = useContext(LabelerContext)
-	
+
 	const {
 		wks,
 		dictionary,
@@ -35,7 +35,6 @@ const LabelerContent = ({ title }) => {
 			>
 				<div className='row'>
 					{wks.map(workstation => {
-						console.table()
 						return (
 							<div className='col-lg-4 col-md-4' key={workstation.ws_id}>
 								<WorkStationCard

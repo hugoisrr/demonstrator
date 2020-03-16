@@ -1,57 +1,85 @@
-import React from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
+import { percentage } from '../../assets/libs/helperFunctions'
 import PropTypes from 'prop-types'
 
-const ProgressBar = ({ states, data }) => {
-	const counterStates = new Map()
-	// Assigns states id's as keys and empty arrays as values
-	for (const [stateId] of Object.keys(states)) {
-		counterStates.set(stateId, [])
-	}
-	// For each state id an element of the data in been pushed into an empty array
-	data.forEach(element => {
-		for (const [state_id, statesArray] of counterStates.entries()) {
-			if (element === parseInt(state_id)) {
-				statesArray.push(element)
-			}
+const ProgressBar = ({ states, data, statesColors }) => {
+	const [flexValues, setFlexValues] = useState([])
+
+	useEffect(() => {
+		const counterStates = new Map()
+		// Assigns states id's as keys and empty arrays as values
+		for (const [stateId] of Object.keys(states)) {
+			counterStates.set(stateId, [])
 		}
-	})
-	// According to the length of the array is the number of elements pushed and counts the total
-	let total = 0
-	for (const [state_id, statesArray] of counterStates.entries()) {
-		//console.log(state_id, '->', statesArray.length)
-		total += statesArray.length
-	}
-	//console.log('total:', total)
+
+		// For each state id an element of the data in been pushed into an empty array
+		data.forEach(element => {
+			for (const [state_id, statesArray] of counterStates.entries()) {
+				if (element === parseInt(state_id)) {
+					statesArray.push(element)
+				}
+			}
+		})
+		// According to the length of the array, is the number of elements pushed and counts the total
+		let total = 0
+		for (const statesArray of counterStates.values()) {
+			total += statesArray.length
+		}
+		// Calculates the percentage of each state
+		let percentageValue = 0
+		let flexValue = 0
+		const values = []
+		// NOTE to verify the percentage and the states uncomment the next lines
+		// for (const [state_id, statesArray] of counterStates.entries()) {
+		for (const statesArray of counterStates.values()) {
+			percentageValue = percentage(statesArray.length, total).toFixed(2)
+			if (percentageValue === 'NaN' || percentageValue === 'Infinity')
+				percentageValue = 0
+			flexValue = (percentageValue / 100).toFixed(1)
+			values.push(flexValue)
+			// console.log(
+			// 	state_id,
+			// 	'->',
+			// 	statesArray.length,
+			// 	'->',
+			// 	percentageValue,
+			// 	'% ->',
+			// 	flexValue
+			// )
+		}
+		setFlexValues(values)
+		// console.log('total:', total)
+	}, [data, flexValues, states])
+
 	return (
-		<div className='progress'>
-			<div
-				className='progress-bar progress-bar-success'
-				role='progressbar'
-				style={{ flex: 0.4 }}
-			>
-				Free Space
+		<Fragment>
+			<h6 style={{ color: 'white' }}>Percentage:</h6>
+			<div className='progress'>
+				{flexValues.map((value, index) => {
+					const percentage = value * 100
+					return (
+						<div
+							className='progress-bar progress-bar-success'
+							role='progressbar'
+							style={{
+								flex: value,
+								color: 'darkslategray',
+								backgroundColor: statesColors[index],
+							}}
+						>
+							{percentage}%
+						</div>
+					)
+				})}
 			</div>
-			<div
-				className='progress-bar progress-bar-warning'
-				role='progressbar'
-				style={{ flex: 0.1 }}
-			>
-				Warning
-			</div>
-			<div
-				className='progress-bar progress-bar-danger'
-				role='progressbar'
-				style={{ flex: 0.2 }}
-			>
-				Danger
-			</div>
-		</div>
+		</Fragment>
 	)
 }
 
 ProgressBar.propTypres = {
 	states: PropTypes.object.isRequired,
 	data: PropTypes.object.isRequired,
+	statesColors: PropTypes.array.isRequired,
 }
 
 export default ProgressBar
