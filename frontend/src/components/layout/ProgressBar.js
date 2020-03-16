@@ -1,3 +1,19 @@
+
+/**
+ * ProgressBar
+ * Description - One big useEffect() runs for every data received.
+ * To calculate the porcentage a Map data structure is created, which is called
+ * counterStates, first it's initialize with the states's ids and with an empty array,
+ * then for each data received verifies the id the state received with the state id of the 
+ * counterStates Map object, if both are equal then it's been push to the array.
+ * Then it calculates the total of all entries, of all the states. After that we calculate
+ * the percentage of each state, after getting the percentage, we had to converte the value into
+ * decimal values, example: 20% -> 0.2, 55% -> 0.5. Because JSX doesn't accept percentage values to
+ * render the ProgressBar. The file receives as a prop the statesColors, which is an array. To render
+ * the proper color it verifies the array's index and the state's id. 
+ */
+
+
 import React, { Fragment, useEffect, useState } from 'react'
 import { percentage } from '../../assets/libs/helperFunctions'
 import PropTypes from 'prop-types'
