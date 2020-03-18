@@ -1,12 +1,10 @@
-
 /**
  * WorkstationCard
- * Description - The first useEffect() runs only once because of the empty array, and it 
+ * Description - The first useEffect() runs only once because of the empty array, and it
  * randomly sets the color of each state. The second useEffect() runs for every data received,
  * then it verifies the state_id received from the data and sets the current staet and it's color.
  * Then for the ProgressBar component it receives the objects, data, and the array of colors.
  */
-
 
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'

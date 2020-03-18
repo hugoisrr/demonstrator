@@ -2,7 +2,6 @@ import { useContext } from 'react'
 import { w3cwebsocket as W3CWebSocket } from 'websocket'
 import LabelerContext from '../../context/labeler/labelerContext'
 
-
 //const client = new W3CWebSocket('ws://172.21.30.241:3000')
 export const client = new W3CWebSocket('ws://localhost:3000')
 
@@ -13,7 +12,7 @@ const LabelerWebsocket = () => {
 		getLabelerWks,
 		pushToDictionary,
 		startDictionary,
-		getLabelerWebsocketStatus,		
+		getLabelerWebsocketStatus,
 	} = labelerContext
 
 	client.onerror = () => {

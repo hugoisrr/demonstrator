@@ -38,7 +38,7 @@ const ModelWebsocket = () => {
 	client.onmessage = message => {
 		message = JSON.parse(message.data)
 		if (Array.isArray(message) && message.length > 0) {
-			// Gets the initial array of workstations 
+			// Gets the initial array of workstations
 			getModelWks(message)
 		} else if (typeof message === 'object') {
 			// Starts the dictionary structure and the data from the websocket
