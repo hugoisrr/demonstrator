@@ -9,7 +9,7 @@ const DeviceContent = ({ title }) => {
 
 	const {
 		wks,
-		// wksMap,
+		wksMap,
 		websocketStatus,
 		getDeviceWebsocketStatus,
 	} = deviceContext
@@ -24,7 +24,8 @@ const DeviceContent = ({ title }) => {
 		}
 	}
 
-	if (wks.length > 0) {
+	// Verifies if there are Workstations and Data is been received, if not it renders a Spinner
+	if (wks.length > 0 && wksMap.size > 0) {
 		return (
 			<ContentAPI
 				title={title}

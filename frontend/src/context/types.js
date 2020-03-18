@@ -1,6 +1,5 @@
 //Define action types for contexts
 export const GET_LABELER_DATA = 'GET_LABELER_DATA'
-export const GET_DEVICE_DATA = 'GET_DEVICE_DATA'
 export const GET_MODEL_DATA = 'GET_MODEL_DATA'
 export const GET_LABELER_WKS = 'GET_LABELER_WKS'
 export const GET_DEVICE_WKS = 'GET_DEVICE_WKS'
