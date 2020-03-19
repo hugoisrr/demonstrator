@@ -32,21 +32,6 @@ const DeviceState = props => {
 		}
 	}
 
-	const setCurrentDevice = wkId => {
-		dispatch({
-			type: SET_CURRENT_DEVICE,
-			payload: wkId,
-		})
-	}
-
-	// Get Workstations from the API
-	const getDeviceWks = wks => {
-		dispatch({
-			type: GET_DEVICE_WKS,
-			payload: wks,
-		})
-	}
-
 	// Set income raw_values on its corresponding array, within the device map structure
 	const setDataInDeviceMap = data => {
 		if (state.wksMap.size > 0) {
@@ -56,6 +41,36 @@ const DeviceState = props => {
 				}
 			}
 		}
+	}
+
+	// Set current device id select from the dropdown
+	const setCurrentDevice = wkId => {
+		const deviceSelected = {}
+		// Set workstation id and raw data keys from the wks array for the current Device
+		state.wks.forEach(workstation => {
+			if (wkId === workstation.ws_id) {
+				deviceSelected['ws_id'] = wkId
+				deviceSelected['raw_data'] = workstation.raw_data
+			}
+		})
+		// Set raw values from the wksMap for the current Device
+		for (const [ws_id, values] of state.wksMap.entries()) {
+			if (parseInt(ws_id) === wkId) {
+				deviceSelected['raw_values'] = values
+			}
+		}
+		dispatch({
+			type: SET_CURRENT_DEVICE,
+			payload: deviceSelected,
+		})
+	}
+
+	// Get Workstations from the API
+	const getDeviceWks = wks => {
+		dispatch({
+			type: GET_DEVICE_WKS,
+			payload: wks,
+		})
 	}
 
 	// Get WebsocketStatus

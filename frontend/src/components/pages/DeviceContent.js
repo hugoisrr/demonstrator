@@ -36,7 +36,11 @@ const DeviceContent = ({ title }) => {
 				dropdown
 			>
 				<div className='row'>
-					{currentDevice === null ?  <SelectDevice>Select Device</SelectDevice> : <DeviceGraphs currentDevice={currentDevice} wks={wks} wksMap={wksMap} />}
+					{currentDevice === null ? (
+						<SelectDevice>Select Device</SelectDevice>
+					) : (
+						<DeviceGraphs currentDevice={currentDevice} />
+					)}
 				</div>
 			</ContentAPI>
 		)
@@ -57,11 +61,11 @@ DeviceContent.defaultProps = {
 	title: 'Device Content',
 }
 
-const SelectDevice = ({children}) => {
+const SelectDevice = ({ children }) => {
 	return (
-	<div className="text-center col-12 center-block mt-5">
-		<h5 style={{color: 'lightGray'}}>{children}</h5>
-	</div>
+		<div className='text-center col-12 center-block mt-5'>
+			<h5 style={{ color: 'lightGray' }}>{children}</h5>
+		</div>
 	)
 }
 
