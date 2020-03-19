@@ -15,8 +15,6 @@ const DeviceContent = ({ title }) => {
 		getDeviceWebsocketStatus,
 	} = deviceContext
 
-	console.log('currentDevice:', currentDevice)
-
 	const handleSwitch = ({ target }) => {
 		if (!target.checked && websocketStatus === 'OPEN') {
 			client.close()
@@ -37,7 +35,7 @@ const DeviceContent = ({ title }) => {
 				dropdown={true}
 			>
 				<div className='row'>
-					<h1>Hola</h1>
+					<h4>{currentDevice === null ? 'Select a Device' : 'Graphs'}</h4>
 				</div>
 			</ContentAPI>
 		)
