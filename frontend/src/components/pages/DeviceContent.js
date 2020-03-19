@@ -3,6 +3,7 @@ import DeviceContext from '../../context/device/deviceContext'
 import ContentAPI from '../layout/ContentAPI'
 import { client } from '../websockets/deviceWebsocket'
 import { Spinner } from '../layout/Spinner'
+import { DeviceGraphs } from '../layout/DeviceGraphs'
 
 const DeviceContent = ({ title }) => {
 	const deviceContext = useContext(DeviceContext)
@@ -32,10 +33,10 @@ const DeviceContent = ({ title }) => {
 				title={title}
 				websocketStatus={websocketStatus}
 				change={handleSwitch}
-				dropdown={true}
+				dropdown
 			>
 				<div className='row'>
-					<h4>{currentDevice === null ? 'Select a Device' : 'Graphs'}</h4>
+					{currentDevice === null ?  <SelectDevice>Select Device</SelectDevice> : <DeviceGraphs currentDevice={currentDevice} wks={wks} wksMap={wksMap} />}
 				</div>
 			</ContentAPI>
 		)
@@ -54,6 +55,14 @@ const DeviceContent = ({ title }) => {
 
 DeviceContent.defaultProps = {
 	title: 'Device Content',
+}
+
+const SelectDevice = ({children}) => {
+	return (
+	<div className="text-center col-12 center-block mt-5">
+		<h5 style={{color: 'lightGray'}}>{children}</h5>
+	</div>
+	)
 }
 
 export default DeviceContent
