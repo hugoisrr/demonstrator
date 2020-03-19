@@ -10,9 +10,12 @@ const DeviceContent = ({ title }) => {
 	const {
 		wks,
 		wksMap,
+		currentDevice,
 		websocketStatus,
 		getDeviceWebsocketStatus,
 	} = deviceContext
+
+	console.log('currentDevice:', currentDevice)
 
 	const handleSwitch = ({ target }) => {
 		if (!target.checked && websocketStatus === 'OPEN') {
@@ -31,6 +34,7 @@ const DeviceContent = ({ title }) => {
 				title={title}
 				websocketStatus={websocketStatus}
 				change={handleSwitch}
+				dropdown={true}
 			>
 				<div className='row'>
 					<h1>Hola</h1>

@@ -4,6 +4,7 @@ import DeviceReducer from './deviceReducer'
 import {
 	GET_DEVICE_WKS,
 	SET_DEVICE_MAP,
+	SET_CURRENT_DEVICE,
 	GET_DEVICE_WEBSOCKET_STATUS,
 } from '../types'
 
@@ -11,6 +12,7 @@ const DeviceState = props => {
 	const initialState = {
 		wks: [],
 		wksMap: {},
+		currentDevice: null,
 		websocketStatus: '',
 	}
 
@@ -28,6 +30,13 @@ const DeviceState = props => {
 				payload: wksMap,
 			})
 		}
+	}
+
+	const setCurrentDevice = wkId => {
+		dispatch({
+			type: SET_CURRENT_DEVICE,
+			payload: wkId,
+		})
 	}
 
 	// Get Workstations from the API
@@ -62,8 +71,10 @@ const DeviceState = props => {
 			value={{
 				wks: state.wks,
 				wksMap: state.wksMap,
+				currentDevice: state.currentDevice,
 				websocketStatus: state.websocketStatus,
 				setUpDeviceMap,
+				setCurrentDevice,
 				getDeviceWks,
 				setDataInDeviceMap,
 				getDeviceWebsocketStatus,

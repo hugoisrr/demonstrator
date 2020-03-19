@@ -3,7 +3,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Sidebar = () => {
-	console.log('render')
 	return (
 		<ul
 			className='navbar-nav bg-gradient-primary sidebar sidebar-dark accordion'
