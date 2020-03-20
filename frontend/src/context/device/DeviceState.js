@@ -18,12 +18,12 @@ const DeviceState = props => {
 
 	const [state, dispatch] = useReducer(DeviceReducer, initialState)
 
-	// Set up Map data structure with workstations ids as keys and with empty arrays as values
+	// Set up Map data structure with workstations ids as keys and 50 Arrays fill with 0 as values
 	const setUpDeviceMap = wks => {
 		if (wks.length > 0) {
 			const wksMap = new Map()
 			wks.forEach(workstation => {
-				wksMap.set(workstation.ws_id, [])
+				wksMap.set(workstation.ws_id, new Array(50).fill(0))
 			})
 			dispatch({
 				type: SET_DEVICE_MAP,
@@ -32,11 +32,12 @@ const DeviceState = props => {
 		}
 	}
 
-	// Set income raw_values on its corresponding array, within the device map structure
+	// Shift the first raw_values and puush the income raw_values on its corresponding array, within the device map structure
 	const setDataInDeviceMap = data => {
 		if (state.wksMap.size > 0) {
 			for (const [wks_id, rawValuesArray] of state.wksMap.entries()) {
 				if (data.ws_id === parseInt(wks_id)) {
+					rawValuesArray.shift()
 					rawValuesArray.push(data.raw_values)
 				}
 			}
