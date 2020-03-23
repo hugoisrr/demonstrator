@@ -23,7 +23,7 @@ const DeviceState = props => {
 		if (wks.length > 0) {
 			const wksMap = new Map()
 			wks.forEach(workstation => {
-				wksMap.set(workstation.ws_id, new Array(50).fill(0))
+				wksMap.set(workstation.ws_id, new Array(20).fill(0))
 			})
 			dispatch({
 				type: SET_DEVICE_MAP,
@@ -51,7 +51,7 @@ const DeviceState = props => {
 		state.wks.forEach(workstation => {
 			if (wkId === workstation.ws_id) {
 				deviceSelected['ws_id'] = wkId
-				deviceSelected['raw_data'] = workstation.raw_data
+				deviceSelected['raw_data'] = Object.values(workstation.raw_data)
 			}
 		})
 		// Set raw values from the wksMap for the current Device

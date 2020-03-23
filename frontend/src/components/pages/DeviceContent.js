@@ -3,7 +3,7 @@ import DeviceContext from '../../context/device/deviceContext'
 import ContentAPI from '../layout/ContentAPI'
 import { client } from '../websockets/deviceWebsocket'
 import { Spinner } from '../layout/Spinner'
-import { DeviceGraphs } from '../layout/DeviceGraphs'
+import DeviceCard from '../layout/DeviceCard'
 
 const DeviceContent = ({ title }) => {
 	const deviceContext = useContext(DeviceContext)
@@ -39,7 +39,7 @@ const DeviceContent = ({ title }) => {
 					{currentDevice === null ? (
 						<SelectDevice>Select Device</SelectDevice>
 					) : (
-						<DeviceGraphs currentDevice={currentDevice} />
+						<DeviceCard currentDevice={currentDevice} wks={wks} />
 					)}
 				</div>
 			</ContentAPI>
@@ -69,4 +69,4 @@ const SelectDevice = ({ children }) => {
 	)
 }
 
-export default DeviceContent
+export default React.memo(DeviceContent)
