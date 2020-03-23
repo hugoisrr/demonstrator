@@ -83,7 +83,7 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 					data={data}
 					statesColors={Object.values(statesColors)}
 				/>
-				<TestContent states={states} />
+				<TestContent states={states} data={data}/>
 			</div>
 		</div>
 	)

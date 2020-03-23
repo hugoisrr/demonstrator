@@ -3,7 +3,7 @@ import ModelContext from '../../context/model/modelContext'
 import { Spinner } from '../layout/Spinner'
 import * as d3 from "d3";
 
-export const TestContent = ({states}) => {
+export const TestContent = ({data, states}) => {
 	const modelContext = useContext(ModelContext)
   	var margin = { top: 20, right: 10, bottom: 30, left: 10 };
   	var width = 10 - margin.left - margin.right; //TODO: Dynamic
@@ -18,8 +18,7 @@ export const TestContent = ({states}) => {
 	// add new value at the end of the array
 	//var cardData = Array.from({ length: 60 }, () => Math.floor(Math.random() * 3)); //TODO: websocket data
 	
-	var cardData = Array.from(states);
-	console.log(states)
+	var cardData = Array.from(data);
 	// #################################################
 	// find the element, take the reference and start next step in the chain
 		var w= 10;
