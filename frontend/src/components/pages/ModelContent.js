@@ -14,6 +14,7 @@ import WorkStationCard from '../layout/WorkStationCard'
 import { client } from '../websockets/modelWebsocket'
 import { Spinner } from '../layout/Spinner'
 
+
 const ModelContent = ({ title }) => {
 	const modelContext = useContext(ModelContext)
 

@@ -2,7 +2,8 @@ import React, { Fragment, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 // import ModelContent from './components/pages/ModelContent'
 import DeviceContent from './components/pages/DeviceContent'
-// import LabelerContent from './components/pages/LabelerContent'
+import TestContent from './components/pages/TestContent'
+import LabelerContent from './components/pages/LabelerContent'
 import Sidebar from './components/layout/Sidebar'
 import * as JqueryFunctions from './assets/libs/customJquery'
 import './App.scss'
@@ -33,9 +34,10 @@ const App = () => {
 								<Sidebar />
 								<div id='content-wrapper' className='d-flex flex-column'>
 									<Switch>
-										{/* <Route exact path='/' component={LabelerContent} />
-										<Route exact path='/model' component={ModelContent} /> */}
+										<Route exact path='/' component={LabelerContent} />
+										{/* <Route exact path='/model' component={ModelContent} /> */}
 										<Route exact path='/' component={DeviceContent} />
+										<Route exact path='/test' component={TestContent} />
 									</Switch>
 								</div>
 							</div>

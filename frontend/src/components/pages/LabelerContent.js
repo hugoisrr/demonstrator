@@ -4,6 +4,7 @@ import ContentAPI from '../layout/ContentAPI'
 import WorkStationCard from '../layout/WorkStationCard'
 import { client } from '../websockets/labelerWebsocket'
 import { Spinner } from '../layout/Spinner'
+import TestContent from '../pages/TestContent'
 
 const LabelerContent = ({ title }) => {
 	const labelerContext = useContext(LabelerContext)
@@ -42,9 +43,11 @@ const LabelerContent = ({ title }) => {
 									data={dictionary[workstation.ws_id]}
 								/>
 							</div>
+
 						)
 					})}
 				</div>
+				
 			</ContentAPI>
 		)
 	} else {

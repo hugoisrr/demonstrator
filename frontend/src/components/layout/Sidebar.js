@@ -80,9 +80,9 @@ const Sidebar = () => {
 				>
 					<div className='bg-white py-2 collapse-inner rounded'>
 						<h6 className='collapse-header'>Available IDs</h6>
-						<a className='collapse-item' href='/test'>
+						<Link className='collapse-item' to='/test'>
 							Colors
-						</a>
+						</Link>
 						<a className='collapse-item' href='utilities-border.html'>
 							Borders
 						</a>
