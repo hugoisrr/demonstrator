@@ -23,7 +23,7 @@ const DeviceState = props => {
 		if (wks.length > 0) {
 			const wksMap = new Map()
 			wks.forEach(workstation => {
-				wksMap.set(workstation.ws_id, new Array(20).fill(0))
+				wksMap.set(workstation.ws_id, new Array(100).fill(0))
 			})
 			dispatch({
 				type: SET_DEVICE_MAP,
