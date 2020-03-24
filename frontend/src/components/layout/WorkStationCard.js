@@ -25,9 +25,7 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 		'white-space': 'nowrap',
 		'text-overflow': 'ellipsis',
 		'overflow': 'visible'
-
 	}
-	
 	// Get a random color for each state
 	useEffect(() => {
 		const colorStates = {}
@@ -76,13 +74,12 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 					</h1>
 				</div>
 				<hr />
-				<GanttChart data={data}/>
+				
 				<ProgressBar
 					states={states}
-					data={data}
+					data={data}					
 					statesColors={Object.values(statesColors)}
-				/>
-				
+				/>			
 			</div>
 		</div>
 	)

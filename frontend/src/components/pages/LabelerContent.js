@@ -43,7 +43,9 @@ const LabelerContent = ({ title }) => {
 									workstation={workstation}
 									data={dictionary[workstation.ws_id]} //incoming data get divided by workstation ID
 								/>
-								
+								<GanttChart
+									workstation={workstation}
+									data={dictionary[workstation.ws_id]} />
 							</div>
 						)
 					})}

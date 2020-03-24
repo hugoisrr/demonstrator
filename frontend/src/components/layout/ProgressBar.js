@@ -21,7 +21,7 @@ const ProgressBar = ({ states, data, statesColors }) => {
 
 	useEffect(() => {
 		const counterStates = new Map()
-		// Assigns states id's as keys and empty arrays as values
+		// Assigns states id's as keys and empty arrays as values		
 		for (const [stateId] of Object.keys(states)) {
 			counterStates.set(stateId, [])
 		}
@@ -33,7 +33,7 @@ const ProgressBar = ({ states, data, statesColors }) => {
 					statesArray.push(element)
 				}
 			}
-		})
+		})		
 		// According to the length of the array, is the number of elements pushed and counts the total
 		let total = 0
 		for (const statesArray of counterStates.values()) {
@@ -42,7 +42,7 @@ const ProgressBar = ({ states, data, statesColors }) => {
 		// Calculates the percentage of each state
 		let percentageValue = 0
 		let flexValue = 0
-		const values = []
+		const values = [] 
 		// NOTE to verify the percentage and the states uncomment the next lines
 		// for (const [state_id, statesArray] of counterStates.entries()) {
 		for (const statesArray of counterStates.values()) {
@@ -63,8 +63,7 @@ const ProgressBar = ({ states, data, statesColors }) => {
 		}
 		setFlexValues(values)
 		// console.log('total:', total)
-	}, [data, flexValues, states])
-
+	}, [data, flexValues, states])	
 	return (
 		<Fragment>
 			<h6 style={{ color: 'white' }}>Percentage:</h6>

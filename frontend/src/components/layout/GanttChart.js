@@ -3,7 +3,7 @@ import ModelContext from '../../context/model/modelContext'
 import { Spinner } from '../layout/Spinner'
 import * as d3 from "d3";
 
-export const GanttChart = ({data, states}) => {
+export const GanttChart = ({ workstation: { ws_id, ws_name, states }, data }) => {
 	const modelContext = useContext(ModelContext)
   	var margin = { top: 20, right: 10, bottom: 30, left: 10 };
   	var width = 10 - margin.left - margin.right; //TODO: Dynamic
@@ -19,7 +19,10 @@ export const GanttChart = ({data, states}) => {
 	//var cardData = Array.from({ length: 60 }, () => Math.floor(Math.random() * 3)); //TODO: websocket data
 
 	var i = 0
-		var cardData = Array.from({ length: 30 }, () => data[i++]); //TODO: websocket data 
+	//if (ws_id === 0 )
+	var cardData = Array.from({ length: 30 }, () => data[i++]); //TODO: websocket data 
+	//else if (ws_id === 1)
+		
 	// array of length 30 filled with -1, adding state values from websocket
 	
 
@@ -42,7 +45,7 @@ export const GanttChart = ({data, states}) => {
 				}else if (d == 2)
 					return "lightblue"
 			})
-			.attr("width", w) //fix size
+			.attr("width", w ) //fix size
 			.attr("height", function(d){
 				if(d == -1){
 					return 0}
@@ -61,9 +64,9 @@ export const GanttChart = ({data, states}) => {
 				<div style={ganttBox} >
 					<svg id="gantt_chart" 
 						ref={el => {
-        				if (!el) return;
-        				}} 
-	  					style={{height: 300, width: 335 }}> //innerWidth ?
+						if (!el) return;
+						}} 
+						style={{height: 300, width: 335 }}> //innerWidth ?
 					</svg>
 				</div>
 			</div>
