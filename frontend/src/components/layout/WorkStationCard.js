@@ -12,24 +12,22 @@ import PropTypes from 'prop-types'
 import drillImage from '../../assets/img/drill.png'
 import engravingImage from '../../assets/img/engravingMachine.png'
 import ProgressBar from './ProgressBar'
-import TestContent from '../pages/TestContent'
 
 import { getRandColor } from '../../assets/libs/helperFunctions'
+import { GanttChart } from './GanttChart';
 
 const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 	const [currentState, setState] = useState('null')
 	const [statesColors, setStatesColors] = useState({})
 	const [color, setColor] = useState()
 
-	const styleObj = {
-		color: color
-	}
-
 	const styleDiv = {
 		'white-space': 'nowrap',
 		'text-overflow': 'ellipsis',
-		'overflow': 'hidden',
-		'display': 'inherit'}
+		'overflow': 'visible'
+
+	}
+	
 	// Get a random color for each state
 	useEffect(() => {
 		const colorStates = {}
@@ -50,6 +48,7 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 			}
 		})
 	})
+
 
 	return (
 		<div className='card shadow mb-4 workstationcard'>
@@ -72,18 +71,18 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 				</div>
 				<h6 style={{ color: 'white' }}>State:</h6>
 				<div style={styleDiv}>
-				<h1 className='display-3 text-center bold' style={styleObj}>
+				<h1 className='display-3 text-center bold' style={{color : color}}>
 					{currentState}
 					</h1>
 				</div>
 				<hr />
-				
+				<GanttChart data={data}/>
 				<ProgressBar
 					states={states}
 					data={data}
 					statesColors={Object.values(statesColors)}
 				/>
-				<TestContent states={states} data={data}/>
+				
 			</div>
 		</div>
 	)

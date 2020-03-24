@@ -2,7 +2,6 @@ import React, { Fragment, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 // import ModelContent from './components/pages/ModelContent'
 import DeviceContent from './components/pages/DeviceContent'
-import TestContent from './components/pages/TestContent'
 import LabelerContent from './components/pages/LabelerContent'
 import Sidebar from './components/layout/Sidebar'
 import * as JqueryFunctions from './assets/libs/customJquery'
@@ -37,7 +36,7 @@ const App = () => {
 										<Route exact path='/' component={LabelerContent} />
 										{/* <Route exact path='/model' component={ModelContent} /> */}
 										<Route exact path='/' component={DeviceContent} />
-										<Route exact path='/test' component={TestContent} />
+										<Route exact path='/test' />
 									</Switch>
 								</div>
 							</div>

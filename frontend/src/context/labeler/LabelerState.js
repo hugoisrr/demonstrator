@@ -1,3 +1,4 @@
+// Definition of the context function which are shared with all of the labeler components
 import React, { useReducer, useRef } from 'react'
 
 import LabelerContext from './labelerContext'
@@ -19,10 +20,11 @@ const LabelerState = props => {
 
 	const [state, dispatch] = useReducer(LabelerReducer, initialState)
 
+	// create the dictionary for the gantt chart
 	const startDictionary = () => {
 		if (refInit.current) {
 			state.wks.forEach(element => {
-				state.dictionary[element.ws_id] = new Array(5).fill(-1)
+				state.dictionary[element.ws_id] = new Array(30).fill(-1)
 				refInit.current = false
 			})
 		}
