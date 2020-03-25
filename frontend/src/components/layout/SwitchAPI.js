@@ -8,7 +8,7 @@ const SwitchAPI = ({ websocketStatus, change }) => {
 					type='checkbox'
 					className='custom-control-input'
 					id='apiSwitch'
-					checked={websocketStatus === 'OPEN' && 'true'}
+					checked={websocketStatus === 'OPEN' && true}
 					onChange={change}
 				/>
 				<label className='custom-control-label' htmlFor='apiSwitch'>

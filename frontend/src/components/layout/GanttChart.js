@@ -30,10 +30,16 @@ export const GanttChart = ({ workstation: { ws_id, ws_name, states }, data }) =>
 	// find the element, take the reference and start next step in the chain
 		var w= 10;
 		var h= 50;
+		var gantt_scale_Y = d3.scaleLinear()
+		.domain([0, 2]) // input
+		.range([0, 2]);
 		//var gantt_scale_Y = d3.scaleLinear().domain([0,2]).range([0,2]);
-		// var gantt_scale_X = d3.scaleLinear().domain(document.getElementById("gantt_chart").width).range([0,60]);
-		var svg = d3.select("#gantt_chart").selectAll("rect").remove()
-		var svg = d3.select("#gantt_chart").selectAll("rect")
+		/* var gantt_scale_X = d3.scaleLinear()
+		.domain([0, width])
+		.range([0,60]); */
+
+		var svg = d3.select("#gantt_chart" + ws_id).selectAll("rect").remove()
+		var svg = d3.select("#gantt_chart" + ws_id).selectAll("rect")
 			.data(cardData)
 			.enter()
 			.append("rect")
@@ -62,7 +68,7 @@ export const GanttChart = ({ workstation: { ws_id, ws_name, states }, data }) =>
 		<Fragment>
 			<div id='content'>
 				<div style={ganttBox} >
-					<svg id="gantt_chart" 
+					<svg id={"gantt_chart" + ws_id }
 						ref={el => {
 						if (!el) return;
 						}} 

@@ -22,8 +22,8 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 	const [color, setColor] = useState()
 
 	const styleDiv = {
-		'white-space': 'nowrap',
-		'text-overflow': 'ellipsis',
+		'whiteSpace': 'nowrap',
+		'textOverflow': 'ellipsis',
 		'overflow': 'visible'
 	}
 	// Get a random color for each state
