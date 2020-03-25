@@ -3,7 +3,7 @@ import ModelContext from '../../context/model/modelContext'
 import { Spinner } from '../layout/Spinner'
 import * as d3 from "d3";
 
-export const GanttChart = ({ workstation: { ws_id, ws_name, states }, data }) => {
+export const GanttChart = ({ ws_id, data }) => {
 	const modelContext = useContext(ModelContext)
   	var margin = { top: 20, right: 10, bottom: 30, left: 10 };
   	var width = 10 - margin.left - margin.right; //TODO: Dynamic

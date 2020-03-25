@@ -79,7 +79,10 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 					states={states}
 					data={data}					
 					statesColors={Object.values(statesColors)}
-				/>			
+				/>		
+				<GanttChart
+				ws_id={ws_id}
+				data={data} />
 			</div>
 		</div>
 	)
