@@ -12,7 +12,6 @@ import PropTypes from 'prop-types'
 import drillImage from '../../assets/img/drill.png'
 import engravingImage from '../../assets/img/engravingMachine.png'
 import ProgressBar from './ProgressBar'
-
 import { getRandColor } from '../../assets/libs/helperFunctions'
 import { GanttChart } from './GanttChart';
 
@@ -21,6 +20,7 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 	const [statesColors, setStatesColors] = useState({})
 	const [color, setColor] = useState()
 
+	//Div styling which forces div contents to stay in one line
 	const styleDiv = {
 		'whiteSpace': 'nowrap',
 		'textOverflow': 'ellipsis',
@@ -47,11 +47,11 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 		})
 	})
 
-
+//Display a card for each workstations. Pass parameters for Workstation and data to the GanttChart and ProgressBar Components
 	return (
 		<div className='card shadow mb-4 workstationcard'>
 			<div className='card-header py-3'>
-				<div className='row'>
+				<div className='row' style = {styleDiv}>
 					<h5 id='cardName' className='m-0 font-weight bold col-6'>
 						{ws_name}
 					</h5>
@@ -61,7 +61,7 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 			<div className='card-body'>
 				<div className='text-center'>
 					<img
-						src={ws_id === 0 ? engravingImage : drillImage}
+						src={ws_id === 0 ? engravingImage : drillImage} //implement it for more than 2 ws
 						alt=''
 						className='img-fluid px-3 px-sm-4 mt-3 mb-4'
 						style={{ height: '9rem' }}

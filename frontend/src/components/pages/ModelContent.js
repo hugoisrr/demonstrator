@@ -25,6 +25,7 @@ const ModelContent = ({ title }) => {
 		getModelWebsocketStatus,
 	} = modelContext
 
+
 	const handleSwitch = ({ target }) => {
 		if (!target.checked && websocketStatus === 'OPEN') {
 			client.close()
@@ -38,7 +39,6 @@ const ModelContent = ({ title }) => {
 
 	// Verifies if there are Workstations and Data is been received, if not it renders a Spinner
 	if (wks.length > 0 && Object.keys(dictionary).length > 0) {
-
 		return (
 			<ContentAPI
 				title={title}

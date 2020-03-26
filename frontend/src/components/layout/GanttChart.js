@@ -8,24 +8,14 @@ export const GanttChart = ({ ws_id, data }) => {
   	var margin = { top: 20, right: 10, bottom: 30, left: 10 };
   	var width = 10 - margin.left - margin.right; //TODO: Dynamic
 	var height = 200 - margin.top - margin.bottom; //fix
-	const ganttBox = {
-		border: '3px solid green'
-	};
 	// creating a non existing svg
 	var svg = null;
 	// input data for graph
-	// create a array of the leght 60 with zeros in it
-	// add new value at the end of the array
-	//var cardData = Array.from({ length: 60 }, () => Math.floor(Math.random() * 3)); //TODO: websocket data
-
+	// array of length 30 filled with -1, adding state values from websocket	
 	var i = 0
-	//if (ws_id === 0 )
 	var cardData = Array.from({ length: 30 }, () => data[i++]); //TODO: websocket data 
-	//else if (ws_id === 1)
 		
-	// array of length 30 filled with -1, adding state values from websocket
 	
-
 	// #################################################
 	// find the element, take the reference and start next step in the chain
 		var w= 10;
@@ -38,18 +28,21 @@ export const GanttChart = ({ ws_id, data }) => {
 		.domain([0, width])
 		.range([0,60]); */
 
+		//differentiate each svg graph according to its workstation id
 		var svg = d3.select("#gantt_chart" + ws_id).selectAll("rect").remove()
 		var svg = d3.select("#gantt_chart" + ws_id).selectAll("rect")
-			.data(cardData)
-			.enter()
-			.append("rect")
-			.attr("fill", function(d){
-				if(d == 0){
-					return "red";
-				}else if(d == 1){
-					return "lightgreen"
-				}else if (d == 2)
-					return "lightblue"
+		.data(cardData)
+		.enter()
+		.append("rect")
+		.attr("fill", function (d) {
+			if (d == 0) {
+				return "red"
+			} else if (d == 1) {
+				return "lightgreen"
+			} else if (d == 2){
+				return "lightblue"
+			} else if (d == 3)
+				return "yellow"
 			})
 			.attr("width", w ) //fix size
 			.attr("height", function(d){
@@ -67,12 +60,12 @@ export const GanttChart = ({ ws_id, data }) => {
 	return (
 		<Fragment>
 			<div id='content'>
-				<div style={ganttBox} >
+				<div>
 					<svg id={"gantt_chart" + ws_id }
 						ref={el => {
 						if (!el) return;
 						}} 
-						style={{height: 300, width: 335 }}> //innerWidth ?
+						style={{height: 300, width: window.width }}> 
 					</svg>
 				</div>
 			</div>

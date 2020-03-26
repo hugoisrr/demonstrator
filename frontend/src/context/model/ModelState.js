@@ -21,7 +21,7 @@ const ModelState = props => {
 	const startDictionary = () => {
 		if (refInit.current) {
 			state.wks.forEach(element => {
-				state.dictionary[element.ws_id] = new Array(60).fill(-1)
+				state.dictionary[element.ws_id] = new Array(30).fill(-1)
 				refInit.current = false
 			})
 		}

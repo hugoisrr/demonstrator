@@ -4,7 +4,6 @@ import ContentAPI from '../layout/ContentAPI'
 import WorkStationCard from '../layout/WorkStationCard'
 import { client } from '../websockets/labelerWebsocket'
 import { Spinner } from '../layout/Spinner'
-import { GanttChart } from '../layout/GanttChart'
 
 const LabelerContent = ({ title }) => {
 	const labelerContext = useContext(LabelerContext)
@@ -28,7 +27,6 @@ const LabelerContent = ({ title }) => {
 	
 	// Verifies if there are Workstations and Data is been received
 	if (wks.length > 0 && Object.keys(dictionary).length > 0) {
-
 		return (
 			<ContentAPI
 				title={title}
@@ -43,12 +41,10 @@ const LabelerContent = ({ title }) => {
 									workstation={workstation}
 									data={dictionary[workstation.ws_id]} //incoming data get divided by workstation ID
 								/>
-
 							</div>
 						)
 					})}
-				</div>
-				
+				</div>			
 			</ContentAPI>
 		)
 	} else {

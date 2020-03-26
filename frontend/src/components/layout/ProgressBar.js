@@ -64,6 +64,8 @@ const ProgressBar = ({ states, data, statesColors }) => {
 		setFlexValues(values)
 		// console.log('total:', total)
 	}, [data, flexValues, states])	
+
+	console.log(statesColors)
 	return (
 		<Fragment>
 			<h6 style={{ color: 'white' }}>Percentage:</h6>
@@ -96,3 +98,7 @@ ProgressBar.propTypres = {
 }
 
 export default ProgressBar
+
+
+//Change the way of calculating the percentage, calculate historical data and not only current data
+//Maybe use a counter for each state  
