@@ -1,63 +1,21 @@
 import React, {
-	useContext,
-	useEffect,
-	useState,
-	useCallback,
-	useMemo,
-	useRef,
+	useContext,	
 } from 'react'
 import { VictoryLine } from 'victory'
-// import DeviceContext from '../../context/device/deviceContext'
+import DeviceContext from '../../context/device/deviceContext'
+import { extractColumn } from '../../assets/libs/helperFunctions'
 
-export const DeviceGraph = ({ values, sensor }) => {
-	const [arrayData, setArrayData] = useState([])
-	// const sensorId = useMemo(() => {
-	// 	return sensor
-	// }, [sensor])
+export const DeviceGraph = ({ sensorId }) => {	
+	const deviceContext = useContext(DeviceContext)
+	const {currentDevice} = deviceContext
+	const {raw_values} = currentDevice	
 
-	const arrayValues = useMemo(() => {
-		return values
-	}, [values])
-	// const refData = useRef([])
+	//Change the values into a format that Victorycharts can read it	
+	let data = extractColumn(raw_values, sensorId).map(value => {
+		return { y: value }
+	})
 
-	//Function that takes only the values of each sensor
-	const extractColumn = useCallback((values, sensor) => {
-		return values.map(x => {
-			x === 0 ? (x = 0) : (x = x[sensor])
-			return x
-		})
-	}, [])
-
-	useEffect(() => {
-		setArrayData(
-			extractColumn(values, sensor).map(item => {
-				return { y: item }
-			})
-		)
-		// eslint-disable-next-line
-	}, [extractColumn(values, sensor), values, sensor ])
-	//Change the values into a format that Victorycharts can read it
-	// useEffect(() => {
-	// 	refData.current = extractColumn(values, sensor).map(item => {
-	// 		return { y: item }
-	// 	})
-	// 	console.log(refData.current)
-	// 	// eslint-disable-next-line
-	// }, [extractColumn(values, sensor), values, sensor])
-
-	if (arrayData.length > 0) {
-		// console.log(dataGraph)
-		return (
-			// <h4>hola2</h4>
-			<VictoryLine
-				style={{
-					data: { stroke: '#c43a31' },
-					/* parent: { border: '1px solid #ccc' }, */
-				}}
-				data={arrayData}
-			/>
-		)
-	}
-	// Spinner for graphs
-	return <h4>hola</h4>
+	return (
+		<VictoryLine style={{ data: { stroke: '#c43a31'},}} data={data} />
+	)
 }

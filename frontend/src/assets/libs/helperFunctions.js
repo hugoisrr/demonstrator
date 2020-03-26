@@ -17,3 +17,11 @@ export function getRandColor(brightness) {
 	)
 	return 'rgb(' + mixedrgb.join(',') + ')'
 }
+
+//Function that takes only the values of each sensor
+export function extractColumn(values, sensor) {
+	return values.map(x => {
+		x === 0 ? (x = 0) : (x = x[sensor])
+		return x
+	})
+}
