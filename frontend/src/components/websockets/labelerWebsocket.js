@@ -1,3 +1,11 @@
+/**
+ * Model Websocket
+ * Description - Implementation of Websocket through API methods, the file imports
+ * methods from the Context, to set the status of the Websocket, to get the Workstations,
+ * set the dictionary data structure and new incoming data from the websocket.
+ * The file also export the client so the frontend would have control over the Websocket.
+ */
+
 import { useContext } from 'react'
 import { w3cwebsocket as W3CWebSocket } from 'websocket'
 import LabelerContext from '../../context/labeler/labelerContext'
@@ -17,31 +25,49 @@ const LabelerWebsocket = () => {
 	} = labelerContext
 
 	client.onerror = () => {
-		console.error('Connection Error with WebSocket Labeler')
-		getLabelerWebsocketStatus('ERROR')
+		try {
+			console.error('Connection Error with WebSocket Labeler')
+			getLabelerWebsocketStatus('ERROR')
+		} catch (error) {
+			console.error(error)
+		}
 	}
 
 	client.onopen = () => {
-		console.log('WebSocket Labeler Client Connected')
-		getLabelerWebsocketStatus('CONNECTING')
+		try {
+			console.log('WebSocket Labeler Client Connected')
+			getLabelerWebsocketStatus('CONNECTING')
+		} catch (error) {
+			console.error(error)
+		}
 	}
 
 	client.onmessage = message => {
-		message = JSON.parse(message.data)
-		if (Array.isArray(message) && message.length > 0) {
-			getLabelerWks(message)
-			setUpLabelerMap(message)
-			setLabelerStatesColors(message)
-			setUpLabelerFlexValues(message)
-		} else if (typeof message === 'object') {
-			setDataInLabelerMap(message)
-			getLabelerWebsocketStatus('OPEN')
+		try {
+			message = JSON.parse(message.data)
+			if (Array.isArray(message) && message.length > 0) {
+				// Gets the initial array of workstations
+				getLabelerWks(message)
+				setUpLabelerMap(message)
+				setLabelerStatesColors(message)
+				setUpLabelerFlexValues(message)
+			} else if (typeof message === 'object') {
+				// Starts the dictionary structure and the data from the websocket
+				setDataInLabelerMap(message)
+				getLabelerWebsocketStatus('OPEN')
+			}
+		} catch (error) {
+			console.error(error)
 		}
 	}
 
 	client.onclose = () => {
-		console.log('WebSocket Labeler Client Closed')
-		getLabelerWebsocketStatus('CLOSED')
+		try {
+			console.log('WebSocket Labeler Client Closed')
+			getLabelerWebsocketStatus('CLOSED')
+		} catch (error) {
+			console.error(error)
+		}
 	}
 
 	return null
