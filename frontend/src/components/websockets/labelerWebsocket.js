@@ -8,11 +8,12 @@ export const client = new W3CWebSocket('ws://localhost:3000')
 const LabelerWebsocket = () => {
 	const labelerContext = useContext(LabelerContext)
 	const {
-		getLabelerData,
-		getLabelerWks,
-		pushToDictionary,
-		startDictionary,
+		setUpLabelerMap,
+		setDataInLabelerMap,
+		setLabelerStatesColors,
 		getLabelerWebsocketStatus,
+		setUpLabelerFlexValues,
+		getLabelerWks,
 	} = labelerContext
 
 	client.onerror = () => {
@@ -29,10 +30,11 @@ const LabelerWebsocket = () => {
 		message = JSON.parse(message.data)
 		if (Array.isArray(message) && message.length > 0) {
 			getLabelerWks(message)
+			setUpLabelerMap(message)
+			setLabelerStatesColors(message)
+			setUpLabelerFlexValues(message)
 		} else if (typeof message === 'object') {
-			startDictionary()
-			getLabelerData(message)
-			pushToDictionary(message)
+			setDataInLabelerMap(message)
 			getLabelerWebsocketStatus('OPEN')
 		}
 	}

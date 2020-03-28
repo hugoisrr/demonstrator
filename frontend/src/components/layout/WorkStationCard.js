@@ -6,40 +6,18 @@
  * Then for the ProgressBar component it receives the objects, data, and the array of colors.
  */
 
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import drillImage from '../../assets/img/drill.png'
 import engravingImage from '../../assets/img/engravingMachine.png'
-import ProgressBar from './ProgressBar'
-import { getRandColor } from '../../assets/libs/helperFunctions'
+import { CurrentState } from './workstation/CurrentState'
+import ProgressBar from './workstation/ProgressBar'
 
-const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
-	const [currentState, setState] = useState('null')
-	const [statesColors, setStatesColors] = useState({})
-	const [color, setColor] = useState()
-
-	// Get a random color for each state
-	useEffect(() => {
-		const colorStates = {}
-		Object.values(states).forEach(state => {
-			colorStates[state] = getRandColor(5)
-		})
-		setStatesColors(colorStates)
-	}, [])
-
-	// Set current state name and state's color of each workstation
-	useEffect(() => {
-		data.forEach(element => {
-			for (const [stateId, stateName] of Object.entries(states)) {
-				if (element === parseInt(stateId)) {
-					setState(stateName)
-					setColor(Object.values(statesColors)[stateId])
-				}
-			}
-		})
-	})
-
+const WorkStationCard = ({
+	workstation: { ws_id, ws_name, states },
+	statesColors,
+	dataValues,
+}) => {
 	return (
 		<div className='card shadow mb-4 workstationcard'>
 			<div className='card-header py-3'>
@@ -60,15 +38,34 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 					/>
 				</div>
 				<h6 style={{ color: 'white' }}>State:</h6>
-				<h1 className='display-3 text-center bold' style={{ color: color }}>
-					{currentState}
-				</h1>
+				<CurrentState
+					statesColors={Object.values(statesColors)}
+					dataValues={dataValues}
+					states={states}
+				/>
 				<hr />
 				<ProgressBar
+					wsId={ws_id}
 					states={states}
-					data={data}
+					data={dataValues}
 					statesColors={Object.values(statesColors)}
 				/>
+				<div className='d-sm-flex align-items-center my-2 justify-content-center'>
+					{Object.keys(statesColors).map((state, index) => {
+						return (
+							<span
+								className='badge badge-info mx-2'
+								key={index}
+								style={{
+									backgroundColor: Object.values(statesColors)[index],
+									color: 'darkslategray',
+								}}
+							>
+								{state}
+							</span>
+						)
+					})}
+				</div>
 			</div>
 		</div>
 	)
@@ -76,7 +73,8 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 
 WorkStationCard.propTypes = {
 	workstation: PropTypes.object.isRequired,
-	data: PropTypes.object.isRequired,
+	statesColors: PropTypes.object.isRequired,
+	dataValues: PropTypes.array.isRequired,
 }
 
 export default WorkStationCard

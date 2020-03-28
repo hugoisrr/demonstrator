@@ -10,8 +10,9 @@ const LabelerContent = ({ title }) => {
 
 	const {
 		wks,
-		dictionary,
+		wksMap,
 		websocketStatus,
+		wksStatesColors,
 		getLabelerWebsocketStatus,
 	} = labelerContext
 
@@ -26,7 +27,7 @@ const LabelerContent = ({ title }) => {
 	}
 
 	// Verifies if there are Workstations and Data is been received
-	if (wks.length > 0 && Object.keys(dictionary).length > 0) {
+	if (wks.length > 0 && wksMap.size > 0 && wksStatesColors.size > 0) {
 		return (
 			<ContentAPI
 				title={title}
@@ -35,11 +36,14 @@ const LabelerContent = ({ title }) => {
 			>
 				<div className='row'>
 					{wks.map(workstation => {
+						const statesColors = wksStatesColors.get(workstation.ws_id)
+						const dataValues = wksMap.get(workstation.ws_id)
 						return (
-							<div className='col-lg-4 col-md-4' key={workstation.ws_id}>
+							<div className='col-lg-4 col-md-6' key={workstation.ws_id}>
 								<WorkStationCard
 									workstation={workstation}
-									data={dictionary[workstation.ws_id]}
+									statesColors={statesColors}
+									dataValues={dataValues}
 								/>
 							</div>
 						)
@@ -64,4 +68,4 @@ LabelerContent.defaultProps = {
 	title: 'Labeler Content',
 }
 
-export default LabelerContent
+export default React.memo(LabelerContent)
