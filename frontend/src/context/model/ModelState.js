@@ -111,8 +111,7 @@ const ModelState = props => {
 		}
 	}
 
-	// Set new Flex Values in its corresponding workstation
-	const setFlexValuesInModelFlexValues = (wksId, flexValues) => {
+	const setModelFlexValues = (wksId, flexValues) => {
 		try {
 			if (state.flexValues.size > 0) {
 				for (const [wks_id, flexValuesArray] of state.flexValues.entries()) {
@@ -133,15 +132,15 @@ const ModelState = props => {
 				wks: state.wks,
 				wksMap: state.wksMap,
 				wksStatesColors: state.wksStatesColors,
-				flexValues: state.flexValues,
+				modelFlexValues: state.flexValues,
 				websocketStatus: state.websocketStatus,
 				setUpModelMap,
 				setModelStatesColors,
 				setDataInModelMap,
 				getModelWebsocketStatus,
-				setUpModelFlexValues,
 				getModelWks,
-				setFlexValuesInModelFlexValues,
+				setUpModelFlexValues,
+				setModelFlexValues,
 			}}
 		>
 			{props.children}

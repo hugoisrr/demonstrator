@@ -23,7 +23,7 @@ export default (state, action) => {
 		case SET_MODEL_COLORS:
 			return {
 				...state,
-				websocketStatus: action.payload,
+				wksStatesColors: action.payload,
 			}
 
 		case GET_MODEL_WKS:

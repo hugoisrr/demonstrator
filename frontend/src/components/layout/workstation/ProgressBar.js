@@ -12,92 +12,49 @@
  * the proper color it verifies the array's index and the state's id.
  */
 
-import React, { Fragment, useContext } from 'react'
+import React, { useContext } from 'react'
 import LabelerContext from '../../../context/labeler/labelerContext'
-import { percentage } from '../../../assets/libs/helperFunctions'
-import PropTypes from 'prop-types'
+import ModelContext from '../../../context/model/modelContext'
+import { calculateFlexValues } from '../../../assets/libs/helperFunctions'
+import { ProgressBarView } from './ProgressBarView'
 
-const ProgressBar = ({ wsId, states, data, statesColors }) => {
+const ProgressBar = ({ wsId, states, data, statesColors, isLabeler }) => {
 	const labelerContext = useContext(LabelerContext)
-	const { setFlexValuesInLabelerFlexValues, flexValues } = labelerContext
+	const modelContext = useContext(ModelContext)
+	const { setLabelerFlexValues, labelerFlexValues } = labelerContext
+	const { setModelFlexValues, modelFlexValues } = modelContext
 
-	const counterStates = new Map()
-	// Assigns states id's as keys and empty arrays as values
-	for (const [stateId] of Object.keys(states)) {
-		counterStates.set(stateId, [])
-	}
+	const values = calculateFlexValues(states, data)
 
-	// For each state id an element of the data in been pushed into an empty array
-	data.forEach(element => {
-		for (const [state_id, statesArray] of counterStates.entries()) {
-			if (element === parseInt(state_id)) {
-				statesArray.push(element)
-			}
+	if (isLabeler) {
+		setLabelerFlexValues(wsId, values)
+
+		if (labelerFlexValues.size > 0) {
+			return (
+				<ProgressBarView
+					arrayValues={labelerFlexValues}
+					wsId={wsId}
+					statesColors={statesColors}
+				/>
+			)
+		} else {
+			return null
 		}
-	})
-	// According to the length of the array, is the number of elements pushed and counts the total
-	let total = 0
-	for (const statesArray of counterStates.values()) {
-		total += statesArray.length
-	}
-	// Calculates the percentage of each state
-	let percentageValue = 0
-	let flexValue = 0
-	const values = []
-	// NOTE to verify the percentage and the states uncomment the next lines
-	// for (const [state_id, statesArray] of counterStates.entries()) {
-	for (const statesArray of counterStates.values()) {
-		percentageValue = percentage(statesArray.length, total).toFixed(2)
-		if (percentageValue === 'NaN' || percentageValue === 'Infinity')
-			percentageValue = 0
-		flexValue = (percentageValue / 100).toFixed(1)
-		values.push(flexValue)
-		// console.log(
-		// 	state_id,
-		// 	'->',
-		// 	statesArray.length,
-		// 	'->',
-		// 	percentageValue,
-		// 	'% ->',
-		// 	flexValue
-		// )
-	}
-	setFlexValuesInLabelerFlexValues(wsId, values)
-	if (flexValues.size > 0) {
-		return (
-			<Fragment>
-				<h6 style={{ color: 'white' }}>Percentage:</h6>
-				<div className='progress'>
-					{flexValues.get(wsId).map((value, index) => {
-						const percentage = value * 100
-						return (
-							<div
-								className='progress-bar progress-bar-success'
-								key={index}
-								role='progressbar'
-								style={{
-									flex: value,
-									color: 'darkslategray',
-									backgroundColor: statesColors[index],
-								}}
-							>
-								{percentage}%
-							</div>
-						)
-					})}
-				</div>
-			</Fragment>
-		)
 	} else {
-		return null
-	}
-}
+		setModelFlexValues(wsId, values)
 
-ProgressBar.propTypres = {
-	wsId: PropTypes.number.isRequired,
-	states: PropTypes.object.isRequired,
-	data: PropTypes.object.isRequired,
-	statesColors: PropTypes.array.isRequired,
+		if (modelFlexValues.size > 0) {
+			return (
+				<ProgressBarView
+					arrayValues={modelFlexValues}
+					wsId={wsId}
+					statesColors={statesColors}
+				/>
+			)
+		} else {
+			return null
+		}
+	}
 }
 
 export default ProgressBar

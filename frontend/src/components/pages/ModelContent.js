@@ -48,11 +48,15 @@ const ModelContent = ({ title }) => {
 						const statesColors = wksStatesColors.get(workstation.ws_id)
 						const dataValues = wksMap.get(workstation.ws_id)
 						return (
-							<div className='col-lg-4 col-md-6' key={workstation.ws_id}>
+							<div
+								className='col-xl-6 col-lg-8 col-md-12'
+								key={workstation.ws_id}
+							>
 								<WorkStationCard
 									workstation={workstation}
 									statesColors={statesColors}
 									dataValues={dataValues}
+									isLabeler={false}
 								/>
 							</div>
 						)

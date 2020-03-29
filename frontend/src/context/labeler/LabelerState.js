@@ -112,7 +112,7 @@ const LabelerState = props => {
 	}
 
 	// Set new Flex Values in its corresponding workstation
-	const setFlexValuesInLabelerFlexValues = (wksId, flexValues) => {
+	const setLabelerFlexValues = (wksId, flexValues) => {
 		try {
 			if (state.flexValues.size > 0) {
 				for (const [wks_id, flexValuesArray] of state.flexValues.entries()) {
@@ -133,15 +133,15 @@ const LabelerState = props => {
 				wks: state.wks,
 				wksMap: state.wksMap,
 				wksStatesColors: state.wksStatesColors,
-				flexValues: state.flexValues,
+				labelerFlexValues: state.flexValues,
 				websocketStatus: state.websocketStatus,
 				setUpLabelerMap,
 				setLabelerStatesColors,
 				setDataInLabelerMap,
 				getLabelerWebsocketStatus,
-				setUpLabelerFlexValues,
 				getLabelerWks,
-				setFlexValuesInLabelerFlexValues,
+				setUpLabelerFlexValues,
+				setLabelerFlexValues,
 			}}
 		>
 			{props.children}

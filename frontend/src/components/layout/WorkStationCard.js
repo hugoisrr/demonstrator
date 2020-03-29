@@ -17,6 +17,7 @@ const WorkStationCard = ({
 	workstation: { ws_id, ws_name, states },
 	statesColors,
 	dataValues,
+	isLabeler,
 }) => {
 	return (
 		<div className='card shadow mb-4 workstationcard'>
@@ -49,6 +50,7 @@ const WorkStationCard = ({
 					states={states}
 					data={dataValues}
 					statesColors={Object.values(statesColors)}
+					isLabeler={isLabeler}
 				/>
 				<div className='d-sm-flex align-items-center my-2 justify-content-center'>
 					{Object.keys(statesColors).map((state, index) => {

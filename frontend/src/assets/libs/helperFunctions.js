@@ -25,3 +25,50 @@ export function extractColumn(values, sensor) {
 		return x
 	})
 }
+
+// Function that calculates Flex values to render the length of each bar in the ProgressBar
+export function calculateFlexValues(states, data) {
+	const counterStates = new Map()
+	// Assigns states id's as keys and empty arrays as values
+	for (const [stateId] of Object.keys(states)) {
+		counterStates.set(stateId, [])
+	}
+
+	// For each state id an element of the data in been pushed into an empty array
+	data.forEach(element => {
+		for (const [state_id, statesArray] of counterStates.entries()) {
+			if (element === parseInt(state_id)) {
+				statesArray.push(element)
+			}
+		}
+	})
+	// According to the length of the array, is the number of elements pushed and counts the total
+	let total = 0
+	for (const statesArray of counterStates.values()) {
+		total += statesArray.length
+	}
+	// Calculates the percentage of each state
+	let percentageValue = 0
+	let flexValue = 0
+	const values = []
+	// NOTE to verify the percentage and the states uncomment the next lines
+	// for (const [state_id, statesArray] of counterStates.entries()) {
+	for (const statesArray of counterStates.values()) {
+		percentageValue = percentage(statesArray.length, total).toFixed(2)
+		if (percentageValue === 'NaN' || percentageValue === 'Infinity')
+			percentageValue = 0
+		flexValue = (percentageValue / 100).toFixed(1)
+		values.push(flexValue)
+		// console.log(
+		// 	state_id,
+		// 	'->',
+		// 	statesArray.length,
+		// 	'->',
+		// 	percentageValue,
+		// 	'% ->',
+		// 	flexValue
+		// )
+	}
+
+	return values
+}
