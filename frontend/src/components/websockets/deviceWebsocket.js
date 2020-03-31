@@ -11,13 +11,9 @@ const DeviceWebsocket = () => {
 	const deviceContext = useContext(DeviceContext)
 	//Declare context functions
 	const {
-		// getDeviceData,
 		getDeviceWks,
 		setUpDeviceMap,
 		setDataInDeviceMap,
-		// pushToDictionary,
-		// startDictionary,
-		// pushToDictionaryTemp,
 		getDeviceWebsocketStatus,
 	} = deviceContext
 

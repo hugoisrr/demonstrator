@@ -6,52 +6,23 @@
  * Then for the ProgressBar component it receives the objects, data, and the array of colors.
  */
 
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import drillImage from '../../assets/img/drill.png'
 import engravingImage from '../../assets/img/engravingMachine.png'
-import ProgressBar from './ProgressBar'
-import { getRandColor } from '../../assets/libs/helperFunctions'
-import { GanttChart } from './GanttChart';
+import { CurrentState } from './workstation/CurrentState'
+import ProgressBar from './workstation/ProgressBar'
 
-const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
-	const [currentState, setState] = useState('null')
-	const [statesColors, setStatesColors] = useState({})
-	const [color, setColor] = useState()
-
-	//Div styling which forces div contents to stay in one line
-	const styleDiv = {
-		'whiteSpace': 'nowrap',
-		'textOverflow': 'ellipsis',
-		'overflow': 'visible'
-	}
-	// Get a random color for each state
-	useEffect(() => {
-		const colorStates = {}
-		Object.values(states).forEach(state => {
-			colorStates[state] = getRandColor(5)
-		})
-		setStatesColors(colorStates)
-	}, [])
-
-	// Set current state name and state's color of each workstation
-	useEffect(() => {
-		data.forEach(element => {
-			for (const [stateId, stateName] of Object.entries(states)) {
-				if (element === parseInt(stateId)) {
-					setState(stateName)
-					setColor(Object.values(statesColors)[stateId])
-				}
-			}
-		})
-	})
-
-//Display a card for each workstations. Pass parameters for Workstation and data to the GanttChart and ProgressBar Components
+const WorkStationCard = ({
+	workstation: { ws_id, ws_name, states },
+	statesColors,
+	dataValues,
+	isLabeler,
+}) => {
 	return (
 		<div className='card shadow mb-4 workstationcard'>
 			<div className='card-header py-3'>
-				<div className='row' style = {styleDiv}>
+				<div className='row'>
 					<h5 id='cardName' className='m-0 font-weight bold col-6'>
 						{ws_name}
 					</h5>
@@ -68,21 +39,36 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 					/>
 				</div>
 				<h6 style={{ color: 'white' }}>State:</h6>
-				<div style={styleDiv}>
-				<h1 className='display-3 text-center bold' style={{color : color}}>
-					{currentState}
-					</h1>
-				</div>
-				<hr />
-				
-				<ProgressBar
-					states={states}
-					data={data}					
+				<CurrentState
 					statesColors={Object.values(statesColors)}
-				/>		
-				<GanttChart
-				ws_id={ws_id}
-				data={data} />
+					dataValues={dataValues}
+					states={states}
+				/>
+				<hr />
+
+				<ProgressBar
+					wsId={ws_id}
+					states={states}
+					data={dataValues}
+					statesColors={Object.values(statesColors)}
+					isLabeler={isLabeler}
+				/>
+				<div className='d-sm-flex align-items-center my-2 justify-content-center'>
+					{Object.keys(statesColors).map((state, index) => {
+						return (
+							<span
+								className='badge badge-info mx-2'
+								key={index}
+								style={{
+									backgroundColor: Object.values(statesColors)[index],
+									color: 'darkslategray',
+								}}
+							>
+								{state}
+							</span>
+						)
+					})}
+				</div>
 			</div>
 		</div>
 	)
@@ -90,7 +76,8 @@ const WorkStationCard = ({ workstation: { ws_id, ws_name, states }, data }) => {
 
 WorkStationCard.propTypes = {
 	workstation: PropTypes.object.isRequired,
-	data: PropTypes.object.isRequired,
+	statesColors: PropTypes.object.isRequired,
+	dataValues: PropTypes.array.isRequired,
 }
 
 export default WorkStationCard

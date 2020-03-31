@@ -3,13 +3,15 @@ import DeviceContext from '../../context/device/deviceContext'
 import ContentAPI from '../layout/ContentAPI'
 import { client } from '../websockets/deviceWebsocket'
 import { Spinner } from '../layout/Spinner'
+import DeviceCard from '../layout/DeviceCard'
 
 const DeviceContent = ({ title }) => {
 	const deviceContext = useContext(DeviceContext)
 
 	const {
 		wks,
-		// wksMap,
+		wksMap,
+		currentDevice,
 		websocketStatus,
 		getDeviceWebsocketStatus,
 	} = deviceContext
@@ -24,15 +26,21 @@ const DeviceContent = ({ title }) => {
 		}
 	}
 
-	if (wks.length > 0) {
+	// Verifies if there are Workstations and Data is been received, if not it renders a Spinner
+	if (wks.length > 0 && wksMap.size > 0) {
 		return (
 			<ContentAPI
 				title={title}
 				websocketStatus={websocketStatus}
 				change={handleSwitch}
+				dropdown
 			>
 				<div className='row'>
-					<h1>Hola</h1>
+					{currentDevice === null ? (
+						<SelectDevice>Select Device</SelectDevice>
+					) : (
+						<DeviceCard currentDevice={currentDevice} wks={wks} />
+					)}
 				</div>
 			</ContentAPI>
 		)
@@ -53,4 +61,12 @@ DeviceContent.defaultProps = {
 	title: 'Device Content',
 }
 
-export default DeviceContent
+const SelectDevice = ({ children }) => {
+	return (
+		<div className='text-center col-12 center-block mt-5'>
+			<h5 style={{ color: 'lightGray' }}>{children}</h5>
+		</div>
+	)
+}
+
+export default React.memo(DeviceContent)

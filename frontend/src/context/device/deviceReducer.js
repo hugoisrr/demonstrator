@@ -1,6 +1,7 @@
 import {
 	GET_DEVICE_WKS,
 	SET_DEVICE_MAP,
+	SET_CURRENT_DEVICE,
 	GET_DEVICE_WEBSOCKET_STATUS,
 } from '../types'
 
@@ -16,6 +17,12 @@ export default (state, action) => {
 			return {
 				...state,
 				websocketStatus: action.payload,
+			}
+
+		case SET_CURRENT_DEVICE:
+			return {
+				...state,
+				currentDevice: action.payload,
 			}
 
 		case SET_DEVICE_MAP:

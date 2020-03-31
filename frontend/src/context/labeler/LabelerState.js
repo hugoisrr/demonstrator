@@ -1,46 +1,80 @@
-// Definition of the context function which are shared with all of the labeler components
-import React, { useReducer, useRef } from 'react'
-
+import React, { useReducer } from 'react'
 import LabelerContext from './labelerContext'
 import LabelerReducer from './labelerReducer'
 import {
-	GET_LABELER_DATA,
 	GET_LABELER_WKS,
+	SET_LABELER_MAP,
+	SET_LABELER_COLORS,
+	SET_LABELER_FLEX_VALUES,
 	GET_LABELER_WEBSOCKET_STATUS,
 } from '../types'
+import { getRandColor } from '../../assets/libs/helperFunctions'
 
 const LabelerState = props => {
-	const refInit = useRef(true)
 	const initialState = {
-		data: {},
 		wks: [],
-		dictionary: {},
+		wksMap: {},
+		wksStatesColors: {},
+		flexValues: {},
 		websocketStatus: '',
 	}
 
 	const [state, dispatch] = useReducer(LabelerReducer, initialState)
 
-	// create the dictionary for the gantt chart
-	const startDictionary = () => {
-		if (refInit.current) {
-			state.wks.forEach(element => {
-				state.dictionary[element.ws_id] = new Array(30).fill(-1)
-				refInit.current = false
-			})
+	// Set up Map data structure with workstations ids as keys and 50 Arrays fill with -1 as values
+	const setUpLabelerMap = wks => {
+		try {
+			if (wks.length > 0) {
+				const wksMap = new Map()
+				wks.forEach(workstation => {
+					wksMap.set(workstation.ws_id, new Array(50).fill(-1))
+				})
+				dispatch({
+					type: SET_LABELER_MAP,
+					payload: wksMap,
+				})
+			}
+		} catch (error) {
+			console.error(error)
 		}
 	}
 
-	const pushToDictionary = data => {
-		state.dictionary[data.ws_id].shift()
-		state.dictionary[data.ws_id].push(data.state_key)
+	// Creates a Map Data structure to store an object with an object holding all states and its corresponding color
+	const setLabelerStatesColors = wks => {
+		try {
+			if (wks.length > 0) {
+				const wksStatesColors = new Map()
+				wks.forEach(workstation => {
+					const colorStates = {}
+					Object.values(workstation.states).forEach(state => {
+						colorStates[state] = getRandColor(5)
+					})
+					wksStatesColors.set(workstation.ws_id, colorStates)
+				})
+				dispatch({
+					type: SET_LABELER_COLORS,
+					payload: wksStatesColors,
+				})
+			}
+		} catch (error) {
+			console.error(error)
+		}
 	}
 
-	// Get Labeler Data
-	const getLabelerData = messageData => {
-		dispatch({
-			type: GET_LABELER_DATA,
-			payload: messageData,
-		})
+	// Shift the first state_key values and push the income state_key values on its corresponding array, within the labeler map structure
+	const setDataInLabelerMap = data => {
+		try {
+			if (state.wksMap.size > 0) {
+				for (const [wks_id, stateKeyValuesArray] of state.wksMap.entries()) {
+					if (data.ws_id === parseInt(wks_id)) {
+						stateKeyValuesArray.shift()
+						stateKeyValuesArray.push(data.state_key)
+					}
+				}
+			}
+		} catch (error) {
+			console.error(error)
+		}
 	}
 
 	// Get WebsocketStatus
@@ -59,18 +93,55 @@ const LabelerState = props => {
 		})
 	}
 
+	// Creates a Map data structure to store the flex values for the progressbar in each workstation
+	const setUpLabelerFlexValues = wks => {
+		try {
+			if (wks.length > 0) {
+				const flexValuesMap = new Map()
+				wks.forEach(workstation => {
+					flexValuesMap.set(workstation.ws_id, [])
+				})
+				dispatch({
+					type: SET_LABELER_FLEX_VALUES,
+					payload: flexValuesMap,
+				})
+			}
+		} catch (error) {
+			console.error(error)
+		}
+	}
+
+	// Set new Flex Values in its corresponding workstation
+	const setLabelerFlexValues = (wksId, flexValues) => {
+		try {
+			if (state.flexValues.size > 0) {
+				for (const [wks_id, flexValuesArray] of state.flexValues.entries()) {
+					if (wksId === parseInt(wks_id)) {
+						flexValuesArray.length = 0
+						flexValuesArray.push.apply(flexValuesArray, flexValues)
+					}
+				}
+			}
+		} catch (error) {
+			console.error(error)
+		}
+	}
+
 	return (
 		<LabelerContext.Provider
 			value={{
-				data: state.data,
 				wks: state.wks,
-				dictionary: state.dictionary,
+				wksMap: state.wksMap,
+				wksStatesColors: state.wksStatesColors,
+				labelerFlexValues: state.flexValues,
 				websocketStatus: state.websocketStatus,
+				setUpLabelerMap,
+				setLabelerStatesColors,
+				setDataInLabelerMap,
 				getLabelerWebsocketStatus,
-				startDictionary,
-				pushToDictionary,
-				getLabelerData,
 				getLabelerWks,
+				setUpLabelerFlexValues,
+				setLabelerFlexValues,
 			}}
 		>
 			{props.children}

@@ -1,5 +1,3 @@
-/* eslint-disable array-callback-return */
-
 /**
  * Model Websocket
  * Description - Implementation of Websocket through API methods, the file imports
@@ -18,40 +16,58 @@ export const client = new W3CWebSocket('ws://localhost:4000')
 const ModelWebsocket = () => {
 	const modelContext = useContext(ModelContext)
 	const {
-		getModelData,
-		getModelWks,
-		pushToDictionary,
-		startDictionary,
+		setUpModelMap,
+		setDataInModelMap,
+		setModelStatesColors,
 		getModelWebsocketStatus,
+		setUpModelFlexValues,
+		getModelWks,
 	} = modelContext
 
 	client.onerror = () => {
-		console.error('Connection Error with WebSocket Model')
-		getModelWebsocketStatus('ERROR')
+		try {
+			console.error('Connection Error with WebSocket Model')
+			getModelWebsocketStatus('ERROR')
+		} catch (error) {
+			console.error(error)
+		}
 	}
 
 	client.onopen = () => {
-		console.log('WebSocket Model Client Connected')
-		getModelWebsocketStatus('CONNECTING')
+		try {
+			console.log('WebSocket Model Client Connected')
+			getModelWebsocketStatus('CONNECTING')
+		} catch (error) {
+			console.error(error)
+		}
 	}
 
 	client.onmessage = message => {
-		message = JSON.parse(message.data)
-		if (Array.isArray(message) && message.length > 0) {
-			// Gets the initial array of workstations
-			getModelWks(message)
-		} else if (typeof message === 'object') {
-			// Starts the dictionary structure and the data from the websocket
-			startDictionary()
-			getModelData(message)
-			pushToDictionary(message)
-			getModelWebsocketStatus('OPEN')
+		try {
+			message = JSON.parse(message.data)
+			if (Array.isArray(message) && message.length > 0) {
+				// Gets the initial array of workstations
+				getModelWks(message)
+				setUpModelMap(message)
+				setModelStatesColors(message)
+				setUpModelFlexValues(message)
+			} else if (typeof message === 'object') {
+				// Starts the dictionary structure and the data from the websocket
+				setDataInModelMap(message)
+				getModelWebsocketStatus('OPEN')
+			}
+		} catch (error) {
+			console.error(error)
 		}
 	}
 
 	client.onclose = () => {
-		console.warn('WebSocket Model Client Closed')
-		getModelWebsocketStatus('CLOSED')
+		try {
+			console.warn('WebSocket Model Client Closed')
+			getModelWebsocketStatus('CLOSED')
+		} catch (error) {
+			console.error(error)
+		}
 	}
 
 	return null

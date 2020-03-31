@@ -34,9 +34,8 @@ const App = () => {
 								<div id='content-wrapper' className='d-flex flex-column'>
 									<Switch>
 										<Route exact path='/' component={LabelerContent} />
-										<Route exact path='/model' component={ModelContent} /> 
-										<Route exact path='/device' component={DeviceContent} />
-										<Route exact path='/test' />
+										<Route exact path='/model' component={ModelContent} />
+										<Route exact path='/debug' component={DeviceContent} />
 									</Switch>
 								</div>
 							</div>

@@ -1,3 +1,12 @@
+/**
+ * Model Content
+ * Description - it verifies if data is been received, so it would render
+ * the workstation cards, if data is not received it shows the Spinner. The
+ * file receives as a props the title of the page, so then it's passed to the
+ * ContentAPI as a prop
+ *
+ */
+
 import React, { useContext } from 'react'
 import LabelerContext from '../../context/labeler/labelerContext'
 import ContentAPI from '../layout/ContentAPI'
@@ -10,8 +19,9 @@ const LabelerContent = ({ title }) => {
 
 	const {
 		wks,
-		dictionary,
+		wksMap,
 		websocketStatus,
+		wksStatesColors,
 		getLabelerWebsocketStatus,
 	} = labelerContext
 
@@ -24,9 +34,9 @@ const LabelerContent = ({ title }) => {
 			getLabelerWebsocketStatus('OPEN')
 		}
 	}
-	
+
 	// Verifies if there are Workstations and Data is been received
-	if (wks.length > 0 && Object.keys(dictionary).length > 0) {
+	if (wks.length > 0 && wksMap.size > 0 && wksStatesColors.size > 0) {
 		return (
 			<ContentAPI
 				title={title}
@@ -35,16 +45,23 @@ const LabelerContent = ({ title }) => {
 			>
 				<div className='row'>
 					{wks.map(workstation => {
+						const statesColors = wksStatesColors.get(workstation.ws_id)
+						const dataValues = wksMap.get(workstation.ws_id)
 						return (
-							<div className='col-lg-4 col-md-4' key={workstation.ws_id}>
+							<div
+								className='col-xl-6 col-lg-8 col-md-12'
+								key={workstation.ws_id}
+							>
 								<WorkStationCard
 									workstation={workstation}
-									data={dictionary[workstation.ws_id]} //incoming data get divided by workstation ID
+									statesColors={statesColors}
+									dataValues={dataValues}
+									isLabeler={true}
 								/>
 							</div>
 						)
 					})}
-				</div>			
+				</div>
 			</ContentAPI>
 		)
 	} else {
@@ -60,10 +77,8 @@ const LabelerContent = ({ title }) => {
 	}
 }
 
-
-
 LabelerContent.defaultProps = {
 	title: 'Labeler Content',
 }
 
-export default LabelerContent
+export default React.memo(LabelerContent)
