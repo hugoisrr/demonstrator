@@ -12,6 +12,7 @@ import drillImage from '../../assets/img/drill.png'
 import engravingImage from '../../assets/img/engravingMachine.png'
 import { CurrentState } from './workstation/CurrentState'
 import ProgressBar from './workstation/ProgressBar'
+import GanttChart from './workstation/GanttChart'
 
 const WorkStationCard = ({
 	workstation: { ws_id, ws_name, states },
@@ -45,7 +46,8 @@ const WorkStationCard = ({
 					states={states}
 				/>
 				<hr />
-
+				<GanttChart ws_id={ws_id} data={dataValues} />
+				<hr />
 				<ProgressBar
 					wsId={ws_id}
 					states={states}
