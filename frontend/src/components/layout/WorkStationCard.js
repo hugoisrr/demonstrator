@@ -46,7 +46,11 @@ const WorkStationCard = ({
 					states={states}
 				/>
 				<hr />
-				<GanttChart ws_id={ws_id} data={dataValues} />
+				<GanttChart
+					ws_id={ws_id}
+					data={dataValues}
+					statesColors={Object.values(statesColors)}
+				/>
 				<hr />
 				<ProgressBar
 					wsId={ws_id}
