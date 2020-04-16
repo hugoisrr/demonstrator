@@ -53,7 +53,7 @@ const Sidebar = () => {
 							Model Source
 						</Link>
 						<Link className='collapse-item' to='/debug'>
-							Device Source
+							Signal view
 						</Link>
 					</div>
 				</div>
