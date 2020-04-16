@@ -58,7 +58,7 @@ const DeviceContent = ({ title }) => {
 }
 
 DeviceContent.defaultProps = {
-	title: 'Device Content',
+	title: 'Signal view',
 }
 
 const SelectDevice = ({ children }) => {

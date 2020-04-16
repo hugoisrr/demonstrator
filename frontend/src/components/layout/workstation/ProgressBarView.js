@@ -1,3 +1,11 @@
+/**
+ * ProgressBarView
+ * Description - For each workstation this component iterates the number of states
+ * and gets the flex values to generate a progress bar corresponding for each
+ * state, then it gets the color from the array StatesColors, it compares the index
+ * of the arry to assig its corresponding color.
+ */
+
 import React, { Fragment } from 'react'
 
 export const ProgressBarView = ({ arrayValues, wsId, statesColors }) => {

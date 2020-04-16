@@ -21,9 +21,11 @@ const App = () => {
 		JqueryFunctions.smoothScrollingTop()
 	})
 	return (
+		// imports states of LabelerContent, Device and Model
 		<LabelerState>
 			<DeviceState>
 				<ModelState>
+					{/* imports websocket clients and methods from Labeler, Model and Device */}
 					<Websockets.LabelerWebsocket />
 					<Websockets.ModelWebsocket />
 					<Websockets.DeviceWebsocket />
@@ -32,6 +34,7 @@ const App = () => {
 							<div id='wrapper'>
 								<Sidebar />
 								<div id='content-wrapper' className='d-flex flex-column'>
+									{/* Switch router to the different views */}
 									<Switch>
 										<Route exact path='/' component={LabelerContent} />
 										<Route exact path='/model' component={ModelContent} />

@@ -1,3 +1,10 @@
+/**
+ * ContentAPI
+ * Description - This is a helper component that receives the children from
+ * a parent component as a prop, depending if there is a dropdown component
+ * it renders the proper content
+ */
+
 import React, { Fragment } from 'react'
 import SwitchAPI from './SwitchAPI'
 import { Dropdown } from './Dropdown'

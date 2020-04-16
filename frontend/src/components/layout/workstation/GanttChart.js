@@ -1,3 +1,10 @@
+/**
+ * GanttChart
+ * Description - Using the D3 library, this component generates different rows for each
+ * workstation state. Each row generate a rectangle with a width and height fixed.
+ * The colors of each row is brought by the statesColors.
+ */
+
 import React, { Fragment } from 'react'
 import * as d3 from 'd3'
 

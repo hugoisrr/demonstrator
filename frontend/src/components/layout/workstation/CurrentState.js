@@ -1,3 +1,10 @@
+/**
+ * CurrentState
+ * Description - This component is called by the WorkStationCard and its purpose is
+ * display the current state of each Workstation, it verifies the current by checking
+ * the stateId, it also displays the state's color.
+ */
+
 import React, { Fragment, useState, useEffect } from 'react'
 
 export const CurrentState = ({ statesColors, dataValues, states }) => {
