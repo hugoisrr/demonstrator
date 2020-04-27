@@ -5,7 +5,6 @@
  * set the dictionary data structure and new incoming data from the websocket.
  * The file also export the client so the frontend would have control over the Websocket.
  */
-
 import { useContext } from 'react'
 import { w3cwebsocket as W3CWebSocket } from 'websocket'
 import LabelerContext from '../../context/labeler/labelerContext'
@@ -71,8 +70,6 @@ const LabelerWebsocket = () => {
 	}
 
 	return null
-
-
 }
 
 export default LabelerWebsocket

@@ -2,10 +2,6 @@ export function percentage(partialValue, totalValue) {
 	return (100 * partialValue) / totalValue
 }
 
-export function hexColorGenerator() {
-	return '#' + ((Math.random() * 0xffffff) << 0).toString(16)
-}
-
 export function getRandColor(brightness) {
 	// Six levels of brightness from 0 to 5, 0 being the darkest
 	var rgb = [Math.random() * 256, Math.random() * 256, Math.random() * 256]
