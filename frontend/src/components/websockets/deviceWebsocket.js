@@ -2,6 +2,7 @@
 import { useContext } from 'react'
 import { w3cwebsocket as W3CWebSocket } from 'websocket'
 import DeviceContext from '../../context/device/deviceContext'
+import SidebarContext from '../../context/sidebar/sidebarContext'
 
 //const client = new W3CWebSocket('ws://172.21.30.241:2000')
 export const client = new W3CWebSocket('ws://localhost:2000')
@@ -9,6 +10,7 @@ export const client = new W3CWebSocket('ws://localhost:2000')
 const DeviceWebsocket = () => {
 	//Define the context to use
 	const deviceContext = useContext(DeviceContext)
+	const sidebarContext = useContext(SidebarContext)
 	//Declare context functions
 	const {
 		getDeviceWks,
@@ -16,6 +18,8 @@ const DeviceWebsocket = () => {
 		setDataInDeviceMap,
 		getDeviceWebsocketStatus,
 	} = deviceContext
+
+	const { getWksIds } = sidebarContext
 
 	client.onerror = () => {
 		console.error('Connection Error with WebSocket Device')
@@ -35,6 +39,7 @@ const DeviceWebsocket = () => {
 			//Passing initial data array into the context
 			getDeviceWks(message)
 			setUpDeviceMap(message)
+			getWksIds(message)
 		} else if (typeof message === 'object') {
 			setDataInDeviceMap(message)
 			getDeviceWebsocketStatus('OPEN')

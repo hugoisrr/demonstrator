@@ -8,12 +8,15 @@
 import { useContext } from 'react'
 import { w3cwebsocket as W3CWebSocket } from 'websocket'
 import LabelerContext from '../../context/labeler/labelerContext'
+import SidebarContext from '../../context/sidebar/sidebarContext'
 
 //const client = new W3CWebSocket('ws://172.21.30.241:3000')
 export const client = new W3CWebSocket('ws://localhost:3000')
 
 const LabelerWebsocket = () => {
 	const labelerContext = useContext(LabelerContext)
+	const sidebarContext = useContext(SidebarContext)
+
 	const {
 		setUpLabelerMap,
 		setDataInLabelerMap,
@@ -22,6 +25,8 @@ const LabelerWebsocket = () => {
 		setUpLabelerFlexValues,
 		getLabelerWks,
 	} = labelerContext
+
+	const { getWksIds } = sidebarContext
 
 	client.onerror = () => {
 		try {
@@ -50,6 +55,7 @@ const LabelerWebsocket = () => {
 				setUpLabelerMap(message)
 				setLabelerStatesColors(message)
 				setUpLabelerFlexValues(message)
+				getWksIds(message)
 			} else if (typeof message === 'object') {
 				// Starts the dictionary structure and the data from the websocket
 				setDataInLabelerMap(message)

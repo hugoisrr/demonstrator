@@ -9,12 +9,15 @@
 import { useContext } from 'react'
 import { w3cwebsocket as W3CWebSocket } from 'websocket'
 import ModelContext from '../../context/model/modelContext'
+import SidebarContext from '../../context/sidebar/sidebarContext'
 
 //export const client = new W3CWebSocket('ws://172.21.30.241:4000')
 export const client = new W3CWebSocket('ws://localhost:4000')
 
 const ModelWebsocket = () => {
 	const modelContext = useContext(ModelContext)
+	const sidebarContext = useContext(SidebarContext)
+
 	const {
 		setUpModelMap,
 		setDataInModelMap,
@@ -23,6 +26,8 @@ const ModelWebsocket = () => {
 		setUpModelFlexValues,
 		getModelWks,
 	} = modelContext
+
+	const { getWksIds } = sidebarContext
 
 	client.onerror = () => {
 		try {
@@ -51,6 +56,7 @@ const ModelWebsocket = () => {
 				setUpModelMap(message)
 				setModelStatesColors(message)
 				setUpModelFlexValues(message)
+				getWksIds(message)
 			} else if (typeof message === 'object') {
 				// Starts the dictionary structure and the data from the websocket
 				setDataInModelMap(message)

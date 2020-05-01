@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import DevicesList from './Sidebar/DevicesList'
 
-const Sidebar = () => {	
+const Sidebar = () => {
 	return (
 		<ul
 			className='navbar-nav bg-gradient-primary sidebar sidebar-dark accordion'
@@ -80,16 +80,7 @@ const Sidebar = () => {
 				>
 					<div className='bg-white py-2 collapse-inner rounded'>
 						<h6 className='collapse-header'>List of Devices</h6>
-						<DevicesList/>
-						{/* <a className='collapse-item' href='utilities-border.html'>
-							Borders
-						</a>
-						<a className='collapse-item' href='utilities-animation.html'>
-							Animations
-						</a>
-						<a className='collapse-item' href='utilities-other.html'>
-							Other
-						</a> */}
+						<DevicesList />
 					</div>
 				</div>
 			</li>

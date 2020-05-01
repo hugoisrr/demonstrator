@@ -17,8 +17,9 @@ export const GanttChart = ({ ws_id, data, statesColors }) => {
 
 	/* Representing the svg width by getting the width of the parent div */
 	var svg_width = 0
-	var svg_parent = document.querySelector("#svg")
-	if (svg_parent){
+
+	var svg_parent = document.querySelector('#svg')
+	if (svg_parent) {
 		svg_width = svg_parent.clientWidth
 	}
 
@@ -50,7 +51,7 @@ export const GanttChart = ({ ws_id, data, statesColors }) => {
 				return statesColors[2]
 			} else if (value === 3) return statesColors[3]
 		})
-		.attr('width', width) 
+		.attr('width', width)
 		.attr('height', function(value) {
 			if (value === -1) {
 				return 0
@@ -58,7 +59,7 @@ export const GanttChart = ({ ws_id, data, statesColors }) => {
 		}) //fix size
 		.attr('x', function(d, i) {
 			// dynamic position
-			return i * width // [index of array] * [width of rect]  
+			return i * width // [index of array] * [width of rect]
 		})
 		.attr('y', function(value) {
 			// dynamic position
@@ -66,7 +67,7 @@ export const GanttChart = ({ ws_id, data, statesColors }) => {
 		})
 	return (
 		<Fragment>
-			<div className='text-center' id = 'svg'>
+			<div className='text-center' id='svg'>
 				<svg
 					id={'gantt_chart' + ws_id}
 					style={{
