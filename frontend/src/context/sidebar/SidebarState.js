@@ -47,7 +47,6 @@ const SidebarState = props => {
 		try {
 			if (state.wksIdsMap.size > 0) {
 				const valuesArray = [0, 0, 0]
-				source === 'model' ? (valuesArray[0] = 1) : (valuesArray[0] = 0)
 				switch (source) {
 					case 'model':
 						valuesArray[0] = 1
