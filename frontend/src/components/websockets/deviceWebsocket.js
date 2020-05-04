@@ -19,7 +19,7 @@ const DeviceWebsocket = () => {
 		getDeviceWebsocketStatus,
 	} = deviceContext
 
-	const { getWksIds } = sidebarContext
+	const { getWksIds, setDataInWksIdsMap } = sidebarContext
 
 	client.onerror = () => {
 		console.error('Connection Error with WebSocket Device')
@@ -42,6 +42,7 @@ const DeviceWebsocket = () => {
 			getWksIds(message)
 		} else if (typeof message === 'object') {
 			setDataInDeviceMap(message)
+			setDataInWksIdsMap(message, 'device')
 			getDeviceWebsocketStatus('OPEN')
 		}
 	}

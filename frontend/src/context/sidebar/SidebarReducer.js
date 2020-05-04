@@ -2,6 +2,7 @@ import {
 	GET_WKS_IDS_SIDEBAR,
 	SET_WKS_IDS_MAP_SIDEBAR,
 	REMOVE_DUPLICATED_IDS_SIDEBAR,
+	SET_WKS_IDS_STATUS_ARRAY_SIDEBAR,
 } from '../types'
 
 export default (state, action) => {
@@ -19,6 +20,12 @@ export default (state, action) => {
 			}
 
 		case SET_WKS_IDS_MAP_SIDEBAR:
+			return {
+				...state,
+				wksIdsMap: action.payload,
+			}
+
+		case SET_WKS_IDS_STATUS_ARRAY_SIDEBAR:
 			return {
 				...state,
 				wksIdsMap: action.payload,

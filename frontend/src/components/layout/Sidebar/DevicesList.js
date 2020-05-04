@@ -1,9 +1,14 @@
 import React, { useContext, Fragment } from 'react'
 import SidebarContext from '../../../context/sidebar/sidebarContext'
+import SignalList from './SignalList'
 
 const DevicesList = () => {
 	const sidebarContext = useContext(SidebarContext)
 	const { wksIdsMap } = sidebarContext
+	if (wksIdsMap.size > 0) {
+		// console.log('wksIdsMap:', wksIdsMap)
+		console.log('wksIdsMap:', ...wksIdsMap.values())
+	}
 
 	if (wksIdsMap.size > 0) {
 		return (
@@ -20,18 +25,16 @@ const DevicesList = () => {
 						</thead>
 						<tbody>
 							{[...wksIdsMap.keys()].map(workstationId => {
+								let signalArray = []
+								for (const [wks_id, signalValues] of wksIdsMap.entries()) {
+									if (workstationId === parseInt(wks_id)) {
+										signalArray = signalValues
+									}
+								}
 								return (
 									<tr key={workstationId}>
 										<td>{workstationId}</td>
-										<td>
-											<DeviceCircle color='red' />
-										</td>
-										<td>
-											<DeviceCircle color='red' />
-										</td>
-										<td>
-											<DeviceCircle color='green' />
-										</td>
+										<SignalList signalArray={signalArray} />
 									</tr>
 								)
 							})}
@@ -49,19 +52,4 @@ const DevicesList = () => {
 	}
 }
 
-const DeviceCircle = ({ color }) => {
-	return (
-		<svg height='30' width='30'>
-			<circle
-				cx='15'
-				cy='15'
-				r='10'
-				stroke='black'
-				strokeWidth='2'
-				fill={color}
-			/>
-		</svg>
-	)
-}
-
-export default React.memo(DevicesList)
+export default DevicesList

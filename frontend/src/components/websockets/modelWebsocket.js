@@ -27,7 +27,7 @@ const ModelWebsocket = () => {
 		getModelWks,
 	} = modelContext
 
-	const { getWksIds } = sidebarContext
+	const { getWksIds, setDataInWksIdsMap } = sidebarContext
 
 	client.onerror = () => {
 		try {
@@ -60,6 +60,7 @@ const ModelWebsocket = () => {
 			} else if (typeof message === 'object') {
 				// Starts the dictionary structure and the data from the websocket
 				setDataInModelMap(message)
+				setDataInWksIdsMap(message, 'model')
 				getModelWebsocketStatus('OPEN')
 			}
 		} catch (error) {

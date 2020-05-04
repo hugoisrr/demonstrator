@@ -14,7 +14,6 @@ import WorkStationCard from '../layout/WorkStationCard'
 import { client } from '../websockets/modelWebsocket'
 import { Spinner } from '../layout/Spinner'
 
-
 const ModelContent = ({ title }) => {
 	const modelContext = useContext(ModelContext)
 
@@ -26,7 +25,6 @@ const ModelContent = ({ title }) => {
 		getModelWebsocketStatus,
 	} = modelContext
 
-
 	const handleSwitch = ({ target }) => {
 		if (!target.checked && websocketStatus === 'OPEN') {
 			client.close()
@@ -36,7 +34,6 @@ const ModelContent = ({ title }) => {
 			getModelWebsocketStatus('OPEN')
 		}
 	}
-
 
 	// Verifies if there are Workstations and Data is been received, if not it renders a Spinner
 	if (wks.length > 0 && wksMap.size > 0 && wksStatesColors.size > 0) {

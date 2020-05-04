@@ -26,7 +26,7 @@ const LabelerWebsocket = () => {
 		getLabelerWks,
 	} = labelerContext
 
-	const { getWksIds } = sidebarContext
+	const { getWksIds, setDataInWksIdsMap } = sidebarContext
 
 	client.onerror = () => {
 		try {
@@ -59,6 +59,7 @@ const LabelerWebsocket = () => {
 			} else if (typeof message === 'object') {
 				// Starts the dictionary structure and the data from the websocket
 				setDataInLabelerMap(message)
+				setDataInWksIdsMap(message, 'labeler')
 				getLabelerWebsocketStatus('OPEN')
 			}
 		} catch (error) {
