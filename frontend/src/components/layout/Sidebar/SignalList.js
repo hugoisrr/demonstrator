@@ -1,18 +1,15 @@
 import React, { Fragment } from 'react'
 
 const SignalList = ({ signalArray }) => {
-	console.log('signalArray:', signalArray)
 	return (
 		<Fragment>
-			<td>
-				<DeviceCircle color='red' />
-			</td>
-			<td>
-				<DeviceCircle color='red' />
-			</td>
-			<td>
-				<DeviceCircle color='green' />
-			</td>
+			{signalArray.map((signalValue, index) => {
+				return (
+					<td key={index}>
+						<DeviceCircle color={signalValue === 1 ? 'green' : 'red'} />
+					</td>
+				)
+			})}
 		</Fragment>
 	)
 }

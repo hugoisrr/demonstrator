@@ -5,10 +5,6 @@ import SignalList from './SignalList'
 const DevicesList = () => {
 	const sidebarContext = useContext(SidebarContext)
 	const { wksIdsMap } = sidebarContext
-	if (wksIdsMap.size > 0) {
-		// console.log('wksIdsMap:', wksIdsMap)
-		console.log('wksIdsMap:', ...wksIdsMap.values())
-	}
 
 	if (wksIdsMap.size > 0) {
 		return (
