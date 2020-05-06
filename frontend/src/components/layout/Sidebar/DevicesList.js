@@ -1,3 +1,12 @@
+/**
+ * DevicesList
+ * Description - By calling the Map datastructure that holds the signal values from
+ * each websocket, through the SidebarContext. We verify first if we received the
+ * and id values through the keys of the Map datastrucure, then for each workstation
+ * we pass to the component SignalList an array with the signal values corresponded
+ * to the workstation id's.
+ */
+
 import React, { useContext, Fragment } from 'react'
 import SidebarContext from '../../../context/sidebar/sidebarContext'
 import SignalList from './SignalList'

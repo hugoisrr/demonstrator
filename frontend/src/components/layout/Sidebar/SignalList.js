@@ -1,3 +1,10 @@
+/**
+ * SignalList
+ * Description - This component receives an Array with the Signal values of each
+ * workstation, then we iterates through the array and check the values, if the value
+ * is 1 then it will render a green circule, if the value is 0 it renders a red circle
+ */
+
 import React, { Fragment } from 'react'
 
 const SignalList = ({ signalArray }) => {
@@ -14,6 +21,7 @@ const SignalList = ({ signalArray }) => {
 	)
 }
 
+// DeviceCircle component that receives the color as a prop, using CSS transition it delays the color
 const DeviceCircle = ({ color }) => {
 	return (
 		<svg height='30' width='30'>
