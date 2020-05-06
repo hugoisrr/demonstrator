@@ -24,6 +24,7 @@ const DeviceCircle = ({ color }) => {
 				stroke='black'
 				strokeWidth='2'
 				fill={color}
+				className='delay'
 			/>
 		</svg>
 	)
