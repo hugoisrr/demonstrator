@@ -13,7 +13,7 @@ const SignalList = ({ signalArray }) => {
 			{signalArray.map((signalValue, index) => {
 				return (
 					<td key={index}>
-						<DeviceCircle color={signalValue === 1 ? 'green' : 'red'} />
+						<DeviceCircle color={signalValue === 1 ? 'red' : 'green'} />
 					</td>
 				)
 			})}
