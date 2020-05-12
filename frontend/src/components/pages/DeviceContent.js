@@ -1,3 +1,12 @@
+/**
+ * Device Content
+ * Description - it verifies if data is been received, so it would render
+ * the workstation cards, if data is not received it shows the Spinner. The
+ * file receives as a props the title of the page, so then it's passed to the
+ * ContentAPI as a prop
+ *
+ */
+
 import React, { useContext } from 'react'
 import DeviceContext from '../../context/device/deviceContext'
 import ContentAPI from '../layout/ContentAPI'

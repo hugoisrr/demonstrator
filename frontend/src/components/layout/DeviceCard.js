@@ -1,3 +1,5 @@
+//Graphic component for the signal view which contains a graph name and the signal graph
+
 import React, { Fragment } from 'react'
 import { DeviceGraph } from './DeviceGraph'
 

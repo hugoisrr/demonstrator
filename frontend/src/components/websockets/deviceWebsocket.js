@@ -1,3 +1,11 @@
+/**
+ * Device Websocket
+ * Description - Implementation of Websocket through API methods, the file imports
+ * methods from the Context, to set the status of the Websocket, to get the Workstations,
+ * set the dictionary data structure and new incoming data from the websocket.
+ * The file also export the client so the frontend would have control over the Websocket.
+ */
+
 //Recieve data from Device API and pass it to the context
 import { useContext } from 'react'
 import { w3cwebsocket as W3CWebSocket } from 'websocket'

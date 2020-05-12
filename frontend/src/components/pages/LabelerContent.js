@@ -1,5 +1,5 @@
 /**
- * Model Content
+ * Labeler Content
  * Description - it verifies if data is been received, so it would render
  * the workstation cards, if data is not received it shows the Spinner. The
  * file receives as a props the title of the page, so then it's passed to the

@@ -1,5 +1,5 @@
 /**
- * Model Websocket
+ * Labeler Websocket
  * Description - Implementation of Websocket through API methods, the file imports
  * methods from the Context, to set the status of the Websocket, to get the Workstations,
  * set the dictionary data structure and new incoming data from the websocket.

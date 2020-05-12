@@ -1,3 +1,5 @@
+//TODO :  comment the file
+
 import React from 'react'
 
 const SwitchAPI = ({ websocketStatus, change }) => {

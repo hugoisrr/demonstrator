@@ -1,3 +1,5 @@
+//Graphic component for the signal view which display a line chart 
+
 import React, { useContext } from 'react'
 import { VictoryLine } from 'victory'
 import DeviceContext from '../../context/device/deviceContext'

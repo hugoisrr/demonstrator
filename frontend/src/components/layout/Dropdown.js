@@ -1,3 +1,5 @@
+//Graphic component for the signal view which enable to switch between workstation view
+
 import React, { Fragment, useContext, useState } from 'react'
 import DeviceContext from '../../context/device/deviceContext'
 
