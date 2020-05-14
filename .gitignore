@@ -1,10 +1,12 @@
 # Dependency directories
 node_modules/
-/node_modules
+frontend/node_modules
 jspm_packages/
+frontend/package-lock.json
 
 # Python 
 .idea
 *.log
 .ipynb_checkpoints
 /__pycache__
+logs/
