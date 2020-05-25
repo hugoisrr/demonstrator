@@ -23,9 +23,9 @@ const WorkStationCard = ({
 		<div className='card shadow mb-4 workstationcard'>
 			<div className='card-header py-3'>
 				<div className='row'>
-					<h5 id='cardName' className='m-0 font-weight bold col-6'>
+					<h2 id='cardName' className='m-0 font-weight bold col-6'>
 						{ws_name}
-					</h5>
+					</h2>
 					<small className='text-right text-muted col-6'>ID: {ws_id}</small>
 				</div>
 			</div>
@@ -38,7 +38,7 @@ const WorkStationCard = ({
 						style={{ height: '9rem' }}
 					/>
 				</div>
-				<h6 style={{ color: 'white' }}>State:</h6>
+				<h3>State:</h3>
 				<CurrentState
 					statesColors={Object.values(statesColors)}
 					dataValues={dataValues}
