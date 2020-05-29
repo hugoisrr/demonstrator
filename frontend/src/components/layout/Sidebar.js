@@ -9,6 +9,7 @@ const Sidebar = () => {
 			className='navbar-nav bg-gradient-primary sidebar sidebar-dark accordion'
 			id='accordionSidebar'
 		>
+				
 			{/* Link for logo that redirects to home page "/" */}
 			<Link
 				className='sidebar-brand d-flex align-items-center justify-content-center'
@@ -22,7 +23,7 @@ const Sidebar = () => {
 						src='img/torch.png'
 					></img>
 				</div>
-				<div className='sidebar-brand-text mx-3'>Edge Device</div>
+				<div className='sidebar-brand-text mx-3'>LeanDA</div>
 			</Link>
 
 			<hr className='sidebar-divider my-0' />
@@ -38,7 +39,7 @@ const Sidebar = () => {
 					aria-controls='collapseTwo'
 				>
 					<i className='fas fa-fw fa-signal'></i>
-					<span>Data Sources</span>
+					<span style = {{fontSize : '1.2em'}}> Data Sources </span>
 				</a>
 				<div
 					id='collapseTwo'
@@ -69,8 +70,8 @@ const Sidebar = () => {
 					aria-expanded='true'
 					aria-controls='collapseUtilities'
 				>
-					<i className='fas fa-fw fa-cogs'></i>
-					<span>List of Devices</span>
+					<i className='fas fa-th-list'></i>
+					<span style = {{fontSize : '1.2em'}}> List of Devices </span>
 				</a>
 				<div
 					id='collapseUtilities'
@@ -86,10 +87,10 @@ const Sidebar = () => {
 			</li>
 
 			<hr className='sidebar-divider d-none d-md-block' />
-
-			<div className='text-center d-none d-md-inline'>
+		
+			<li  style={{ position:"fixed", bottom:0, left:'5%'}}>
 				<button className='rounded-circle border-0' id='sidebarToggle'></button>
-			</div>
+			</li>
 		</ul>
 	)
 }

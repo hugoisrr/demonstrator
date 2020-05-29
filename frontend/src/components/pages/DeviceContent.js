@@ -67,13 +67,13 @@ const DeviceContent = ({ title }) => {
 }
 
 DeviceContent.defaultProps = {
-	title: 'Signal view',
+	title: 'Signal View'
 }
 
 const SelectDevice = ({ children }) => {
 	return (
 		<div className='text-center col-12 center-block mt-5'>
-			<h5 style={{ color: 'lightGray' }}>{children}</h5>
+			<h1 style={{ fontSize : '5em', color: 'lightGray' }}>{children}</h1>
 		</div>
 	)
 }

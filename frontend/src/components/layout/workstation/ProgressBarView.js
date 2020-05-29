@@ -11,7 +11,7 @@ import React, { Fragment } from 'react'
 export const ProgressBarView = ({ arrayValues, wsId, statesColors }) => {
 	return (
 		<Fragment>
-			<h6 style={{ color: 'white' }}>Percentage:</h6>
+			<h3 className = "workstationcard">Percentage:</h3>
 			<div className='progress'>
 				{arrayValues.get(wsId).map((value, index) => {
 					const percentage = value * 100

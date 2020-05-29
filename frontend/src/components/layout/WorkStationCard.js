@@ -26,7 +26,7 @@ const WorkStationCard = ({
 					<h2 id='cardName' className='m-0 font-weight bold col-6'>
 						{ws_name}
 					</h2>
-					<small className='text-right text-muted col-6'>ID: {ws_id}</small>
+					<h3 className='text-right col-6'>ID: {ws_id}</h3>
 				</div>
 			</div>
 			<div className='card-body'>
@@ -45,6 +45,7 @@ const WorkStationCard = ({
 					states={states}
 				/>
 				<hr />
+				<h3>Historical data:</h3>
 				<GanttChart
 					ws_id={ws_id}
 					data={dataValues}
