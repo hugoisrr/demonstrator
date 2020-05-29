@@ -3,12 +3,24 @@
         border-top: 1px solid $teal
     }
 
-    h1,
-    h5 {
-        text-transform: capitalize
+    h1 {
+        text-transform: capitalize;
+        font-size : 2em;
+    }
+
+    h2 {
+        text-transform: capitalize;
+        font-size : 1.3em;
+    }
+
+    h3 {
+        text-transform: capitalize;
+        font-size : 1.2em;
+        color : $gray-300;
     }
 
     span {
         text-transform: capitalize;
+        
     }
 }

@@ -13,13 +13,13 @@ const SwitchAPI = ({ websocketStatus, change }) => {
 					checked={websocketStatus === 'OPEN' && true}
 					onChange={change}
 				/>
-				<label className='custom-control-label' htmlFor='apiSwitch'>
+				<label className='custom-control-label' style={{ color: "#dddfeb" }} htmlFor='apiSwitch'>
 					Websocket switch{' '}
 					<span
 						className={
 							websocketStatus === 'OPEN'
 								? `badge badge-success`
-								: `badge badge-info`
+								: `badge badge-danger`
 						}
 					>
 						{websocketStatus}

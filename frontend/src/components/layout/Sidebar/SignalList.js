@@ -13,7 +13,7 @@ const SignalList = ({ signalArray }) => {
 			{signalArray.map((signalValue, index) => {
 				return (
 					<td key={index}>
-						<DeviceCircle color={signalValue === 1 ? 'red' : 'green'} />
+						<DeviceCircle color={signalValue === 1 ? '#c82333' : '#28a745'} />
 					</td>
 				)
 			})}
@@ -29,7 +29,7 @@ const DeviceCircle = ({ color }) => {
 				cx='15'
 				cy='15'
 				r='10'
-				stroke='black'
+				stroke='#dddfeb'
 				strokeWidth='2'
 				fill={color}
 				className='delay'
